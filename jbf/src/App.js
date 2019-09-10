@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Login from './components/Login'
 
 
-function App() {
-  return (
-    <div className="App">
-      <Login />
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      loggedIn: false
+    }
+  }
+
+  changeLogin = (b) => {
+    this.setState({loggedIn:b});
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <Login changeLogin={this.changeLogin} />
+      </div>
+    )
+  }
 }
 
 export default App;
