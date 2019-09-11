@@ -15,8 +15,27 @@ class Login extends Component{
     
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log("clickity click");
-        this.props.changeLogin(true);
+        fetch('http://localhost:3000/users',{
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers:{
+                'Accept': 'application/json',
+               'Content-Type': 'application/json'
+             }
+        })
+        .then((res) => {
+            res.json()
+            .then((data) => {
+                console.log(data);
+                this.setState({username:"",password:""});
+                this.props.changeLogin(true);
+            },(err) => {
+                console.log(err)
+            }
+            )
+        })
+
+        
     }
 
     render(){
