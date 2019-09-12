@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Login from './components/Login'
+import BoosterHome from './components/BoosterHome'
 
 
 class App extends Component {
@@ -16,9 +18,13 @@ class App extends Component {
 
   render(){
     return (
-      <div className="App">
-        <Login changeLogin={this.changeLogin} />
-      </div>
+      <BrowserRouter>
+        <Switch>
+        <Route path="/" exact render ={()=><Login changeLogin={this.changeLogin} />} />
+        <Route path="/booster/jobs/index" component={BoosterHome} />
+        <Route path="/" render={()=>{return (<div>404 page not found</div>)}} />
+        </Switch>
+      </BrowserRouter>
     )
   }
 }
