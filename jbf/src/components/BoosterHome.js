@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Auth from '../modules/Auth'
 
 class BoosterHome extends Component{
     constructor(props) {
@@ -9,7 +10,12 @@ class BoosterHome extends Component{
     }
 
     componentDidMount(){
-        fetch('http://localhost:3000/boosters',{method:"GET"})
+        fetch('http://localhost:3000/boosters',{
+            method:"GET",
+            headers:{
+                Authorization : `Token ${Auth.getToken()}`
+            }
+        })
         .then((res) => {
             res.json()
             .then((data) => {

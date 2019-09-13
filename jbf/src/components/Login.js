@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Auth from '../modules/Auth'
 
 class Login extends Component{
     constructor(props){
@@ -27,6 +28,7 @@ class Login extends Component{
             res.json()
             .then((data) => {
                 console.log(data);
+                Auth.authToken(data.token)
                 this.setState({username:"",password:""});
                 this.props.changeLogin(true);
             },(err) => {
