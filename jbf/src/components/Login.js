@@ -30,7 +30,7 @@ class Login extends Component{
                 console.log(data);
                 Auth.authToken(data.token)
                 this.setState({username:"",password:""});
-                this.props.changeLogin(true);
+                
             },(err) => {
                 console.log(err)
             }
