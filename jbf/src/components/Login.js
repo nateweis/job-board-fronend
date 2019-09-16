@@ -28,7 +28,6 @@ class Login extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data);
                 Auth.authToken(data.token)
                 this.setState({username:"",password:""});
                 this.props.history.push("/jobs/booster/index")
