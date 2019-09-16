@@ -48,23 +48,27 @@ class BoosterShow extends Component{
         })
     }
 
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+      }
+
     render(){
         return(
             <div>
                 {this.state.id? <form>
-                    Job Order Number: <input type="text"/>
+                    Job Order Number: <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     <br/>
-                    Description: <textarea name="" id="" cols="30" rows="10"></textarea>
+                    Description: <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
                     <br/>
-                    Requested By: <input type="text"/>
+                    Requested By: <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
                     <br/>
-                    Job Address: <input type="text"/>
+                    Job Address: <input type="text" value={this.state.job_address} name="job_address" onChange={this.handleChange} />
                     <br/>
-                    Pump PO: <input type="text" name="" id=""/>
+                    Pump PO: <input type="text" name="pump_po" value={this.state.pump_po} onChange={this.handleChange} />
                     <br/>
                     Pump ETA: <input type="date" name="" id=""/>
                     <br/>
-                    Pump Received: Yes <input type="radio" name="" id=""/> No <input type="radio" name="" id=""/>
+                    Pump Received: Yes <input type="radio" name="pump_received" id=""/> No <input type="radio" name="pump_received" id=""/>
                     <br/>
                     Controller PO: <input type="text"/>
                     <br/>
