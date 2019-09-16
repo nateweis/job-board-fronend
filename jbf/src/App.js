@@ -24,7 +24,7 @@ class App extends Component {
         <Route path="/jobs" render={()=>(Auth.getToken()? <NavBar />: <Redirect to="/login" />)} />
         <Switch>
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} />       
-          <Route path="/jobs/booster/index" render ={()=>(Auth.getToken()? <BoosterHome />: <Redirect to="/login" />)} />
+          <Route path="/jobs/booster/index" render ={()=> <BoosterHome />} />
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>
       </BrowserRouter>
