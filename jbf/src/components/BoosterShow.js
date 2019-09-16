@@ -1,12 +1,85 @@
 import React, { Component } from 'react';
+import Auth from '../modules/Auth'
 
 
 class BoosterShow extends Component{
+    constructor(props){
+        super(props)
+        this.state={
+
+        }
+    }
+
+    componentDidMount(){
+        fetch('http://localhost:3000/boosters/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
+        .then((res) => {
+           res.json()
+           .then((data) => {
+               console.log(data)
+               if(data.err){this.props.push('/jobs/booster/index')}
+               else{
+                   this.setState({
+                       id: data.data.id,
+                       description: data.data.description,
+                       job_address: data.data.job_address,
+                       job_order_number: data.data.job_order_number,
+                       requested_by: data.data.requested_by,
+                       completed: data.data.completed,
+                       controller_eta: data.data.controller_eta,
+                       controller_po: data.data.controller_po,
+                       controller_received: data.data.controller_received,
+                       date_created: data.data.date_created,
+                       due_date: data.data.due_date,
+                       last_updated: data.data.last_updated,
+                       notes: data.data.notes,
+                       pump_eta: data.data.pump_eta,
+                       pump_po: data.data.pump_po,
+                       pump_received: data.data.pump_received,
+                       shipdate_packlist: data.data.shipdate_packlist,
+                       updated_by: data.data.updated_by,
+                       stage: data.data.stage,
+                       user: data.userInfo.name
+                   })
+               }
+           },(err) => {
+               console.log(err);
+               
+           }) 
+        })
+    }
 
     render(){
         return(
             <div>
-                Show page for {this.props.id}
+                {this.state.id? <form>
+                    Job Order Number: <input type="text"/>
+                    <br/>
+                    Description: <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <br/>
+                    Requested By: <input type="text"/>
+                    <br/>
+                    Job Address: <input type="text"/>
+                    <br/>
+                    Pump PO: <input type="text" name="" id=""/>
+                    <br/>
+                    Pump ETA: <input type="date" name="" id=""/>
+                    <br/>
+                    Pump Received: Yes <input type="radio" name="" id=""/> No <input type="radio" name="" id=""/>
+                    <br/>
+                    Controller PO: <input type="text"/>
+                    <br/>
+                    Controller ETA: <input type="date" name="" id=""/>
+                    <br/>
+                    Controller Received: Yes <input type="radio" name="" id=""/> No <input type="radio" name="" id=""/>
+                    <br/>
+                    Due Date: <input type="date" name="" id=""/>
+                    <br/>
+                    Completed: Yes <input type="radio" name="" id=""/> No <input type="radio" name="" id=""/>
+                    <br/>
+                    Shipdate/Packlist: <input type="text" name="" id=""/>
+                    <br/>
+                    <input type="submit" value="Update"/>
+                </form> :<h3>Loading.......</h3>}
             </div>
         )
     }
