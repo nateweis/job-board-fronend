@@ -30,13 +30,17 @@ class BoosterHome extends Component{
         })
     }
 
+    showPage = (job) => {
+        this.props.history.push("/jobs/booster/"+job)
+    }
+
     render(){
         return(
             <div>
             <h2>Booster Jobs Index Page</h2>
             {this.state.jobs? this.state.jobs.map((job, index) => {
                 return(
-                    <div key={index}>
+                    <div key={index} onClick={()=>this.showPage(job.id)}>
                         <p>Job Order Number: {job.job_order_number}</p>
                         <p>Requested By: {job.requested_by} </p>
                         <p>Site Location: {job.job_address} </p>
