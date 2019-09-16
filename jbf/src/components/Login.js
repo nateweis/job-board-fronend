@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import Auth from '../modules/Auth'
 
 class Login extends Component{
@@ -30,7 +31,7 @@ class Login extends Component{
                 console.log(data);
                 Auth.authToken(data.token)
                 this.setState({username:"",password:""});
-                
+                this.props.history.push("/jobs/booster/index")
             },(err) => {
                 console.log(err)
             }
