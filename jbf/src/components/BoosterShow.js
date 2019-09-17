@@ -55,15 +55,19 @@ class BoosterShow extends Component{
         }
         else{
             this.setState({[e.target.name]: e.target.value})
-        }
-        console.log(this.state);
-                
+        }               
       }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(this.state);
+        
+    }  
 
     render(){
         return(
             <div>
-                {this.state.id? <form>
+                {this.state.id? <form onSubmit={this.handleSubmit} >
                     Job Order Number: <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     <br/>
                     Description: <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
@@ -80,17 +84,21 @@ class BoosterShow extends Component{
                     <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No 
                     <input type="radio" name="pump_received" checked={this.state.pump_received? false: true} onChange={this.handleChange}/>
                     <br/>
-                    Controller PO: <input type="text"/>
+                    Controller PO: <input type="text" name="controller_po" value={this.state.controller_po} onChange={this.handleChange} />
                     <br/>
-                    Controller ETA: <input type="date" name="" id=""/>
+                    Controller ETA: <input type="date" name="controller_eta" value={this.state.controller_eta} onChange={this.handleChange} />
                     <br/>
-                    Controller Received: Yes <input type="radio" name="" id=""/> No <input type="radio" name="" id=""/>
+                    Controller Received: Yes 
+                    <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
+                    <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
                     <br/>
-                    Due Date: <input type="date" name="" id=""/>
+                    Due Date: <input type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
                     <br/>
-                    Completed: Yes <input type="radio" name="" id=""/> No <input type="radio" name="" id=""/>
+                    Completed: Yes 
+                    <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No 
+                    <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
                     <br/>
-                    Shipdate/Packlist: <input type="text" name="" id=""/>
+                    Shipdate/Packlist: <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
                     <br/>
                     <input type="submit" value="Update"/>
                 </form> :<h3>Loading.......</h3>}
