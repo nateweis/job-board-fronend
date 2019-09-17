@@ -49,7 +49,15 @@ class BoosterShow extends Component{
     }
 
     handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        if(e.target.type === "radio"){           
+            if(e.target.className === "trueClass"){this.setState({[e.target.name]: true})}
+            else{this.setState({[e.target.name]: false})}
+        }
+        else{
+            this.setState({[e.target.name]: e.target.value})
+        }
+        console.log(this.state);
+                
       }
 
     render(){
@@ -66,9 +74,11 @@ class BoosterShow extends Component{
                     <br/>
                     Pump PO: <input type="text" name="pump_po" value={this.state.pump_po} onChange={this.handleChange} />
                     <br/>
-                    Pump ETA: <input type="date" name="" id=""/>
+                    Pump ETA: <input type="date" name="pump_eta" value={this.state.pump_eta} onChange={this.handleChange} />
                     <br/>
-                    Pump Received: Yes <input type="radio" name="pump_received" id=""/> No <input type="radio" name="pump_received" id=""/>
+                    Pump Received: Yes 
+                    <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No 
+                    <input type="radio" name="pump_received" checked={this.state.pump_received? false: true} onChange={this.handleChange}/>
                     <br/>
                     Controller PO: <input type="text"/>
                     <br/>
