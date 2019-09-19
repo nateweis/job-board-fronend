@@ -11,6 +11,10 @@ class BoosterShow extends Component{
     }
 
     componentDidMount(){
+        this.pullBoosterData()
+    }
+
+    pullBoosterData = () => {
         fetch('http://localhost:3000/boosters/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
         .then((res) => {
            res.json()
@@ -38,7 +42,8 @@ class BoosterShow extends Component{
                        shipdate_packlist: data.data.shipdate_packlist,
                        updated_by: data.data.updated_by,
                        stage: data.data.stage,
-                       user: data.userInfo.name
+                       user: data.userInfo.name,
+                       originalData: data.data
                    })
                }
            },(err) => {
@@ -73,6 +78,7 @@ class BoosterShow extends Component{
             res.json()
             .then((data) => {
                 console.log(data)
+                this.pullBoosterData()
                 this.setState({makeUpdates: false})
             },(err) => {
                 console.log(err);
@@ -85,11 +91,16 @@ class BoosterShow extends Component{
     updateMenu = () => {
         this.setState({makeUpdates: true})
     }
+
+    cancleChange = () => {
+        this.props.push('/jobs/booster/'+this.state.id)
+    }
     
     render(){
         return(
             <>
-                {this.state.makeUpdates? <> {this.state.id? <div><form onSubmit={this.handleSubmit} >
+                {this.state.makeUpdates? <> {this.state.id? <div><button onClick={this.cancleChange}>X</button>
+                    <form onSubmit={this.handleSubmit} >
                     Job Order Number: <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     <br/>
                     Description: <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
