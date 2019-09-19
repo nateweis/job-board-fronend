@@ -29,14 +29,14 @@ class BoosterShow extends Component{
                        job_order_number: data.data.job_order_number,
                        requested_by: data.data.requested_by,
                        completed: data.data.completed,
-                       controller_eta: data.data.controller_eta,
+                       controller_eta:this.formatDate(data.data.controller_eta) ,
                        controller_po: data.data.controller_po,
                        controller_received: data.data.controller_received,
                        date_created: data.data.date_created,
-                       due_date: data.data.due_date,
+                       due_date:this.formatDate(data.data.due_date) ,
                        last_updated: data.data.last_updated,
                        notes: data.data.notes,
-                       pump_eta: data.data.pump_eta,
+                       pump_eta: this.formatDate(data.data.pump_eta),
                        pump_po: data.data.pump_po,
                        pump_received: data.data.pump_received,
                        shipdate_packlist: data.data.shipdate_packlist,
@@ -87,6 +87,12 @@ class BoosterShow extends Component{
         })
         
     }  
+
+    formatDate =(string) => {
+        const str = string;
+        if(str){return str.slice(0,10)}
+        return str
+    }
 
     updateMenu = () => {
         this.setState({makeUpdates: true})
