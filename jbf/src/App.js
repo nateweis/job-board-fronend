@@ -24,6 +24,7 @@ class App extends Component {
       <BrowserRouter>
         <Route path="/jobs" render={()=>(Auth.getToken()? <NavBar />: <Redirect to="/login" />)} />
         <Switch>
+          <Route path="/" exact render={()=><Redirect to="/login"/>} />
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} />       
           <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} />} />
           <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} push={history.push} /> } />

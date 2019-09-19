@@ -6,7 +6,7 @@ class BoosterShow extends Component{
     constructor(props){
         super(props)
         this.state={
-
+            makeUpdates: false,
         }
     }
 
@@ -73,6 +73,7 @@ class BoosterShow extends Component{
             res.json()
             .then((data) => {
                 console.log(data)
+                this.setState({makeUpdates: false})
             },(err) => {
                 console.log(err);
                 
@@ -81,10 +82,14 @@ class BoosterShow extends Component{
         
     }  
 
+    updateMenu = () => {
+        this.setState({makeUpdates: true})
+    }
+    
     render(){
         return(
-            <div>
-                {this.state.id? <form onSubmit={this.handleSubmit} >
+            <>
+                {this.state.makeUpdates? <> {this.state.id? <div><form onSubmit={this.handleSubmit} >
                     Job Order Number: <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     <br/>
                     Description: <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
@@ -118,8 +123,9 @@ class BoosterShow extends Component{
                     Shipdate/Packlist: <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
                     <br/>
                     <input type="submit" value="Update"/>
-                </form> :<h3>Loading.......</h3>}
-            </div>
+                </form></div> :<h3>Loading.......</h3>}</> : <div> <button onClick={this.updateMenu} >Make Updates</button> </div> }
+                
+            </>
         )
     }
 }
