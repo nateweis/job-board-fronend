@@ -93,7 +93,23 @@ class BoosterShow extends Component{
     }
 
     cancleChange = () => {
-        this.props.push('/jobs/booster/'+this.state.id)
+        this.setState({
+            makeUpdates: false,
+            description: this.state.originalData.description,
+            job_address: this.state.originalData.job_address,
+            job_order_number: this.state.originalData.job_order_number,
+            requested_by: this.state.originalData.requested_by,
+            completed: this.state.originalData.completed,
+            controller_eta: this.state.originalData.controller_eta,
+            controller_po: this.state.originalData.controller_po,
+            controller_received: this.state.originalData.controller_received,
+            notes: this.state.originalData.notes,
+            pump_eta: this.state.originalData.pump_eta,
+            pump_po: this.state.originalData.pump_po,
+            pump_received: this.state.originalData.pump_received,
+            shipdate_packlist: this.state.originalData.shipdate_packlist,
+            due_date: this.state.originalData.due_date
+        })
     }
     
     render(){
