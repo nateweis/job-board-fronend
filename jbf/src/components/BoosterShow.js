@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Auth from '../modules/Auth'
 
 
+
 class BoosterShow extends Component{
     constructor(props){
         super(props)
@@ -32,9 +33,9 @@ class BoosterShow extends Component{
                        controller_eta:this.formatDate(data.data.controller_eta) ,
                        controller_po: data.data.controller_po,
                        controller_received: data.data.controller_received,
-                       date_created: data.data.date_created,
+                       date_created: this.formatDate(data.data.date_created),
                        due_date:this.formatDate(data.data.due_date) ,
-                       last_updated: data.data.last_updated,
+                       last_updated:this.formatDate(data.data.last_updated),
                        notes: data.data.notes,
                        pump_eta: this.formatDate(data.data.pump_eta),
                        pump_po: data.data.pump_po,
@@ -93,6 +94,7 @@ class BoosterShow extends Component{
         if(str){return str.slice(0,10)}
         return str
     }
+    
 
     updateMenu = () => {
         this.setState({makeUpdates: true})
@@ -116,6 +118,13 @@ class BoosterShow extends Component{
             shipdate_packlist: this.state.originalData.shipdate_packlist,
             due_date: this.state.originalData.due_date
         })
+    }
+
+    SpellOutDate = (props) => {
+        let d = new Date(props.date)
+        d= d.toDateString();
+        
+        return(<>{d}</>)
     }
     
     render(){
@@ -156,7 +165,28 @@ class BoosterShow extends Component{
                     Shipdate/Packlist: <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
                     <br/>
                     <input type="submit" value="Update"/>
-                </form></div> :<h3>Loading.......</h3>}</> : <div> <button onClick={this.updateMenu} >Make Updates</button> </div> }
+                </form></div> :<h3>Loading.......</h3>}</> : <div> <button onClick={this.updateMenu} >Make Updates</button>
+                    <ul>
+                        <li>Job Order Number: {this.state.job_order_number} </li>
+                        <li>Stage: {this.state.stage} </li>
+                        <li>Last Updated: <this.SpellOutDate date={this.state.last_updated} /> </li>
+                        <li>Updated By: {this.state.updated_by} </li>
+                        <li>Date Created: <this.SpellOutDate date={this.state.date_created}/> </li>
+                        <li>Description: {this.state.description} </li>
+                        <li>Requested By: {this.state.requested_by} </li>
+                        <li>Job Address: {this.state.job_address} </li>
+                        <li>Pump PO: {this.state.pump_po} </li>
+                        <li>Pump ETA: <this.SpellOutDate date={this.state.pump_eta}/> </li>
+                        <li>Pump Received: {this.state.pump_received?'Yes':'No'} </li>
+                        <li>Controller PO: {this.state.controller_po} </li>
+                        <li>Controller ETA: <this.SpellOutDate date={this.state.controller_eta} /> </li>
+                        <li>Controller Received: {this.state.controller_received?'Yes':'No'} </li>
+                        <li>Due Date: <this.SpellOutDate date={this.state.due_date} /> </li>
+                        <li>Completed: {this.state.completed?'Yes':'No'} </li>
+                        <li>ShipDate/Packlist: {this.state.shipdate_packlist} </li>
+                        <li>Notes: {this.state.notes} </li>
+                    </ul>
+                 </div> }
                 
             </>
         )
