@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom'
 import Auth from '../modules/Auth'
+
 
 
 class BoosterNew extends Component{
@@ -14,7 +16,7 @@ class BoosterNew extends Component{
             pump_po:"",
             pump_eta:null,
             pump_received:false,
-            updated_by: this.props.location.state.user,
+            updated_by: "",
             controller_po:"",
             controller_eta:null,
             controller_received:false,
@@ -25,7 +27,17 @@ class BoosterNew extends Component{
         }
     }
 
-    
+    componentDidMount(){
+        this.checkForUser()
+    }
+
+    checkForUser = () => {
+        if(!this.props.location.state){
+            this.props.history.push('/jobs/booster/index')
+        }else{
+            this.setState({updated_by: this.props.location.state.user})
+        }
+    }
 
     resetState = () => {
         this.setState({
@@ -79,12 +91,18 @@ class BoosterNew extends Component{
                 console.log(err)
             })
         })
-    }  
+    } 
+    
+    cancle= () => {
+        this.resetState()
+        this.props.history.push('/jobs/booster/index')
+    }
 
     render(){
         return(
             <div>
                 <h3>New Page</h3>
+                <button onClick={this.cancle} >X</button>
                 <form onSubmit={this.handleSubmit} >
                     Job Order Number: <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     <br/>
@@ -127,4 +145,4 @@ class BoosterNew extends Component{
     }
 }
 
-export default BoosterNew
+export default withRouter(BoosterNew) 
