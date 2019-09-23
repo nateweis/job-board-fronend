@@ -15,6 +15,23 @@ class BoosterShow extends Component{
         this.pullBoosterData()
     }
 
+    deleteJob = () => {
+        fetch('http://localhost:3000/boosters/'+this.props.id,{
+            method:'DELETE',
+            headers:{Authorization : `Token ${Auth.getToken()}`}
+        })
+        .then((res) => {
+            res.json()
+            .then((data) => {
+                console.log(data)
+                this.props.push('/jobs/booster/index')
+            },(err) => {
+                console.log(err);
+                
+            })
+        })
+    }
+
     pullBoosterData = () => {
         fetch('http://localhost:3000/boosters/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
         .then((res) => {
@@ -168,6 +185,7 @@ class BoosterShow extends Component{
                     <br/>
                     <input type="submit" value="Update"/>
                 </form></div> :<h3>Loading.......</h3>}</> : <div> <button onClick={this.updateMenu} >Make Updates</button>
+                <button onClick={this.deleteJob}>Delete Job from JobBoard</button>
                     <ul>
                         <li>Job Order Number: {this.state.job_order_number} </li>
                         <li>Stage: {this.state.stage} </li>

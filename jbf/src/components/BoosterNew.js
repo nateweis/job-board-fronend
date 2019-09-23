@@ -27,8 +27,9 @@ class BoosterNew extends Component{
         }
     }
 
-    componentDidMount(){
-        this.checkForUser()
+    cancle= () => {
+        this.resetState()
+        this.props.history.push('/jobs/booster/index')
     }
 
     checkForUser = () => {
@@ -39,25 +40,8 @@ class BoosterNew extends Component{
         }
     }
 
-    resetState = () => {
-        this.setState({
-            job_order_number:"",
-            description:"",
-            requested_by:"",
-            job_address:"",
-            stage:0,
-            pump_po:"",
-            pump_eta:null,
-            pump_received:false,
-            updated_by: this.props.location.state.user,
-            controller_po:"",
-            controller_eta:null,
-            controller_received:false,
-            due_date:null,
-            completed:false,
-            shipdate_packlist:"",
-            notes:""
-        })
+    componentDidMount(){
+        this.checkForUser()
     }
 
     handleChange = (e) => {
@@ -86,17 +70,37 @@ class BoosterNew extends Component{
             .then((data) => {
                 console.log(data)
                 this.resetState()
-
+                this.props.history.push('/jobs/booster/index')
             },(err) => {
                 console.log(err)
             })
         })
     } 
-    
-    cancle= () => {
-        this.resetState()
-        this.props.history.push('/jobs/booster/index')
+
+    resetState = () => {
+        this.setState({
+            job_order_number:"",
+            description:"",
+            requested_by:"",
+            job_address:"",
+            stage:0,
+            pump_po:"",
+            pump_eta:null,
+            pump_received:false,
+            updated_by: this.props.location.state.user,
+            controller_po:"",
+            controller_eta:null,
+            controller_received:false,
+            due_date:null,
+            completed:false,
+            shipdate_packlist:"",
+            notes:""
+        })
     }
+
+   
+    
+    
 
     render(){
         return(
