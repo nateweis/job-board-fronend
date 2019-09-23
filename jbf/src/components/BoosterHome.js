@@ -20,7 +20,7 @@ class BoosterHome extends Component{
             res.json()
             .then((data) => {
                console.log(data);
-                this.setState({jobs:data.data})
+                this.setState({jobs:data.data, user:data.userInfo.name})
             },(err) => {
                 console.log(err);
                 
@@ -34,10 +34,15 @@ class BoosterHome extends Component{
         this.props.history.push("/jobs/booster/"+job)
     }
 
+    newJobPage = () => {
+        this.props.history.push("/jobs/booster/new",{user:this.state.user})
+    }
+
     render(){
         return(
             <div>
             <h2>Booster Jobs Index Page</h2>
+            <button onClick={this.newJobPage}>Add a New Job</button>
             {this.state.jobs? this.state.jobs.map((job, index) => {
                 return(
                     <div key={index} onClick={()=>this.showPage(job.id)}>

@@ -164,6 +164,8 @@ class BoosterShow extends Component{
                     <br/>
                     Shipdate/Packlist: <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
                     <br/>
+                    Notes: <input type="text" name="notes" value={this.state.notes} onChange={this.handleChange} />
+                    <br/>
                     <input type="submit" value="Update"/>
                 </form></div> :<h3>Loading.......</h3>}</> : <div> <button onClick={this.updateMenu} >Make Updates</button>
                     <ul>

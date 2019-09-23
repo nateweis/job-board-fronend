@@ -4,6 +4,7 @@ import Login from './components/Login'
 import BoosterHome from './components/BoosterHome'
 import NavBar from './components/NavBar';
 import BoosterShow from './components/BoosterShow'
+import BoosterNew from './components/BoosterNew'
 import Auth from './modules/Auth'
 
 
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/" exact render={()=><Redirect to="/login"/>} />
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} />       
           <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} />} />
+          <Route path="/jobs/booster/new" component={BoosterNew} />
           <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} push={history.push} /> } />
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>
