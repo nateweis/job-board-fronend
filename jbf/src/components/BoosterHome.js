@@ -5,7 +5,7 @@ class BoosterHome extends Component{
     constructor(props) {
        super(props)
        this.state = {
-
+            filter: 'stage'
        } 
     }
 
@@ -30,6 +30,11 @@ class BoosterHome extends Component{
         })
     }
 
+    filterOptions = (e) => {
+        console.log(e.target.value)
+        this.setState({filter: e.target.value})
+    }
+
     showPage = (job) => {
         this.props.history.push("/jobs/booster/"+job)
     }
@@ -39,22 +44,30 @@ class BoosterHome extends Component{
     }
 
     render(){
+
+        const jobList =  this.state.jobs? this.state.jobs.sort((a,b)=>a[this.state.filter] - b[this.state.filter]).map((job, index) => {
+            return(
+                <div key={index} onClick={()=>this.showPage(job.id)}>
+                    <p>Job Order Number: {job.job_order_number}</p>
+                    <p>Stage: {job.stage}</p>
+                    <p>Requested By: {job.requested_by} </p>
+                    <p>Site Location: {job.job_address} </p>
+                    <p>Job Description: {job.description} </p>
+                    <p>=====================================</p>
+                </div>
+            )
+        }) : <h4>Loading.....</h4>
+        
         return(
             <div>
             <h2>Booster Jobs Index Page</h2>
+            <select name="filter" onChange={this.filterOptions}>
+                <option value="stage">Sort Options</option>
+                <option value="stage">Stage</option>
+                <option value="job_order_number">Job Order Number</option>
+            </select>
             <button onClick={this.newJobPage}>Add a New Job</button>
-            {this.state.jobs? this.state.jobs.map((job, index) => {
-                return(
-                    <div key={index} onClick={()=>this.showPage(job.id)}>
-                        <p>Job Order Number: {job.job_order_number}</p>
-                        <p>Stage: {job.stage}</p>
-                        <p>Requested By: {job.requested_by} </p>
-                        <p>Site Location: {job.job_address} </p>
-                        <p>Job Description: {job.description} </p>
-                        <p>=====================================</p>
-                    </div>
-                )
-            }) : <h4>Loading.....</h4> }
+            { jobList}
             </div>
         )
     }
