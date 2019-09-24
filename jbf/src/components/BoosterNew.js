@@ -51,30 +51,13 @@ class BoosterNew extends Component{
         }
         else{
             this.setState({[e.target.name]: e.target.value})
-        }               
+        }        
       }
 
     handleSubmit = (e) => {
+        this.setStage()
         e.preventDefault()
-        fetch('http://localhost:3000/boosters',{
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers:{
-                'Accept': 'application/json',
-               'Content-Type': 'application/json',
-               'Authorization' : `Token ${Auth.getToken()}`
-             }
-        })
-        .then((res) => {
-            res.json()
-            .then((data) => {
-                console.log(data)
-                this.resetState()
-                this.props.history.push('/jobs/booster/index')
-            },(err) => {
-                console.log(err)
-            })
-        })
+        setTimeout(this.postToApi, 500)
     } 
 
     resetState = () => {
@@ -98,7 +81,37 @@ class BoosterNew extends Component{
         })
     }
 
-   
+   setStage = () => {
+       if(this.state.completed)(
+           this.setState({stage:4})
+       )
+       else if(this.state.controller_received){
+           this.setState({stage:3})
+       }else if(this.state.pump_received){this.setState({stage:2})}
+       else{this.setState({stage:1})}
+   }
+
+   postToApi = () => {
+    fetch('http://localhost:3000/boosters',{
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        headers:{
+            'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           'Authorization' : `Token ${Auth.getToken()}`
+         }
+    })
+    .then((res) => {
+        res.json()
+        .then((data) => {
+            console.log(data)
+            this.resetState()
+            this.props.history.push('/jobs/booster/index')
+        },(err) => {
+            console.log(err)
+        })
+    })
+   }
     
     
 

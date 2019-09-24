@@ -47,6 +47,7 @@ class BoosterHome extends Component{
                 return(
                     <div key={index} onClick={()=>this.showPage(job.id)}>
                         <p>Job Order Number: {job.job_order_number}</p>
+                        <p>Stage: {job.stage}</p>
                         <p>Requested By: {job.requested_by} </p>
                         <p>Site Location: {job.job_address} </p>
                         <p>Job Description: {job.description} </p>
