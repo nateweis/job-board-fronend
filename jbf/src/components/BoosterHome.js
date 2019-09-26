@@ -47,7 +47,7 @@ class BoosterHome extends Component{
 
         const jobList =  this.state.jobs? this.state.jobs.sort((a,b)=>a[this.state.filter] - b[this.state.filter]).map((job, index) => {
             return(
-                <div key={index} onClick={()=>this.showPage(job.id)}>
+                <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
                     <p>Job Order Number: {job.job_order_number}</p>
                     <p>Stage: {job.stage}</p>
                     <p>Requested By: {job.requested_by} </p>
@@ -60,14 +60,19 @@ class BoosterHome extends Component{
         
         return(
             <div>
-            <h2>Booster Jobs Index Page</h2>
-            <select name="filter" onChange={this.filterOptions}>
-                <option value="stage">Sort Options</option>
-                <option value="stage">Stage</option>
-                <option value="job_order_number">Job Order Number</option>
-            </select>
-            <button onClick={this.newJobPage}>Add a New Job</button>
-            { jobList}
+                <div className="banner">
+                    <h2>Booster Jobs Index Page</h2>
+                    <span className="flexbox">
+                        <select name="filter" onChange={this.filterOptions}>
+                            <option value="stage">Sort Options</option>
+                            <option value="stage">Stage</option>
+                            <option value="job_order_number">Job Order Number</option>
+                        </select>
+                        <button onClick={this.newJobPage}>Add a New Job</button>
+                    </span>
+                </div>
+            
+            <div className="index-holder">{ jobList}</div>
             </div>
         )
     }

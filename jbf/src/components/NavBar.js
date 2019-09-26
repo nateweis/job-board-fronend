@@ -9,9 +9,14 @@ class NavBar extends Component{
     }
     render(){       
         return(
-            <div>
-                <button onClick={this.loggout}>Loggout</button>
-                <Link to="/jobs/booster/index"><button>Booster Jobs</button></Link>
+            <div className="nav-container">
+                
+                <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
+                    
+                <ul className="nav-links" >
+                    <li><Link to="/jobs/booster/index"><button>Booster Jobs</button></Link></li>                    
+                </ul>                
+                               
             </div>
         )
     }
