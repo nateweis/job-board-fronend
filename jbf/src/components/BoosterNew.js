@@ -120,73 +120,85 @@ class BoosterNew extends Component{
             <div>
                 <h3 className="banner">New Page</h3>
                 <form onSubmit={this.handleSubmit} className="form-style" >
-                <button className="cancle-btn" onClick={this.cancle} >Cancle</button>
                     <span>
-                    Job Order Number: <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
+                        <button className="cancle-btn" onClick={this.cancle} >Cancle</button>
+                    </span>
+                
+                    <span>
+                        <label htmlFor="">Job Order Number: </label>
+                        <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     </span>
                     
                     <span>
-                    Description: <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
-
-                    </span>
-                    <span>
-                    Requested By: <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
-
-                    </span>
-                    <span>
-                    Job Address: <input type="text" value={this.state.job_address} name="job_address" onChange={this.handleChange} />
-
-                    </span>
-                    <span>
-                    Pump PO: <input type="text" name="pump_po" value={this.state.pump_po} onChange={this.handleChange} />
-
-                    </span>
-                    <span>
-                    Pump ETA: <input type="date" name="pump_eta" value={this.state.pump_eta} onChange={this.handleChange} />
-
+                        <label htmlFor="">Description:</label>
+                         <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
                     </span>
 
                     <span>
-                    Pump Received: Yes 
-                    <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No 
-                    <input type="radio" name="pump_received" checked={this.state.pump_received? false: true} onChange={this.handleChange}/>
+                        <label htmlFor="">Requested By: </label>
+                        <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Job Address: </label>
+                        <input type="text" value={this.state.job_address} name="job_address" onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pump PO: </label>
+                        <input type="text" name="pump_po" value={this.state.pump_po} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pump ETA: </label>
+                        <input type="date" name="pump_eta" value={this.state.pump_eta} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pump Received: Yes</label> 
+                        <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No 
+                        <input type="radio" name="pump_received" checked={this.state.pump_received? false: true} onChange={this.handleChange}/>
                     </span>
                     
                     <span>
-                    Controller PO: <input type="text" name="controller_po" value={this.state.controller_po} onChange={this.handleChange} />
-
+                        <label htmlFor="">Controller PO: </label>    
+                        <input type="text" name="controller_po" value={this.state.controller_po} onChange={this.handleChange} />
                     </span>
-                    <span>
-                    Controller ETA: <input type="date" name="controller_eta" value={this.state.controller_eta} onChange={this.handleChange} />
 
-                    </span>
                     <span>
-                    Controller Received: Yes 
-                    <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
-                    <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
+                        <label htmlFor="">Controller ETA: </label>    
+                        <input type="date" name="controller_eta" value={this.state.controller_eta} onChange={this.handleChange} />
+                    </span>
+
+                    <span>                   
+                        <label >Controller Received: Yes</label> 
+                        <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
+                        <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
                     </span>
                     
                     <span>
-                    Due Date: <input type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
-
+                        <label >Due Date: </label>
+                        <input type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
                     </span>
+
                     <span>
-                    Completed: Yes 
-                    <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No 
-                    <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
+                        <label>Completed: Yes</label>  
+                        <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No 
+                        <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
                     </span>
                     
                     <span>
-                    Shipdate/Packlist: <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
-
+                        <label >Shipdate/Packlist:</label>
+                        <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
                     </span>
-                    <span>
-                    Notes: <input type="text" name="notes" value={this.state.notes} onChange={this.handleChange} />
 
+                    <span>
+                        <label>Notes:</label>                    
+                        <input type="text" name="notes" value={this.state.notes} onChange={this.handleChange} />
                     </span>
-                    <span>
-                    <input type="submit" value="Update"/>
 
+                    <span>
+                        <input type="submit" value="Add Job"/>
                     </span>
                 </form>
             </div>

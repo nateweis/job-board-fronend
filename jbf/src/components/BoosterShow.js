@@ -184,8 +184,14 @@ class BoosterShow extends Component{
                     Notes: <input type="text" name="notes" value={this.state.notes} onChange={this.handleChange} />
                     <br/>
                     <input type="submit" value="Update"/>
-                </form></div> :<h3>Loading.......</h3>}</> : <div> <button onClick={this.updateMenu} >Make Updates</button>
-                <button onClick={this.deleteJob}>Delete Job from JobBoard</button>
+                </form></div> :<h3>Loading.......</h3>}</> : <div>
+                    <div className="banner">
+                        <h2>Full Info Show</h2>
+                        <span className="flexbox">
+                            <button onClick={this.updateMenu} >Make Updates</button>
+                            <button onClick={this.deleteJob}>Delete Job from JobBoard</button>
+                        </span>
+                    </div> 
                     <ul>
                         <li>Job Order Number: {this.state.job_order_number} </li>
                         <li>Stage: {this.state.stage} </li>

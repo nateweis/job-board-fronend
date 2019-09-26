@@ -1,3 +1,6 @@
+/******************************* 
+General
+*****************************/
 body {
   margin: 0;
   font-family: 'Raleway', sans-serif;
@@ -19,11 +22,30 @@ button, input[type=submit]{
   padding: 7px;
   font-family: 'Raleway', 'sans-serif';
   cursor: pointer;
+  background-color: #eae9e9;
+  color: #420000;
+  font-weight: 800;
 }
-input{
+input, select{
   font-family: 'Raleway', 'sans-serif';
 }
-
+.banner{
+  background-image: linear-gradient(#d4d7dd, #f6f6f6);
+  margin: 0;
+}
+.banner h2{
+  margin: 0;
+}
+.flexbox{
+  display: flex;
+  justify-content: center;
+}
+.flexbox *{
+  margin: 0 10px;
+}
+/* *********************************
+Nav 
+**********************************/
 .nav-container{
   display: flex;
   justify-content: space-between;
@@ -46,20 +68,9 @@ input{
   color: #eae9e9;
 }
 
-.banner{
-  background-image: linear-gradient(#d4d7dd, #f6f6f6);
-  margin: 0;
-}
-.banner h2{
-  margin: 0;
-}
-.flexbox{
-  display: flex;
-  justify-content: center;
-}
-.flexbox *{
-  margin: 0 10px;
-}
+/* ******************************
+Index Page
+*********************************/
 .index-holder{
   display: flex;
   flex-wrap: wrap;
@@ -73,16 +84,24 @@ input{
   margin-top: .5em;
   padding: .5em;
 }
-
+/* *********************************
+Forms (New/Update)
+********************************* */
 .form-style{
   border: 3px solid #420000;
   display: flex;
   flex-direction: column;
+  background-color: #fafafa;
+  width:70%;
+  margin: 10px auto;
   
 }
 .form-style *{
   margin: 5px 0;
 }
-.cancle-btn{
+
+.cancle-btn, .form-style input[type=submit]{
   display: block;
+  margin: 0 auto;
 }
+
