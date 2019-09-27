@@ -131,7 +131,7 @@ class BoosterNew extends Component{
                     
                     <span>
                         <label htmlFor="">Description:</label>
-                         <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
+                         <textarea name="description" cols="54" rows="2" onChange={this.handleChange} >{this.state.description}</textarea>
                     </span>
 
                     <span>
@@ -155,8 +155,8 @@ class BoosterNew extends Component{
                     </span>
 
                     <span>
-                        <label htmlFor="">Pump Received: Yes</label> 
-                        <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No 
+                        <label htmlFor="">Pump Received: </label> 
+                        Yes  <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No   
                         <input type="radio" name="pump_received" checked={this.state.pump_received? false: true} onChange={this.handleChange}/>
                     </span>
                     
@@ -171,8 +171,8 @@ class BoosterNew extends Component{
                     </span>
 
                     <span>                   
-                        <label >Controller Received: Yes</label> 
-                        <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
+                        <label >Controller Received: </label> 
+                        Yes  <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
                         <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
                     </span>
                     
@@ -182,8 +182,8 @@ class BoosterNew extends Component{
                     </span>
 
                     <span>
-                        <label>Completed: Yes</label>  
-                        <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No 
+                        <label>Completed: </label>  
+                        Yes  <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No   
                         <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
                     </span>
                     

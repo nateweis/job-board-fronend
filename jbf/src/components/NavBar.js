@@ -9,6 +9,7 @@ class NavBar extends Component{
     }
     render(){       
         return(
+            <div className="outer-nav-container">
             <div className="nav-container">
                 
                 <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
@@ -17,6 +18,9 @@ class NavBar extends Component{
                     <li><Link to="/jobs/booster/index"><button>Booster Jobs</button></Link></li>                    
                 </ul>                
                                
+            </div>
+
+            <div className="spacer"></div>
             </div>
         )
     }
