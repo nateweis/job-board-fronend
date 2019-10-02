@@ -64,7 +64,7 @@ Nav
   height: 75px;
   padding: 0 7%;
   position: fixed;
-  width: 85vw;
+  width: 90vw;
   z-index: 5;
 }
 .loggout-btn{
@@ -190,6 +190,26 @@ Index Page
 }
 
 /* *********************************
+Show Page
+********************************* */
+.show-display{
+  background-color: #eae9e9;
+  width: 40%;
+  margin: 10px auto;
+}
+.show-display ul{
+  list-style: none;
+}
+.show-display ul li{
+  margin: 10px 0;
+  border-bottom: #420000 1px solid;
+  width: 95%;
+}
+.show-display ul li strong{
+  margin-right: 10px;
+}
+
+/* *********************************
 Forms (New/Update)
 ********************************* */
 .form-style{
@@ -217,4 +237,24 @@ Forms (New/Update)
 .form-style span input[type=text]{
   width: 400px;
   height: 30px;
+}
+/* *********************************
+Login Form
+********************************* */
+.login{
+  width: 40%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+.login input{
+  width: 40%;
+  height: 30px;
+  margin: 0 5px;
+} 
+.login-form input[type=submit]{
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  border-radius: 5px;
 }

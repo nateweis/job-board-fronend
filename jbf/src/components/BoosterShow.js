@@ -147,43 +147,90 @@ class BoosterShow extends Component{
     render(){
         return(
             <>
-                {this.state.makeUpdates? <> {this.state.id? <div><button onClick={this.cancleChange}>X</button>
-                    <form onSubmit={this.handleSubmit} >
-                    Job Order Number: <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
-                    <br/>
-                    Description: <textarea name="description" cols="30" rows="1" onChange={this.handleChange} >{this.state.description}</textarea>
-                    <br/>
-                    Requested By: <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
-                    <br/>
-                    Job Address: <input type="text" value={this.state.job_address} name="job_address" onChange={this.handleChange} />
-                    <br/>
-                    Pump PO: <input type="text" name="pump_po" value={this.state.pump_po} onChange={this.handleChange} />
-                    <br/>
-                    Pump ETA: <input type="date" name="pump_eta" value={this.state.pump_eta} onChange={this.handleChange} />
-                    <br/>
-                    Pump Received: Yes 
-                    <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No 
-                    <input type="radio" name="pump_received" checked={this.state.pump_received? false: true} onChange={this.handleChange}/>
-                    <br/>
-                    Controller PO: <input type="text" name="controller_po" value={this.state.controller_po} onChange={this.handleChange} />
-                    <br/>
-                    Controller ETA: <input type="date" name="controller_eta" value={this.state.controller_eta} onChange={this.handleChange} />
-                    <br/>
-                    Controller Received: Yes 
-                    <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
-                    <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
-                    <br/>
-                    Due Date: <input type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
-                    <br/>
-                    Completed: Yes 
-                    <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No 
-                    <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
-                    <br/>
-                    Shipdate/Packlist: <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
-                    <br/>
-                    Notes: <input type="text" name="notes" value={this.state.notes} onChange={this.handleChange} />
-                    <br/>
-                    <input type="submit" value="Update"/>
+                {this.state.makeUpdates? <> {this.state.id? <div>
+                    <h3 className="banner">Update Form</h3>
+                    <form onSubmit={this.handleSubmit} className="form-style" >
+                    
+                    <span>
+                        <button className="cancle-btn" onClick={this.cancleChange}>X</button>
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Job Order Number: </label>
+                        <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
+                    </span>
+                    
+                    <span>
+                        <label htmlFor="">Description:</label>
+                         <textarea name="description" cols="54" rows="2" onChange={this.handleChange} >{this.state.description}</textarea>
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Requested By: </label>
+                        <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Job Address: </label>
+                        <input type="text" value={this.state.job_address} name="job_address" onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pump PO: </label>
+                        <input type="text" name="pump_po" value={this.state.pump_po} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pump ETA: </label>
+                        <input type="date" name="pump_eta" value={this.state.pump_eta} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pump Received: </label> 
+                        Yes  <input type="radio" name="pump_received" checked={this.state.pump_received} onChange={this.handleChange} className="trueClass"/> No   
+                        <input type="radio" name="pump_received" checked={this.state.pump_received? false: true} onChange={this.handleChange}/>
+                    </span>
+                    
+                    <span>
+                        <label htmlFor="">Controller PO: </label>    
+                        <input type="text" name="controller_po" value={this.state.controller_po} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Controller ETA: </label>    
+                        <input type="date" name="controller_eta" value={this.state.controller_eta} onChange={this.handleChange} />
+                    </span>
+
+                    <span>                   
+                        <label >Controller Received: </label> 
+                        Yes  <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
+                        <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
+                    </span>
+                    
+                    <span>
+                        <label >Due Date: </label>
+                        <input type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label>Completed: </label>  
+                        Yes  <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No   
+                        <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
+                    </span>
+                    
+                    <span>
+                        <label >Shipdate/Packlist:</label>
+                        <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label>Notes:</label>                    
+                        <input type="text" name="notes" value={this.state.notes} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <input type="submit" value="Update"/>
+                    </span>
                 </form></div> :<h3>Loading.......</h3>}</> : <div>
                     <div className="banner">
                         <h2>Full Info Show</h2>
@@ -192,26 +239,28 @@ class BoosterShow extends Component{
                             <button onClick={this.deleteJob}>Delete Job from JobBoard</button>
                         </span>
                     </div> 
-                    <ul>
-                        <li>Job Order Number: {this.state.job_order_number} </li>
-                        <li>Stage: {this.state.stage} </li>
-                        <li>Last Updated: <this.SpellOutDate date={this.state.last_updated} /> </li>
-                        <li>Updated By: {this.state.updated_by} </li>
-                        <li>Date Created: <this.SpellOutDate date={this.state.date_created}/> </li>
-                        <li>Description: {this.state.description} </li>
-                        <li>Requested By: {this.state.requested_by} </li>
-                        <li>Job Address: {this.state.job_address} </li>
-                        <li>Pump PO: {this.state.pump_po} </li>
-                        <li>Pump ETA: <this.SpellOutDate date={this.state.pump_eta}/> </li>
-                        <li>Pump Received: {this.state.pump_received?'Yes':'No'} </li>
-                        <li>Controller PO: {this.state.controller_po} </li>
-                        <li>Controller ETA: <this.SpellOutDate date={this.state.controller_eta} /> </li>
-                        <li>Controller Received: {this.state.controller_received?'Yes':'No'} </li>
-                        <li>Due Date: <this.SpellOutDate date={this.state.due_date} /> </li>
-                        <li>Completed: {this.state.completed?'Yes':'No'} </li>
-                        <li>ShipDate/Packlist: {this.state.shipdate_packlist} </li>
-                        <li>Notes: {this.state.notes} </li>
-                    </ul>
+                    <div className="show-display">
+                        <ul>
+                            <li> <strong>Job Order Number:</strong>  {this.state.job_order_number} </li>
+                            <li><strong>Stage:</strong> {this.state.stage} </li>
+                            <li> <strong>Last Updated:</strong><this.SpellOutDate date={this.state.last_updated} /> </li>
+                            <li><strong>Updated By:</strong> {this.state.updated_by} </li>
+                            <li><strong>Date Created:</strong> <this.SpellOutDate date={this.state.date_created}/> </li>
+                            <li><strong>Description:</strong> {this.state.description} </li>
+                            <li><strong>Requested By:</strong> {this.state.requested_by} </li>
+                            <li><strong>Job Address:</strong> {this.state.job_address} </li>
+                            <li><strong>Pump PO:</strong> {this.state.pump_po} </li>
+                            <li><strong>Pump ETA:</strong> <this.SpellOutDate date={this.state.pump_eta}/> </li>
+                            <li><strong>Pump Received:</strong> {this.state.pump_received?'Yes':'No'} </li>
+                            <li> <strong>Controller PO:</strong> {this.state.controller_po} </li>
+                            <li> <strong>Controller ETA:</strong> <this.SpellOutDate date={this.state.controller_eta} /> </li>
+                            <li> <strong>Controller Received:</strong> {this.state.controller_received?'Yes':'No'} </li>
+                            <li> <strong>Due Date:</strong> <this.SpellOutDate date={this.state.due_date} /> </li>
+                            <li> <strong>Completed:</strong> {this.state.completed?'Yes':'No'} </li>
+                            <li> <strong>ShipDate/Packlist:</strong> {this.state.shipdate_packlist} </li>
+                            <li> <strong>Notes:</strong> {this.state.notes} </li>
+                        </ul>
+                    </div>
                  </div> }
                 
             </>
