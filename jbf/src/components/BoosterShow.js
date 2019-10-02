@@ -11,6 +11,26 @@ class BoosterShow extends Component{
         }
     }
 
+    cancleChange = () => {
+        this.setState({
+            makeUpdates: false,
+            description: this.state.originalData.description,
+            job_address: this.state.originalData.job_address,
+            job_order_number: this.state.originalData.job_order_number,
+            requested_by: this.state.originalData.requested_by,
+            completed: this.state.originalData.completed,
+            controller_eta: this.state.originalData.controller_eta,
+            controller_po: this.state.originalData.controller_po,
+            controller_received: this.state.originalData.controller_received,
+            notes: this.state.originalData.notes,
+            pump_eta: this.state.originalData.pump_eta,
+            pump_po: this.state.originalData.pump_po,
+            pump_received: this.state.originalData.pump_received,
+            shipdate_packlist: this.state.originalData.shipdate_packlist,
+            due_date: this.state.originalData.due_date
+        })
+    }
+
     componentDidMount(){
         this.pullBoosterData()
     }
@@ -30,6 +50,29 @@ class BoosterShow extends Component{
                 
             })
         })
+    }
+
+    formatDate =(string) => {
+        const str = string;
+        if(str){return str.slice(0,10)}
+        return str
+    }
+
+    handleChange = (e) => {
+        if(e.target.type === "radio"){           
+            if(e.target.className === "trueClass"){this.setState({[e.target.name]: true})}
+            else{this.setState({[e.target.name]: false})}
+        }
+        else{
+            this.setState({[e.target.name]: e.target.value})
+        }               
+      }
+
+    handleSubmit = (e) => {
+        this.setStage()
+        e.preventDefault()
+        setTimeout(this.updateApi, 500)
+               
     }
 
     pullBoosterData = () => {
@@ -71,18 +114,25 @@ class BoosterShow extends Component{
         })
     }
 
-    handleChange = (e) => {
-        if(e.target.type === "radio"){           
-            if(e.target.className === "trueClass"){this.setState({[e.target.name]: true})}
-            else{this.setState({[e.target.name]: false})}
-        }
-        else{
-            this.setState({[e.target.name]: e.target.value})
-        }               
-      }
+    setStage = () => {
+        if(this.state.completed)(
+            this.setState({stage:4})
+        )
+        else if(this.state.controller_received){
+            this.setState({stage:3})
+        }else if(this.state.pump_received){this.setState({stage:2})}
+        else{this.setState({stage:1})}
+    }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
+     
+    SpellOutDate = (props) => {
+        let d = new Date(props.date)
+        d= d.toDateString();
+        
+        return(<>{d}</>)
+    }
+    
+    updateApi = () => {
         fetch('http://localhost:3000/boosters',{
             method: 'PUT',
             body: JSON.stringify(this.state),
@@ -103,46 +153,15 @@ class BoosterShow extends Component{
                 
             })
         })
-        
-    }  
-
-    formatDate =(string) => {
-        const str = string;
-        if(str){return str.slice(0,10)}
-        return str
     }
     
-
     updateMenu = () => {
         this.setState({makeUpdates: true})
     }
 
-    cancleChange = () => {
-        this.setState({
-            makeUpdates: false,
-            description: this.state.originalData.description,
-            job_address: this.state.originalData.job_address,
-            job_order_number: this.state.originalData.job_order_number,
-            requested_by: this.state.originalData.requested_by,
-            completed: this.state.originalData.completed,
-            controller_eta: this.state.originalData.controller_eta,
-            controller_po: this.state.originalData.controller_po,
-            controller_received: this.state.originalData.controller_received,
-            notes: this.state.originalData.notes,
-            pump_eta: this.state.originalData.pump_eta,
-            pump_po: this.state.originalData.pump_po,
-            pump_received: this.state.originalData.pump_received,
-            shipdate_packlist: this.state.originalData.shipdate_packlist,
-            due_date: this.state.originalData.due_date
-        })
-    }
+    
 
-    SpellOutDate = (props) => {
-        let d = new Date(props.date)
-        d= d.toDateString();
-        
-        return(<>{d}</>)
-    }
+    
     
     render(){
         return(

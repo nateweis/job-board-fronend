@@ -48,11 +48,11 @@ class BoosterHome extends Component{
         const jobList =  this.state.jobs? this.state.jobs.sort((a,b)=>a[this.state.filter] - b[this.state.filter]).map((job, index) => {
             return(
                 <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
-                    <p>Job Order Number: {job.job_order_number}</p>
-                    <p>Stage: {job.stage}</p>
-                    <p>Requested By: {job.requested_by} </p>
-                    <p>Site Location: {job.job_address} </p>
-                    <p>Job Description: {job.description} </p>
+                    <p> <strong>Job Order Number:  </strong> {job.job_order_number}</p>
+                    <p className="stage-class"> <strong>Stage:  </strong> {job.stage}</p>
+                    <p> <strong>Requested By:  </strong> {job.requested_by} </p>
+                    <p><strong>Site Location:   </strong> {job.job_address} </p>
+                    <p><strong>Job Description:   </strong> {job.description} </p>
                     <p>=====================================</p>
                 </div>
             )
