@@ -234,7 +234,7 @@ Forms (New/Update)
   width: 200px;
   padding: 5px;
 }
-.form-style span input[type=text]{
+.form-style span input[type=text], .form-style span select{
   width: 400px;
   height: 30px;
 }

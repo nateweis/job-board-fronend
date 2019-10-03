@@ -23,6 +23,7 @@ class BoosterShow extends Component{
             controller_po: this.state.originalData.controller_po,
             controller_received: this.state.originalData.controller_received,
             notes: this.state.originalData.notes,
+            stage: this.state.originalData.stage,
             pump_eta: this.state.originalData.pump_eta,
             pump_po: this.state.originalData.pump_po,
             pump_received: this.state.originalData.pump_received,
@@ -69,7 +70,7 @@ class BoosterShow extends Component{
       }
 
     handleSubmit = (e) => {
-        this.setStage()
+        console.log(this.state)
         e.preventDefault()
         setTimeout(this.updateApi, 500)
                
@@ -114,15 +115,6 @@ class BoosterShow extends Component{
         })
     }
 
-    setStage = () => {
-        if(this.state.completed)(
-            this.setState({stage:4})
-        )
-        else if(this.state.controller_received){
-            this.setState({stage:3})
-        }else if(this.state.pump_received){this.setState({stage:2})}
-        else{this.setState({stage:1})}
-    }
 
      
     SpellOutDate = (props) => {
@@ -192,6 +184,18 @@ class BoosterShow extends Component{
                     <span>
                         <label htmlFor="">Job Address: </label>
                         <input type="text" value={this.state.job_address} name="job_address" onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Stage:   </label>
+                        <select name="stage" onChange={this.handleChange} >
+                            <option value={this.state.stage}>Current Stage {this.state.stage}</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </span>
 
                     <span>

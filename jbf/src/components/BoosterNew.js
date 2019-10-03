@@ -135,6 +135,7 @@ class BoosterNew extends Component{
                     </span>
 
                     <span>
+                        <label htmlFor="">Stage:   </label>
                         <select name="stage" onChange={this.handleChange} >
                             <option value="1">1</option>
                             <option value="2">2</option>
