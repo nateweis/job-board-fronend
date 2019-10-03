@@ -23,7 +23,10 @@ class BoosterNew extends Component{
             due_date:null,
             completed:false,
             shipdate_packlist:"",
-            notes:""
+            notes:"",
+            carrier:"",
+            bol_number:"",
+            pro_number:""
         }
     }
 
@@ -76,7 +79,10 @@ class BoosterNew extends Component{
             due_date:null,
             completed:false,
             shipdate_packlist:"",
-            notes:""
+            notes:"",
+            carrier:"",
+            bol_number:"",
+            pro_number:""
         })
     }
 
@@ -191,6 +197,21 @@ class BoosterNew extends Component{
                     <span>
                         <label >Shipdate/Packlist:</label>
                         <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Carrier:  </label>
+                        <input type="text" name="carrier" value={this.state.carrier} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Bol Number: </label>
+                        <input type="text" name="bol_number" value={this.state.bol_number} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pro Number: </label>
+                        <input type="text" name="pro_number" value={this.state.pro_number} onChange={this.handleChange} />
                     </span>
 
                     <span>
