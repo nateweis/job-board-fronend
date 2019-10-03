@@ -28,7 +28,10 @@ class BoosterShow extends Component{
             pump_po: this.state.originalData.pump_po,
             pump_received: this.state.originalData.pump_received,
             shipdate_packlist: this.state.originalData.shipdate_packlist,
-            due_date: this.state.originalData.due_date
+            due_date: this.state.originalData.due_date,
+            carrier: this.state.originalData.carrier,
+            bol_number: this.state.originalData.bol_number,
+            pro_number: this.state.originalData.pro_number
         })
     }
 
@@ -105,6 +108,9 @@ class BoosterShow extends Component{
                        updated_by: data.data.updated_by,
                        stage: data.data.stage,
                        user: data.userInfo.name,
+                       carrier: data.data.carrier,
+                       bol_number: data.data.bol_number,
+                       pro_number: data.data.pro_number,
                        originalData: data.data
                    })
                }
@@ -247,6 +253,21 @@ class BoosterShow extends Component{
                     </span>
 
                     <span>
+                        <label htmlFor="">Carrier:  </label>
+                        <input type="text" name="carrier" value={this.state.carrier} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Bol Number: </label>
+                        <input type="text" name="bol_number" value={this.state.bol_number} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Pro Number: </label>
+                        <input type="text" name="pro_number" value={this.state.pro_number} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
                         <label>Notes:</label>                    
                         <input type="text" name="notes" value={this.state.notes} onChange={this.handleChange} />
                     </span>
@@ -281,6 +302,9 @@ class BoosterShow extends Component{
                             <li> <strong>Due Date:</strong> <this.SpellOutDate date={this.state.due_date} /> </li>
                             <li> <strong>Completed:</strong> {this.state.completed?'Yes':'No'} </li>
                             <li> <strong>ShipDate/Packlist:</strong> {this.state.shipdate_packlist} </li>
+                            <li><strong>Carrier: </strong>  {this.state.carrier}</li>
+                            <li><strong>Bol Number:  </strong>{this.state.bol_number} </li>
+                            <li><strong>Pro Number:  </strong>{this.state.pro_number} </li>
                             <li> <strong>Notes:</strong> {this.state.notes} </li>
                         </ul>
                     </div>
