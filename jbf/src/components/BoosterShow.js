@@ -185,7 +185,7 @@ class BoosterShow extends Component{
                     </span>
 
                     <span>
-                        <label htmlFor="">Requested By: </label>
+                        <label htmlFor="">Customer: </label>
                         <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
                     </span>
 
@@ -266,7 +266,7 @@ class BoosterShow extends Component{
                             <li><strong>Updated By:</strong> {this.state.updated_by} </li>
                             <li><strong>Date Created:</strong> <this.SpellOutDate date={this.state.date_created}/> </li>
                             <li><strong>Description:</strong> {this.state.description} </li>
-                            <li><strong>Requested By:</strong> {this.state.requested_by} </li>
+                            <li><strong>Customer:</strong> {this.state.requested_by} </li>
                             <li><strong>Job Address:</strong> {this.state.job_address} </li>
                             <li><strong>Pump PO:</strong> {this.state.pump_po} </li>
                             <li><strong>Pump ETA:</strong> <this.SpellOutDate date={this.state.pump_eta}/> </li>

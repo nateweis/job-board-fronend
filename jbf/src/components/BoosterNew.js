@@ -12,7 +12,7 @@ class BoosterNew extends Component{
             description:"",
             requested_by:"",
             job_address:"",
-            stage:0,
+            stage:1,
             pump_po:"",
             pump_eta:null,
             pump_received:false,
@@ -55,7 +55,6 @@ class BoosterNew extends Component{
       }
 
     handleSubmit = (e) => {
-        this.setStage()
         e.preventDefault()
         setTimeout(this.postToApi, 500)
     } 
@@ -66,7 +65,7 @@ class BoosterNew extends Component{
             description:"",
             requested_by:"",
             job_address:"",
-            stage:0,
+            stage:1,
             pump_po:"",
             pump_eta:null,
             pump_received:false,
@@ -81,15 +80,6 @@ class BoosterNew extends Component{
         })
     }
 
-   setStage = () => {
-       if(this.state.completed)(
-           this.setState({stage:4})
-       )
-       else if(this.state.controller_received){
-           this.setState({stage:3})
-       }else if(this.state.pump_received){this.setState({stage:2})}
-       else{this.setState({stage:1})}
-   }
 
    postToApi = () => {
     fetch('http://localhost:3000/boosters',{
@@ -135,13 +125,23 @@ class BoosterNew extends Component{
                     </span>
 
                     <span>
-                        <label htmlFor="">Requested By: </label>
+                        <label htmlFor="">Customer: </label>
                         <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
                     </span>
 
                     <span>
                         <label htmlFor="">Job Address: </label>
                         <input type="text" value={this.state.job_address} name="job_address" onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <select name="stage" onChange={this.handleChange} >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </span>
 
                     <span>
