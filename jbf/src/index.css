@@ -17,6 +17,9 @@ code {
 *:focus{
   outline: none;
 }
+h1{
+  color: #d4d7dd;
+}
 h2,h3{
   text-align: center;
   padding: 20px 0;

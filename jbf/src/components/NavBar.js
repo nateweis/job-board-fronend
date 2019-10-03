@@ -13,6 +13,8 @@ class NavBar extends Component{
             <div className="nav-container">
                 
                 <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
+
+                <h1>Pending........</h1>
                     
                 <ul className="nav-links" >
                     <li><Link to="/jobs/booster/index"><button>Booster Jobs</button></Link></li>                    
