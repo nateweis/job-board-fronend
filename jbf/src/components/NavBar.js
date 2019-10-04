@@ -18,6 +18,7 @@ class NavBar extends Component{
             this.props.switchToArchive(false)
         }
         this.setState({viewState: e.target.value})
+        this.props.history.push("/jobs/booster/index")
     }
 
     loggout = () => {

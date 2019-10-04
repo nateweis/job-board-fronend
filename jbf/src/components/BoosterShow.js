@@ -278,10 +278,16 @@ class BoosterShow extends Component{
                 </form></div> :<h3>Loading.......</h3>}</> : <div>
                     <div className="banner">
                         <h2>Full Info Show</h2>
-                        <span className="flexbox">
-                            <button onClick={this.updateMenu} >Make Updates</button>
-                            <button onClick={this.deleteJob}>Delete Job from JobBoard</button>
-                        </span>
+                        <>
+                            {this.state.completed?
+                            <button>Un-Archive</button>
+                            :
+                            <span className="flexbox">
+                                <button onClick={this.updateMenu} >Make Updates</button>
+                                <button onClick={this.deleteJob}>Delete Job from JobBoard</button>
+                            </span>
+                            }
+                        </>
                     </div> 
                     <div className="show-display">
                         <ul>

@@ -5,7 +5,8 @@ class BoosterHome extends Component{
     constructor(props) {
        super(props)
        this.state = {
-            filter: 'stage'
+            filter: 'stage',
+            search:""
        } 
     }
 
@@ -35,17 +36,25 @@ class BoosterHome extends Component{
         this.setState({filter: e.target.value})
     }
 
-    showPage = (job) => {
-        this.props.history.push("/jobs/booster/"+job)
+    handleChange = (e) => {
+        this.setState({search: e.target.value})
     }
 
     newJobPage = () => {
         this.props.history.push("/jobs/booster/new",{user:this.state.user})
     }
 
+    showPage = (job) => {
+        this.props.history.push("/jobs/booster/"+job)
+    }
+
     render(){
 
-        const jobList =  this.state.jobs? this.state.jobs.sort((a,b)=>a[this.state.filter] - b[this.state.filter]).map((job, index) => {
+        let allJobs = this.state.jobs? this.state.jobs.filter((job) => {
+            return job.requested_by.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+        }): null
+
+        const jobList =  allJobs? allJobs.sort((a,b)=>a[this.state.filter] - b[this.state.filter]).map((job, index) => {
             if(this.props.archive){
                 return(
                     <>
@@ -83,6 +92,7 @@ class BoosterHome extends Component{
                 <div className="banner">
                     <h2>Booster Jobs Index Page</h2>
                     <span className="flexbox">
+                        <input type="text" placeholder="search" value={this.state.search} onChange={this.handleChange} />
                         <select name="filter" onChange={this.filterOptions}>
                             <option value="stage">Sort Options</option>
                             <option value="stage">Stage</option>
