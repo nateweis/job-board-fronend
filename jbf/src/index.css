@@ -76,6 +76,9 @@ Nav
   width: 75px;
   font-weight: 800;
 }
+.nav-links{
+  display: flex;
+}
 .nav-links li{
   list-style: none;
 }

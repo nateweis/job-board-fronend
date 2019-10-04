@@ -3,6 +3,23 @@ import {Link, withRouter} from 'react-router-dom';
 import Auth from '../modules/Auth'
 
 class NavBar extends Component{
+    constructor(props){
+        super(props)
+        this.state={
+            viewState: "Pending........."
+        }
+    }
+
+    changeView = (e) => {
+        if(e.target.value === "Completed Jobs"){
+            this.props.switchToArchive(true)
+        }
+        else{
+            this.props.switchToArchive(false)
+        }
+        this.setState({viewState: e.target.value})
+    }
+
     loggout = () => {
         Auth.deauthUser();
         this.props.history.push("/login")
@@ -14,10 +31,19 @@ class NavBar extends Component{
                 
                 <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
 
-                <h1>Pending........</h1>
+                <div>
+                    <button value="Pending Jobs" onClick={this.changeView} >Active</button>
+                    <button value="Completed Jobs" onClick={this.changeView} >Completed</button>
+                </div>
+
+                <h1>{this.state.viewState}</h1>
+
+                <div></div>
                     
                 <ul className="nav-links" >
-                    <li><Link to="/jobs/booster/index"><button>Booster Jobs</button></Link></li>                    
+                    <li><Link to="/jobs/booster/index"><button>Booster Jobs</button></Link></li> 
+                    <li><button>Sewer Jobs</button></li>
+                    <li><button>Fire Jobs</button></li>                   
                 </ul>                
                                
             </div>

@@ -12,7 +12,8 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      archive: false
     }
   }
 
@@ -20,14 +21,18 @@ class App extends Component {
     this.setState({loggedIn:b});
   }
 
+  switchToArchive = (bol) => {
+    this.setState({archive: bol})
+  }
+
   render(){
     return (
       <BrowserRouter>
-        <Route path="/jobs" render={()=>(Auth.getToken()? <NavBar />: <Redirect to="/login" />)} />
+        <Route path="/jobs" render={()=>(Auth.getToken()? <NavBar switchToArchive={this.switchToArchive} />: <Redirect to="/login" />)} />
         <Switch>
           <Route path="/" exact render={()=><Redirect to="/login"/>} />
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} />       
-          <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} />} />
+          <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} archive={this.state.archive} />} />
           <Route path="/jobs/booster/new" component={BoosterNew} />
           <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} push={history.push} /> } />
           <Route render={()=>{return (<div>404 page not found</div>)}} />

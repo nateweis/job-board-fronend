@@ -46,8 +46,26 @@ class BoosterHome extends Component{
     render(){
 
         const jobList =  this.state.jobs? this.state.jobs.sort((a,b)=>a[this.state.filter] - b[this.state.filter]).map((job, index) => {
+            if(this.props.archive){
+                return(
+                    <>
+                    {job.completed? 
+                        <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
+                        <p> <strong>Job Order Number:  </strong> {job.job_order_number}</p>
+                        <p className="stage-class"> <strong>Stage:  </strong> {job.stage}</p>
+                        <p> <strong>Customer:  </strong> {job.requested_by} </p>
+                        <p><strong>Site Location:   </strong> {job.job_address} </p>
+                        <p><strong>Job Description:   </strong> {job.description} </p>
+                        <p>=====================================</p>
+                    </div> :""
+                    }
+                    </>
+                )
+            }
             return(
-                <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
+                <>
+                {job.completed? "" : 
+                    <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
                     <p> <strong>Job Order Number:  </strong> {job.job_order_number}</p>
                     <p className="stage-class"> <strong>Stage:  </strong> {job.stage}</p>
                     <p> <strong>Customer:  </strong> {job.requested_by} </p>
@@ -55,6 +73,8 @@ class BoosterHome extends Component{
                     <p><strong>Job Description:   </strong> {job.description} </p>
                     <p>=====================================</p>
                 </div>
+                }
+                </>
             )
         }) : <h4>Loading.....</h4>
         
