@@ -6,7 +6,7 @@ class NavBar extends Component{
     constructor(props){
         super(props)
         this.state={
-            viewState: "Pending........."
+            viewState: "Pending................"
         }
     }
 
@@ -33,7 +33,7 @@ class NavBar extends Component{
                 <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
 
                 <div>
-                    <button value="Pending Jobs" onClick={this.changeView} >Active</button>
+                    <button value="Pending................" onClick={this.changeView} >Active</button>
                     <button value="Completed Jobs" onClick={this.changeView} >Completed</button>
                 </div>
 
