@@ -86,7 +86,21 @@ Nav
   background: none;
   color: #eae9e9;
 }
-
+.stage-class1{
+  color: #D3B1C2;
+}
+.stage-class2{
+  color: #E49830;
+}
+.stage-class3{
+  color: #B50000;
+}
+.stage-class4{
+  color: #9BB2C5;
+}
+.stage-class5{
+  color: #A1A540;
+}
 /* ******************************
 Index Page
 *********************************/

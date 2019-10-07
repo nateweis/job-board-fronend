@@ -48,7 +48,12 @@ class BoosterHome extends Component{
         this.props.history.push("/jobs/booster/"+job)
     }
 
+    stageClass = (int) => {
+        return "stage-cloos" + int
+    }
+
     render(){
+        
 
         let allJobs = this.state.jobs? this.state.jobs.filter((job) => {
             return job.requested_by.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || 
@@ -63,7 +68,7 @@ class BoosterHome extends Component{
                     {job.completed? 
                         <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
                         <p> <strong>Job Order Number:  </strong> {job.job_order_number}</p>
-                        <p className="stage-class"> <strong>Stage:  </strong> {job.stage}</p>
+                        <p className="stage-class5"> <strong>Stage:  </strong> 5</p>
                         <p> <strong>Customer:  </strong> {job.requested_by} </p>
                         <p><strong>Site Location:   </strong> {job.job_address} </p>
                         <p><strong>Job Description:   </strong> {job.description} </p>
@@ -78,7 +83,7 @@ class BoosterHome extends Component{
                 {job.completed? "" : 
                     <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
                     <p> <strong>Job Order Number:  </strong> {job.job_order_number}</p>
-                    <p className="stage-class"> <strong>Stage:  </strong> {job.stage}</p>
+                    <p className={"stage-class"+job.stage}> <strong>Stage:  </strong> {job.stage}</p>
                     <p> <strong>Customer:  </strong> {job.requested_by} </p>
                     <p><strong>Site Location:   </strong> {job.job_address} </p>
                     <p><strong>Job Description:   </strong> {job.description} </p>

@@ -292,7 +292,7 @@ class BoosterShow extends Component{
                     <div className="show-display">
                         <ul>
                             <li> <strong>Job Order Number:</strong>  {this.state.job_order_number} </li>
-                            <li><strong>Stage:</strong> {this.state.stage} </li>
+                            <li className={this.state.completed? "stage-class5": "stage-class"+ this.state.stage} ><strong>Stage:</strong> {this.state.completed? "5": this.state.stage} </li>
                             <li> <strong>Last Updated:</strong><this.SpellOutDate date={this.state.last_updated} /> </li>
                             <li><strong>Updated By:</strong> {this.state.updated_by} </li>
                             <li><strong>Date Created:</strong> <this.SpellOutDate date={this.state.date_created}/> </li>
