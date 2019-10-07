@@ -35,6 +35,29 @@ class BoosterShow extends Component{
         })
     }
 
+    changeCompletion = (bol) => {
+        const obj = {completed: bol, id: this.state.id}
+        fetch('http://localhost:3000/boosters/completed',{
+            method:'PUT',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization : `Token ${Auth.getToken()}`
+        },
+            body: JSON.stringify(obj)
+        })
+        .then((res) => {
+            res.json()
+            .then((data) => {
+                console.log(data)
+                this.props.push('/jobs/booster/index')
+            },(err) => {
+                console.log(err);
+                
+            })
+        })
+    }
+
     componentDidMount(){
         this.pullBoosterData()
     }
@@ -241,11 +264,11 @@ class BoosterShow extends Component{
                         <input type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
                     </span>
 
-                    <span>
+                    {/* <span>
                         <label>Completed: </label>  
                         Yes  <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No   
                         <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
-                    </span>
+                    </span> */}
                     
                     <span>
                         <label >Shipdate/Packlist:</label>
@@ -280,10 +303,13 @@ class BoosterShow extends Component{
                         <h2>Full Info Show</h2>
                         <>
                             {this.state.completed?
-                            <button>Un-Archive</button>
+                            <span className="flexbox">
+                                <button onClick={()=> this.changeCompletion(false)}>Un-Archive</button>
+                            </span>
                             :
                             <span className="flexbox">
                                 <button onClick={this.updateMenu} >Make Updates</button>
+                                <button onClick={()=> this.changeCompletion(true)} >Archive Job</button>
                                 <button onClick={this.deleteJob}>Delete Job from JobBoard</button>
                             </span>
                             }
