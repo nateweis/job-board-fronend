@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Login from './components/Login'
-import BoosterHome from './components/BoosterHome'
+import BoosterHome from './components/booster/BoosterHome'
 import NavBar from './components/NavBar';
-import BoosterShow from './components/BoosterShow'
-import BoosterNew from './components/BoosterNew'
+import BoosterShow from './components/booster/BoosterShow'
+import BoosterNew from './components/booster/BoosterNew'
 import Auth from './modules/Auth'
 
 
