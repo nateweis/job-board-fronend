@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Auth from '../../modules/Auth'
 
-class BoosterHome extends Component{
+class SewageHome extends Component{
     constructor(props) {
        super(props)
        this.state = {
@@ -11,7 +11,7 @@ class BoosterHome extends Component{
     }
 
     componentDidMount(){
-        fetch('http://localhost:3000/boosters',{
+        fetch('http://localhost:3000/sewers',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
@@ -41,13 +41,12 @@ class BoosterHome extends Component{
     }
 
     newJobPage = () => {
-        this.props.history.push("/jobs/booster/new",{user:this.state.user})
+        this.props.history.push("/jobs/sewer/new",{user:this.state.user})
     }
 
     showPage = (job) => {
-        this.props.history.push("/jobs/booster/"+job)
+        this.props.history.push("/jobs/sewer/"+job)
     }
-
 
 
     render(){
@@ -95,7 +94,7 @@ class BoosterHome extends Component{
         return(
             <div>
                 <div className="banner">
-                    <h2>Booster Jobs Index Page</h2>
+                    <h2>Sewage Jobs Index Page</h2>
                     <span className="flexbox">
                         <input type="text" placeholder="search" value={this.state.search} onChange={this.handleChange} />
                         <select name="filter" onChange={this.filterOptions}>
@@ -113,4 +112,4 @@ class BoosterHome extends Component{
     }
 }
 
-export default BoosterHome
+export default SewageHome

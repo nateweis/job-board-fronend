@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import Auth from './modules/Auth'
 import Login from './components/Login'
-import BoosterHome from './components/booster/BoosterHome'
 import NavBar from './components/NavBar';
+import BoosterHome from './components/booster/BoosterHome'
 import BoosterShow from './components/booster/BoosterShow'
 import BoosterNew from './components/booster/BoosterNew'
-import Auth from './modules/Auth'
-
+import SewageHome from './components/sewage/SewageHome'
 
 class App extends Component {
   constructor(props){
@@ -35,6 +35,8 @@ class App extends Component {
           <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} archive={this.state.archive} />} />
           <Route path="/jobs/booster/new" component={BoosterNew} />
           <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} push={history.push} /> } />
+
+          <Route path="/jobs/sewer/index" render ={({history})=> <SewageHome history={history} archive={this.state.archive} />} />
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>
       </BrowserRouter>

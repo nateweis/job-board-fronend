@@ -43,7 +43,7 @@ class NavBar extends Component{
                     
                 <ul className="nav-links" >
                     <li><Link to="/jobs/booster/index"><button>Booster Jobs</button></Link></li> 
-                    <li><button>Sewer Jobs</button></li>
+                    <li><Link to="/jobs/sewer/index"><button>Sewer Jobs</button></Link></li>
                     <li><button>Fire Jobs</button></li>                   
                 </ul>                
                                
