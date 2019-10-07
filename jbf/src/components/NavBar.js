@@ -6,7 +6,8 @@ class NavBar extends Component{
     constructor(props){
         super(props)
         this.state={
-            viewState: "Pending................"
+            viewState: "Pending................",
+            tab:'booster'
         }
     }
 
@@ -18,13 +19,18 @@ class NavBar extends Component{
             this.props.switchToArchive(false)
         }
         this.setState({viewState: e.target.value})
-        this.props.history.push("/jobs/booster/index")
+        this.props.history.push("/jobs/"+this.state.tab+"/index")
     }
 
     loggout = () => {
         Auth.deauthUser();
         this.props.history.push("/login")
     }
+
+    saveTab = (str) => {
+        this.setState({tab:str})        
+    }
+
     render(){       
         return(
             <div className="outer-nav-container">
@@ -42,8 +48,8 @@ class NavBar extends Component{
                 <div></div>
                     
                 <ul className="nav-links" >
-                    <li><Link to="/jobs/booster/index"><button>Booster Jobs</button></Link></li> 
-                    <li><Link to="/jobs/sewer/index"><button>Sewer Jobs</button></Link></li>
+                    <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
+                    <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
                     <li><button>Fire Jobs</button></li>                   
                 </ul>                
                                
