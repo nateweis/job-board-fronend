@@ -4,7 +4,7 @@ import Auth from '../../modules/Auth'
 
 
 
-class BoosterNew extends Component{
+class SewageNew extends Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -16,6 +16,9 @@ class BoosterNew extends Component{
             pump_po:"",
             pump_eta:null,
             pump_received:false,
+            basin_cover:"",
+            basin_cover_eta:null,
+            basin_cover_received:false,
             updated_by: "",
             controller_po:"",
             controller_eta:null,
@@ -32,7 +35,7 @@ class BoosterNew extends Component{
 
     cancle= () => {
         this.resetState()
-        this.props.history.push('/jobs/booster/index')
+        this.props.history.push('/jobs/sewer/index')
     }
 
     checkForUser = () => {
@@ -72,6 +75,9 @@ class BoosterNew extends Component{
             pump_po:"",
             pump_eta:null,
             pump_received:false,
+            basin_cover:"",
+            basin_cover_eta:null,
+            basin_cover_received:false,
             updated_by: this.props.location.state.user,
             controller_po:"",
             controller_eta:null,
@@ -88,7 +94,7 @@ class BoosterNew extends Component{
 
 
    postToApi = () => {
-    fetch('http://localhost:3000/boosters',{
+    fetch('http://localhost:3000/sewers',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{
@@ -102,7 +108,7 @@ class BoosterNew extends Component{
         .then((data) => {
             console.log(data)
             this.resetState()
-            this.props.history.push('/jobs/booster/index')
+            this.props.history.push('/jobs/sewer/index')
         },(err) => {
             console.log(err)
         })
@@ -114,7 +120,7 @@ class BoosterNew extends Component{
     render(){
         return(
             <div>
-                <h3 className="banner">New Booster Job</h3>
+                <h3 className="banner">New Sewer Job</h3>
                 <form onSubmit={this.handleSubmit} className="form-style" >
                     <span>
                         <button className="cancle-btn" onClick={this.cancle} >Cancle</button>
@@ -182,6 +188,22 @@ class BoosterNew extends Component{
                         Yes  <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
                         <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
                     </span>
+
+                    <span>
+                        <label htmlFor="">Basin/Cover: </label>    
+                        <input type="text" name="basin_cover" value={this.state.basin_cover} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Basin/Cover ETA: </label>    
+                        <input type="date" name="basin_cover_eta" value={this.state.basin_cover_eta} onChange={this.handleChange} />
+                    </span>
+
+                    <span>                   
+                        <label >Basin/Cover Received: </label> 
+                        Yes  <input type="radio" name="basin_cover_received" checked={this.state.basin_cover_received} onChange={this.handleChange} className="trueClass" /> No 
+                        <input type="radio" name="basin_cover_received" checked={this.state.basin_cover_received? false: true} onChange={this.handleChange}/>
+                    </span>
                     
                     <span>
                         <label >Due Date: </label>
@@ -228,4 +250,4 @@ class BoosterNew extends Component{
     }
 }
 
-export default withRouter(BoosterNew) 
+export default withRouter(SewageNew) 

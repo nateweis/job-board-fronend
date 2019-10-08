@@ -7,6 +7,7 @@ import BoosterHome from './components/booster/BoosterHome'
 import BoosterShow from './components/booster/BoosterShow'
 import BoosterNew from './components/booster/BoosterNew'
 import SewageHome from './components/sewage/SewageHome'
+import SewageNew from './components/sewage/SewageNew'
 
 class App extends Component {
   constructor(props){
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} push={history.push} /> } />
 
           <Route path="/jobs/sewer/index" render ={({history})=> <SewageHome history={history} archive={this.state.archive} />} />
+          <Route path="/jobs/sewer/new" component={SewageNew} />
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>
       </BrowserRouter>
