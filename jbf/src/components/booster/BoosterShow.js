@@ -300,7 +300,7 @@ class BoosterShow extends Component{
                     </span>
                 </form></div> :<h3>Loading.......</h3>}</> : <div>
                     <div className="banner">
-                        <h2>Full Info Show</h2>
+                        <h2>Booster Job Info</h2>
                         <>
                             {this.state.completed?
                             <span className="flexbox">
