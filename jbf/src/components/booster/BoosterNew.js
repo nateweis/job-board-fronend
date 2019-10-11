@@ -26,7 +26,9 @@ class BoosterNew extends Component{
             notes:"",
             carrier:"",
             bol_number:"",
-            pro_number:""
+            pro_number:"",
+            deposit_amount:"",
+            invoice_number:""
         }
     }
 
@@ -82,7 +84,9 @@ class BoosterNew extends Component{
             notes:"",
             carrier:"",
             bol_number:"",
-            pro_number:""
+            pro_number:"",
+            deposit_amount:"",
+            invoice_number:""
         })
     }
 
@@ -188,15 +192,25 @@ class BoosterNew extends Component{
                         <input type="date" name="due_date" value={this.state.due_date} onChange={this.handleChange} />
                     </span>
 
-                    <span>
+                    {/* <span>
                         <label>Completed: </label>  
                         Yes  <input type="radio" name="completed" checked={this.state.completed} onChange={this.handleChange} className="trueClass" /> No   
                         <input type="radio" name="completed" checked={this.state.completed? false: true} onChange={this.handleChange}/>
-                    </span>
+                    </span> */}
                     
                     <span>
                         <label >Shipdate/Packlist:</label>
                         <input type="text" name="shipdate_packlist" value={this.state.shipdate_packlist} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Deposite Amount:</label>
+                        <input type="text" name="deposit_amount" value={this.state.deposit_amount} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Invoice Number:</label>
+                        <input type="text" name="invoice_number" value={this.state.invoice_number} onChange={this.handleChange} />
                     </span>
 
                     <span>

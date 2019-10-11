@@ -31,7 +31,9 @@ class BoosterShow extends Component{
             due_date: this.state.originalData.due_date,
             carrier: this.state.originalData.carrier,
             bol_number: this.state.originalData.bol_number,
-            pro_number: this.state.originalData.pro_number
+            pro_number: this.state.originalData.pro_number,
+            deposit_amount: this.state.originalData.deposit_amount,
+            invoice_number: this.state.originalData.invoice_number
         })
     }
 
@@ -134,6 +136,8 @@ class BoosterShow extends Component{
                        carrier: data.data.carrier,
                        bol_number: data.data.bol_number,
                        pro_number: data.data.pro_number,
+                       deposit_amount: data.data.deposit_amount,
+                       invoice_number: data.data.invoice_number,
                        originalData: data.data
                    })
                }
@@ -276,6 +280,16 @@ class BoosterShow extends Component{
                     </span>
 
                     <span>
+                        <label htmlFor="">Deposite Amount:</label>
+                        <input type="text" name="deposit_amount" value={this.state.deposit_amount} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Invoice Number:</label>
+                        <input type="text" name="invoice_number" value={this.state.invoice_number} onChange={this.handleChange} />
+                    </span>
+
+                    <span>
                         <label htmlFor="">Carrier:  </label>
                         <input type="text" name="carrier" value={this.state.carrier} onChange={this.handleChange} />
                     </span>
@@ -334,6 +348,8 @@ class BoosterShow extends Component{
                             <li> <strong>Due Date:</strong> <this.SpellOutDate date={this.state.due_date} /> </li>
                             <li> <strong>Completed:</strong> {this.state.completed?'Yes':'No'} </li>
                             <li> <strong>ShipDate/Packlist:</strong> {this.state.shipdate_packlist} </li>
+                            <li> <strong>Deposite Amount:</strong> {this.state.deposit_amount} </li>
+                            <li> <strong>Invoice Number:</strong> {this.state.invoice_number} </li>
                             <li><strong>Carrier: </strong>  {this.state.carrier}</li>
                             <li><strong>Bol Number:  </strong>{this.state.bol_number} </li>
                             <li><strong>Pro Number:  </strong>{this.state.pro_number} </li>
