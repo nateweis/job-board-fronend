@@ -70,6 +70,9 @@ Nav
   width: 90vw;
   z-index: 5;
 }
+.nav-tab{
+  display: flex;
+}
 .loggout-btn{
   color: #420000;
   background: #eae9e9;

@@ -31,21 +31,23 @@ class NavBar extends Component{
         this.setState({tab:str})        
     }
 
-    render(){       
+    render(){ 
+        let width = window.innerWidth      
         return(
             <div className="outer-nav-container">
-            <div className="nav-container">
+            {width > 930? 
+                <div className="nav-container">
                 
                 <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
 
-                <div>
+                <div className="nav-tab">
                     <button value="Pending................" onClick={this.changeView} >Active</button>
                     <button value="Completed Jobs" onClick={this.changeView} >Completed</button>
                 </div>
 
                 <h1>{this.state.viewState}</h1>
 
-                <div></div>
+                <div style={({color: "white"})}></div>
                     
                 <ul className="nav-links" >
                     <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
@@ -54,6 +56,7 @@ class NavBar extends Component{
                 </ul>                
                                
             </div>
+            :<button>Stuff</button>}
 
             <div className="spacer"></div>
             </div>
