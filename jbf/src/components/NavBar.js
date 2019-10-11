@@ -50,7 +50,7 @@ class NavBar extends Component{
                 <ul className="nav-links" >
                     <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
                     <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
-                    <li><button>Fire Jobs</button></li>                   
+                    <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire Jobs</button></Link></li>                   
                 </ul>                
                                
             </div>
