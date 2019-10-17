@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import ReactResizeDetector from 'react-resize-detector';
 import Auth from '../modules/Auth'
 
 class NavBar extends Component{
@@ -32,31 +33,37 @@ class NavBar extends Component{
     }
 
     render(){ 
-        let width = window.innerWidth      
+        // let width = window.innerWidth      
         return(
-            <div className="outer-nav-container">
-            {width > 930? 
-                <div className="nav-container">
-                
-                <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
+            <div className="outer-nav-container" >
+                <ReactResizeDetector handleWidth handleHeight>
 
-                <div className="nav-tab">
-                    <button value="Pending................" onClick={this.changeView} >Active</button>
-                    <button value="Completed Jobs" onClick={this.changeView} >Completed</button>
-                </div>
-
-                <h1>{this.state.viewState}</h1>
-
-                <div style={({color: "white"})}></div>
+                    {({ width}) => <div>{width > 930? 
+                    <div className="nav-container">
                     
-                <ul className="nav-links" >
-                    <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
-                    <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
-                    <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire Jobs</button></Link></li>                   
-                </ul>                
-                               
-            </div>
-            :<button>Stuff</button>}
+                    <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
+
+                    <div className="nav-tab">
+                        <button value="Pending................" onClick={this.changeView} >Active</button>
+                        <button value="Completed Jobs" onClick={this.changeView} >Completed</button>
+                    </div>
+
+                    <h1>{this.state.viewState}</h1>
+
+                    <div style={({color: "white"})}></div>
+                        
+                    <ul className="nav-links" >
+                        <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
+                        <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
+                        <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire Jobs</button></Link></li>                   
+                    </ul>                
+                                
+                    </div>
+                    :<button>Stuff</button>}</div>}
+                    
+                </ReactResizeDetector>
+
+            
 
             <div className="spacer"></div>
             </div>
