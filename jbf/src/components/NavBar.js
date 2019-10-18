@@ -27,6 +27,15 @@ class NavBar extends Component{
         this.props.history.push("/jobs/"+this.state.tab+"/index")
     }
 
+    checkDropdown = (e) => {
+        const links = document.querySelector(".nav-links-hidden")
+        const spacer = document.querySelector(".spacer")
+        if(e > 930){
+            links.style.display = "none";
+            spacer.style.height = "75px";
+        }
+    }
+
     loggout = () => {
         Auth.deauthUser();
         this.props.history.push("/login")
@@ -54,7 +63,7 @@ class NavBar extends Component{
         // let width = window.innerWidth      
         return(
             <div className="outer-nav-container" >
-                <ReactResizeDetector handleWidth handleHeight>
+                <ReactResizeDetector handleWidth handleHeight onResize={this.checkDropdown}>
 
                     {({ width}) => <div>{width > 930? 
                     <div className="nav-container">
@@ -87,7 +96,7 @@ class NavBar extends Component{
                     <div className="nav-container">
                         <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
                         <h1>{this.state.viewState}</h1>
-                        <button onClick={this.showLinks}><i class="fas fa-bars"></i></button>
+                        <button onClick={this.showLinks}><i className="fas fa-bars"></i></button>
                     </div>
                     }</div>}
 
