@@ -7,7 +7,8 @@ class Login extends Component{
         super(props)
         this.state = {
             username:'',
-            password:''
+            password:'',
+            failedAttempt: false
         }
     } 
 
@@ -28,9 +29,13 @@ class Login extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                Auth.authToken(data.token)
-                this.setState({username:"",password:""});
-                this.props.history.push("/jobs/booster/index")
+                if(data.message === "attempt failed"){
+                    this.setState({failedAttempt: true,username:"",password:""})
+                }else{
+                    Auth.authToken(data.token)
+                    this.setState({failedAttempt: false,username:"",password:""});
+                    this.props.history.push("/jobs/booster/index")
+                }
             },(err) => {
                 console.log(err)
             }
@@ -44,6 +49,7 @@ class Login extends Component{
         return(
             <form onSubmit={this.handleSubmit} className="login-form">
                 <h2 className="banner">Login</h2>
+                <h4>{this.state.failedAttempt? "Wrong Username and/or Password":""}</h4>
                 <div className="login">
                     <input type="text" placeholder="Username" value={this.state.username} name="username" onChange={this.handleChange}/>
                     <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} />
