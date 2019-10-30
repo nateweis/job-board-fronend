@@ -111,6 +111,7 @@ class BoosterShow extends Component{
            .then((data) => {
                console.log(data)
                if(data.err){this.props.push('/jobs/booster/index')}
+               else if(data.message === "403 forbiddin"){this.props.push('/jobs/booster/index')}
                else{
                    this.setState({
                        id: data.data.id,
