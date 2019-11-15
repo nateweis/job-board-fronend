@@ -59,9 +59,11 @@ class SewageHome extends Component{
         
 
         let allJobs = this.state.jobs? this.state.jobs.filter((job) => {
+            let dueDate = new Date(job.due_date)
             return job.requested_by.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || 
             job.job_address.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 || 
-            job.job_order_number.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1  
+            job.job_order_number.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1  ||
+            dueDate.toDateString().toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         }): null
 
         const jobList =  allJobs? allJobs.sort((a,b)=>a[this.state.filter] - b[this.state.filter]).map((job, index) => {

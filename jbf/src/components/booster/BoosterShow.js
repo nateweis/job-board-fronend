@@ -81,6 +81,11 @@ class BoosterShow extends Component{
         })
     }
 
+    // formatDate =(string) => {
+    //     const str = string;
+    //     if(str){return str.slice(0,10)}
+    //     return str
+    // }
 
     handleChange = (e) => {
         if(e.target.type === "radio"){           
