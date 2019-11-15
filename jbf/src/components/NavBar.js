@@ -86,9 +86,9 @@ class NavBar extends Component{
                     <div style={({color: "white"})}></div>
                         
                     <ul className="nav-links" >
-                        <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
-                        <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
-                        <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire Jobs</button></Link></li>                   
+                        <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >iBoost Jobs</button></Link></li> 
+                        <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewer</button></Link></li>
+                        <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>iLevel Tankfill</button></Link></li>                   
                     </ul>                
                                 
                     </div>
