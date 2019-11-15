@@ -81,11 +81,6 @@ class BoosterShow extends Component{
         })
     }
 
-    formatDate =(string) => {
-        const str = string;
-        if(str){return str.slice(0,10)}
-        return str
-    }
 
     handleChange = (e) => {
         if(e.target.type === "radio"){           
@@ -120,14 +115,14 @@ class BoosterShow extends Component{
                        job_order_number: data.data.job_order_number,
                        requested_by: data.data.requested_by,
                        completed: data.data.completed,
-                       controller_eta:this.formatDate(data.data.controller_eta) ,
+                       controller_eta:data.data.controller_eta,
                        controller_po: data.data.controller_po,
                        controller_received: data.data.controller_received,
-                       date_created: this.formatDate(data.data.date_created),
-                       due_date:this.formatDate(data.data.due_date) ,
-                       last_updated:this.formatDate(data.data.last_updated),
+                       date_created: data.data.date_created,
+                       due_date:data.data.due_date,
+                       last_updated:data.data.last_updated,
                        notes: data.data.notes,
-                       pump_eta: this.formatDate(data.data.pump_eta),
+                       pump_eta: data.data.pump_eta,
                        pump_po: data.data.pump_po,
                        pump_received: data.data.pump_received,
                        shipdate_packlist: data.data.shipdate_packlist,
@@ -150,13 +145,6 @@ class BoosterShow extends Component{
     }
 
 
-     
-    SpellOutDate = (props) => {
-        let d = new Date(props.date)
-        d= d.toDateString();
-        
-        return(<>{d}</>)
-    }
     
     updateApi = () => {
         fetch('http://localhost:3000/boosters',{
@@ -334,19 +322,19 @@ class BoosterShow extends Component{
                         <ul>
                             <li> <strong>Job Order Number:</strong>  {this.state.job_order_number} </li>
                             <li className={this.state.completed? "stage-class5": "stage-class"+ this.state.stage} ><strong>Stage:</strong> {this.state.completed? "5": this.state.stage} </li>
-                            <li> <strong>Last Updated:</strong><this.SpellOutDate date={this.state.last_updated} /> </li>
+                            <li> <strong>Last Updated:</strong><this.props.SpellOutDate date={this.state.last_updated} /> </li>
                             <li><strong>Updated By:</strong> {this.state.updated_by} </li>
-                            <li><strong>Date Created:</strong> <this.SpellOutDate date={this.state.date_created}/> </li>
+                            <li><strong>Date Created:</strong> <this.props.SpellOutDate date={this.state.date_created}/> </li>
                             <li><strong>Description:</strong> {this.state.description} </li>
                             <li><strong>Customer:</strong> {this.state.requested_by} </li>
                             <li><strong>Job Address:</strong> {this.state.job_address} </li>
                             <li><strong>Pump PO:</strong> {this.state.pump_po} </li>
-                            <li><strong>Pump ETA:</strong> <this.SpellOutDate date={this.state.pump_eta}/> </li>
+                            <li><strong>Pump ETA:</strong> <this.props.SpellOutDate date={this.state.pump_eta}/> </li>
                             <li><strong>Pump Received:</strong> {this.state.pump_received?'Yes':'No'} </li>
                             <li> <strong>Controller PO:</strong> {this.state.controller_po} </li>
-                            <li> <strong>Controller ETA:</strong> <this.SpellOutDate date={this.state.controller_eta} /> </li>
+                            <li> <strong>Controller ETA:</strong> <this.props.SpellOutDate date={this.state.controller_eta} /> </li>
                             <li> <strong>Controller Received:</strong> {this.state.controller_received?'Yes':'No'} </li>
-                            <li> <strong>Due Date:</strong> <this.SpellOutDate date={this.state.due_date} /> </li>
+                            <li> <strong>Due Date:</strong> <this.props.SpellOutDate date={this.state.due_date} /> </li>
                             <li> <strong>Completed:</strong> {this.state.completed?'Yes':'No'} </li>
                             <li> <strong>ShipDate/Packlist:</strong> {this.state.shipdate_packlist} </li>
                             <li> <strong>Deposite Amount:</strong> {this.state.deposit_amount} </li>

@@ -26,6 +26,18 @@ class App extends Component {
     this.setState({loggedIn:b});
   }
 
+  SpellOutDate = (props) => {
+       
+    let d = new Date(props.date)
+    d= d.toDateString();
+
+    if(props.date === null){
+        d = ""         
+    }
+    
+    return(<>{d}</>)
+}
+
   switchToArchive = (bol) => {
     this.setState({archive: bol})
   }
@@ -38,17 +50,17 @@ class App extends Component {
           <Route path="/" exact render={()=><Redirect to="/login"/>} />
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} /> 
                 
-          <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} archive={this.state.archive} />} />
+          <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/booster/new" component={BoosterNew} />
-          <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} push={history.push} /> } />
+          <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} SpellOutDate={this.SpellOutDate} push={history.push} /> } />
 
-          <Route path="/jobs/sewer/index" render ={({history})=> <SewageHome history={history} archive={this.state.archive} />} />
+          <Route path="/jobs/sewer/index" render ={({history})=> <SewageHome history={history} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/sewer/new" component={SewageNew} />
-          <Route path="/jobs/sewer/:id" render={({match, history})=><SewageShow id={match.params.id} push={history.push} /> } />
+          <Route path="/jobs/sewer/:id" render={({match, history})=><SewageShow id={match.params.id} SpellOutDate={this.SpellOutDate} push={history.push} /> } />
 
-          <Route path="/jobs/fire/index" render ={({history})=> <FireHome history={history} archive={this.state.archive} />} />
+          <Route path="/jobs/fire/index" render ={({history})=> <FireHome history={history} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/fire/new" component={FireNew} />
-          <Route path="/jobs/fire/:id" render={({match, history})=><FireShow id={match.params.id} push={history.push} /> } />
+          <Route path="/jobs/fire/:id" render={({match, history})=><FireShow id={match.params.id} SpellOutDate={this.SpellOutDate} push={history.push} /> } />
 
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>

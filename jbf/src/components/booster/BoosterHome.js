@@ -56,6 +56,7 @@ class BoosterHome extends Component{
 
 
 
+
     render(){
         
 
@@ -76,6 +77,7 @@ class BoosterHome extends Component{
                         <p> <strong>Customer:  </strong> {job.requested_by} </p>
                         <p><strong>Site Location:   </strong> {job.job_address} </p>
                         <p><strong>Job Description:   </strong> {job.description} </p>
+                        <p><strong>Due Date:    </strong><this.props.SpellOutDate date={job.due_date} /></p>
                         <p>=====================================</p>
                     </div> :""
                     }
@@ -90,7 +92,8 @@ class BoosterHome extends Component{
                     <p className={"stage-class"+job.stage}> <strong>Stage:  </strong> {job.stage}</p>
                     <p> <strong>Customer:  </strong> {job.requested_by} </p>
                     <p><strong>Site Location:   </strong> {job.job_address} </p>
-                    <p><strong>Job Description:   </strong> {job.description} </p>
+                    <p><strong>Job Description:   </strong>  {job.description} </p>
+                    <p><strong>Due Date:    </strong> <this.props.SpellOutDate date={job.due_date} /></p>
                     <p>=====================================</p>
                 </div>
                 }
