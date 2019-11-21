@@ -18,7 +18,7 @@ class Login extends Component{
     
     handleSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/users',{
+        fetch('https://job-board-api.herokuapp.com/users',{
             method: 'POST',
             body: JSON.stringify(this.state),
             headers:{

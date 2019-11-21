@@ -11,7 +11,7 @@ class SewageHome extends Component{
     }
 
     componentDidMount(){
-        fetch('http://localhost:3000/sewers',{
+        fetch('https://job-board-api.herokuapp.com/sewers',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`

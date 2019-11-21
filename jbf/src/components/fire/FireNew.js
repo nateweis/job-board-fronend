@@ -88,7 +88,7 @@ class FireNew extends Component{
 
 
    postToApi = () => {
-    fetch('http://localhost:3000/fire',{
+    fetch('https://job-board-api.herokuapp.com/fire',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{

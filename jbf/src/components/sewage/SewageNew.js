@@ -98,7 +98,7 @@ class SewageNew extends Component{
 
 
    postToApi = () => {
-    fetch('http://localhost:3000/sewers',{
+    fetch('https://job-board-api.herokuapp.com/sewers',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{
