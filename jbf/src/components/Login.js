@@ -23,7 +23,7 @@ class Login extends Component{
             body: JSON.stringify(this.state),
             headers:{
                 'Accept': 'application/json',
-               'Content-Type': 'application/json'
+               'Content-Type': 'application/json'               
              }
         })
         .then((res) => {
