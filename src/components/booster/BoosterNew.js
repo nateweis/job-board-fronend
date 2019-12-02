@@ -92,7 +92,7 @@ class BoosterNew extends Component{
 
 
    postToApi = () => {
-    fetch('https://job-board-api.herokuapp.com/boosters',{
+    fetch('http://localhost:3001/boosters',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{

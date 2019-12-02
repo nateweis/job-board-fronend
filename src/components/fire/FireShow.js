@@ -37,7 +37,7 @@ class FireShow extends Component{
 
     changeCompletion = (bol) => {
         const obj = {completed: bol, id: this.state.id}
-        fetch('https://job-board-api.herokuapp.com/fire/completed',{
+        fetch('http://localhost:3001/fire/completed',{
             method:'PUT',
             headers:{
                 'Accept': 'application/json',
@@ -63,7 +63,7 @@ class FireShow extends Component{
     }
 
     deleteJob = () => {
-        fetch('https://job-board-api.herokuapp.com/fire/'+this.props.id,{
+        fetch('http://localhost:3001/fire/'+this.props.id,{
             method:'DELETE',
             headers:{Authorization : `Token ${Auth.getToken()}`}
         })
@@ -97,7 +97,7 @@ class FireShow extends Component{
     }
 
     pullFireData = () => {
-        fetch('https://job-board-api.herokuapp.com/fire/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
+        fetch('http://localhost:3001/fire/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
         .then((res) => {
            res.json()
            .then((data) => {
@@ -140,7 +140,7 @@ class FireShow extends Component{
     }
     
     updateApi = () => {
-        fetch('https://job-board-api.herokuapp.com/fire',{
+        fetch('http://localhost:3001/fire',{
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers:{
