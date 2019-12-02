@@ -82,14 +82,14 @@ class NavBar extends Component{
                     </div>
 
                     <h1>{this.state.viewState}</h1>
-
-                    <div style={({color: "white"})}></div>
                         
                     <ul className="nav-links" >
                         <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >iBoost Jobs</button></Link></li> 
                         <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewer</button></Link></li>
                         <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>iLevel Tankfill</button></Link></li>                   
-                    </ul>                
+                    </ul> 
+
+                    <div style={({color: "white"})}>Profile</div>               
                                 
                     </div>
                     :
