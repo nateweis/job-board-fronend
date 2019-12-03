@@ -51,9 +51,8 @@ class NavBar extends Component{
     }
 
     showLinks = (w) => {
-        const links = document.querySelector(".nav-links-hidden")
-        const spacer = document.querySelector(".spacer")
-        console.log(w);
+        const links = document.querySelector(".nav-links-hidden");
+        const spacer = document.querySelector(".spacer");
         
         if(links.style.display === "none"){
             links.style.display = "flex";
