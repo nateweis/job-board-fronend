@@ -51,7 +51,7 @@ class NavBar extends Component{
 
         if(links.style.display === "none"){
             links.style.display = "flex";
-            spacer.style.height = "190px";
+            spacer.style.height = "215px";
         }else{
             links.style.display = "none";
             spacer.style.height = "75px";
@@ -65,7 +65,7 @@ class NavBar extends Component{
             <div className="outer-nav-container" >
                 <ReactResizeDetector handleWidth handleHeight onResize={this.checkDropdown}>
 
-                    {({ width}) => <div>{width > 930? 
+                    {({ width}) => <div>{width > 910? 
                     <div className="nav-container">
                     
                     <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
@@ -81,15 +81,15 @@ class NavBar extends Component{
                         
                     </div>
 
-                    <h1>{this.state.viewState}</h1>                   
+                    <h1>{this.state.viewState}</h1>
                         
                     <ul className="nav-links" >
                         <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >iBoost Jobs</button></Link></li> 
                         <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewer</button></Link></li>
                         <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>iLevel Tankfill</button></Link></li>                   
-                    </ul>      
+                    </ul> 
 
-                    <div style={({color: "white"})}>Profile</div>          
+                    <div><button>Profile</button></div>               
                                 
                     </div>
                     :
@@ -105,6 +105,7 @@ class NavBar extends Component{
                 <div className="spacer"></div>
 
                 <ul className="nav-links-hidden" >
+                    <li><button>Profile</button></li>
                     <li>
                         {
                             this.state.viewState === "Pending................"?
