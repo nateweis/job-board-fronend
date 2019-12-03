@@ -30,9 +30,14 @@ class NavBar extends Component{
     checkDropdown = (e) => {
         const links = document.querySelector(".nav-links-hidden")
         const spacer = document.querySelector(".spacer")
-        if(e > 930){
-            links.style.display = "none";
+        if(e > 910){
+            links.classList.add("full-screen");
+            // links.style.display = "none";
             spacer.style.height = "75px";
+        }
+        else{
+            links.classList.remove("full-screen");
+            if(links.style.display === "flex") spacer.style.height = "215px";
         }
     }
 
@@ -45,13 +50,14 @@ class NavBar extends Component{
         this.setState({tab:str})        
     }
 
-    showLinks = () => {
+    showLinks = (w) => {
         const links = document.querySelector(".nav-links-hidden")
         const spacer = document.querySelector(".spacer")
-
+        console.log(w);
+        
         if(links.style.display === "none"){
             links.style.display = "flex";
-            spacer.style.height = "215px";
+           if(w < 911) spacer.style.height = "215px";
         }else{
             links.style.display = "none";
             spacer.style.height = "75px";
@@ -89,14 +95,14 @@ class NavBar extends Component{
                         <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>iLevel Tankfill</button></Link></li>                   
                     </ul> 
 
-                    <div><button>Profile</button></div>               
+                    <div><button onClick={()=>this.showLinks(width)}><i className="fas fa-bars"></i></button></div>               
                                 
                     </div>
                     :
                     <div className="nav-container">
                         <button className="loggout-btn" onClick={this.loggout}>Loggout</button>
                         <h1>{this.state.viewState}</h1>
-                        <button onClick={this.showLinks}><i className="fas fa-bars"></i></button>
+                        <button onClick={()=>this.showLinks(width)}><i className="fas fa-bars"></i></button>
                     </div>
                     }</div>}
 
