@@ -7,6 +7,7 @@ import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Auth from './modules/Auth';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
+import ChangePassword from './components/ChangePassword';
 import BoosterHome from './components/booster/BoosterHome';
 import BoosterShow from './components/booster/BoosterShow';
 import BoosterNew from './components/booster/BoosterNew';
@@ -58,6 +59,8 @@ class App extends Component {
         <Switch>
           <Route path="/" exact render={()=><Redirect to="/login"/>} />
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} /> 
+
+          <Route path="/jobs/pass/change" component={ChangePassword} />
                 
           <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} retriveUser={this.passdownUser} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/booster/new" component={BoosterNew} />
