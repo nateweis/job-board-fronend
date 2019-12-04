@@ -104,8 +104,8 @@ Nav
   list-style: none;
   background: rgba(66,0,0,.8);
 }
-.nav-links-hidden li:hover{
-  background: rgba(66,0,0,.6);
+.nav-links-hidden li button:hover{
+  background: rgba(255,255,255,.2);
 }
 .nav-links-hidden li button{
   background: none;
