@@ -10,7 +10,8 @@ class NavBar extends Component{
         this.state={
             viewState: "Pending................",
             tab:'booster',
-            user: this.props.passdownUser
+            user: this.props.passdownUser,
+            changePassword: false
         }
     }
     
@@ -48,7 +49,7 @@ class NavBar extends Component{
         }
         else{
             links.classList.remove("full-screen");
-            if(links.style.display === "flex") spacer.style.height = "240px";
+            if(links.style.display === "flex") spacer.style.height = "280px";
         }
     }
 
@@ -72,7 +73,7 @@ class NavBar extends Component{
         
         if(links.style.display === "none"){
             links.style.display = "flex";
-           if(w < 911) spacer.style.height = "240px";
+           if(w < 911) spacer.style.height = "280px";
         }else{
             links.style.display = "none";
             spacer.style.height = "75px";
@@ -128,7 +129,7 @@ class NavBar extends Component{
 
                 <ul className="nav-links-hidden" >
                     <li id="user-li">Current User is <strong>{this.state.user.name}</strong></li>
-                    <li><button>Change Password</button></li>
+                    <li><Link to="/jobs/pass/change"><button onClick={()=> this.saveTab("booster")} >Change Password</button></Link></li> 
                     <hr className="in-list-hr"/>
                     <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
                     <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
@@ -144,6 +145,7 @@ class NavBar extends Component{
                     </li>
                     <li><button className="loggout-btn" onClick={this.loggout}>Loggout</button></li>                   
                 </ul>
+
             
 
             </div>
