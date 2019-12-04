@@ -82,6 +82,7 @@ Nav
 }
 .nav-links{
   display: flex;
+  margin-left: -30px;
 }
 .nav-links li{
   list-style: none;
@@ -112,6 +113,26 @@ Nav
   width: 100%;
   text-align: right;
   border: 0px;
+}
+
+.in-list-hr{
+  margin: 0;
+}
+
+.logo{
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+}
+
+/* .image-container{
+  background: #eae9e9;
+  width: 50px;
+  height: 50px;
+} */
+
+.nav-filler{
+  width: 200px;
 }
 
 .stage-class1{
