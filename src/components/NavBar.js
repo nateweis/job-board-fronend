@@ -9,13 +9,22 @@ class NavBar extends Component{
         super(props)
         this.state={
             viewState: "Pending................",
-            tab:'booster'
+            tab:'booster',
+            user: this.props.passdownUser
         }
     }
+    
 
     componentDidMount(){
         document.querySelector(".nav-links-hidden").style.display = "none";
     }
+
+    componentDidUpdate(){
+        if(this.state.user.name !== this.props.passdownUser.name){
+            this.setState({user:this.props.passdownUser})
+        }
+    }
+
 
     changeView = (e) => {
         if(e.target.value === "Completed Jobs"){

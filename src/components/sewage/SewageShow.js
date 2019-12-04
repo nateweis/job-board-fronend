@@ -54,7 +54,7 @@ class SewageShow extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 this.props.push('/jobs/sewer/index')
             },(err) => {
                 console.log(err);
@@ -75,7 +75,7 @@ class SewageShow extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 this.props.push('/jobs/sewer/index')
             },(err) => {
                 console.log(err);
@@ -96,7 +96,7 @@ class SewageShow extends Component{
       }
 
     handleSubmit = (e) => {
-        console.log(this.state)
+        // console.log(this.state)
         e.preventDefault()
         setTimeout(this.updateApi, 500)
                
@@ -107,7 +107,7 @@ class SewageShow extends Component{
         .then((res) => {
            res.json()
            .then((data) => {
-               console.log(data)
+            //    console.log(data)
                if(data.err){this.props.push('/jobs/sewer/index')}
                else if(data.message === "403 forbiddin"){this.props.push('/jobs/sewer/index')}
                else{
@@ -164,7 +164,7 @@ class SewageShow extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 this.pullSewerData()
                 this.setState({makeUpdates: false})
             },(err) => {

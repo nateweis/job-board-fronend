@@ -20,7 +20,7 @@ class SewageHome extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-               console.log(data);
+            //    console.log(data);
                if(data.message === "403 forbiddin"){
                 Auth.deauthUser();
                 this.props.history.push("/login")
@@ -38,7 +38,7 @@ class SewageHome extends Component{
     }
 
     filterOptions = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         this.setState({filter: e.target.value})
     }
 

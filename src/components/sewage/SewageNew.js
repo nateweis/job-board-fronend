@@ -110,7 +110,7 @@ class SewageNew extends Component{
     .then((res) => {
         res.json()
         .then((data) => {
-            console.log(data)
+            // console.log(data)
             this.resetState()
             this.props.history.push('/jobs/sewer/index')
         },(err) => {
