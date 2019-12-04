@@ -20,13 +20,14 @@ class BoosterHome extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-               console.log(data);
+            //    console.log(data);
                if(data.message === "403 forbiddin"){
                 Auth.deauthUser();
                 this.props.history.push("/login")
                }
                else{
-                   this.setState({jobs:data.data, user:data.userInfo.name})                   
+                   this.setState({jobs:data.data, user:data.userInfo.name})
+                   this.props.retriveUser(data.userInfo)                   
                }
             },(err) => {
                 console.log(err);
@@ -38,7 +39,7 @@ class BoosterHome extends Component{
     }
 
     filterOptions = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         this.setState({filter: e.target.value})
     }
 

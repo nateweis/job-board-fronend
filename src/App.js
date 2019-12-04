@@ -22,12 +22,17 @@ class App extends Component {
     super(props)
     this.state = {
       loggedIn: false,
-      archive: false
+      archive: false,
+      user: {name:"Unknown"}
     }
   }
 
   changeLogin = (b) => {
     this.setState({loggedIn:b});
+  }
+
+  passdownUser = (user) => {
+    this.setState({user:user});
   }
 
   SpellOutDate = (props) => {
@@ -49,12 +54,12 @@ class App extends Component {
   render(){
     return (
       <BrowserRouter>
-        <Route path="/jobs" render={()=>(Auth.getToken()? <NavBar switchToArchive={this.switchToArchive} />: <Redirect to="/login" />)} />
+        <Route path="/jobs" render={()=>(Auth.getToken()? <NavBar switchToArchive={this.switchToArchive} passdownUser={this.state.user} />: <Redirect to="/login" />)} />
         <Switch>
           <Route path="/" exact render={()=><Redirect to="/login"/>} />
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} /> 
                 
-          <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
+          <Route path="/jobs/booster/index" render ={({history})=> <BoosterHome history={history} retriveUser={this.passdownUser} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/booster/new" component={BoosterNew} />
           <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} SpellOutDate={this.SpellOutDate} push={history.push} /> } />
 

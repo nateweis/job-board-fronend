@@ -29,6 +29,8 @@ class Login extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
+                // console.log(data);
+                
                 if(data.message === "attempt failed"){
                     this.setState({failedAttempt: true,username:"",password:""})
                 }else{

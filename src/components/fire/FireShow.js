@@ -49,7 +49,7 @@ class FireShow extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 this.props.push('/jobs/fire/index')
             },(err) => {
                 console.log(err);
@@ -70,7 +70,7 @@ class FireShow extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 this.props.push('/jobs/fire/index')
             },(err) => {
                 console.log(err);
@@ -90,7 +90,7 @@ class FireShow extends Component{
       }
 
     handleSubmit = (e) => {
-        console.log(this.state)
+        // console.log(this.state)
         e.preventDefault()
         setTimeout(this.updateApi, 500)
                
@@ -101,7 +101,7 @@ class FireShow extends Component{
         .then((res) => {
            res.json()
            .then((data) => {
-               console.log(data)
+            //    console.log(data)
                if(data.err){this.props.push('/jobs/fire/index')}
                else if(data.message === "403 forbiddin"){this.props.push('/jobs/fire/index')}
                else{
@@ -152,7 +152,7 @@ class FireShow extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data)
+                // console.log(data)
                 this.pullFireData()
                 this.setState({makeUpdates: false})
             },(err) => {
