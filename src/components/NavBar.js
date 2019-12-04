@@ -34,6 +34,7 @@ class NavBar extends Component{
             this.props.switchToArchive(false)
         }
         this.setState({viewState: e.target.value})
+        this.showLinks(1000)
         this.props.history.push("/jobs/"+this.state.tab+"/index")
     }
 
@@ -61,7 +62,8 @@ class NavBar extends Component{
     }
 
     saveTab = (str) => {
-        this.setState({tab:str})        
+        this.setState({tab:str}) 
+        this.showLinks(1000)       
     }
 
     showLinks = (w) => {
@@ -125,6 +127,7 @@ class NavBar extends Component{
                 <div className="spacer"></div>
 
                 <ul className="nav-links-hidden" >
+                    <li>Current User is {this.state.user.name}</li>
                     <li><button>Change Password</button></li>
                     <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
                     <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
