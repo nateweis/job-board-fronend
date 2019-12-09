@@ -8,10 +8,19 @@ class ChangePassword extends Component{
         }
     }
 
+    componentDidMount(){
+        this.setState({submitSuccess: false})
+    }
+
     componentDidUpdate(){
         if(this.state.user.name !== this.props.passdownUser.name){
             this.setState({user:this.props.passdownUser})
         }
+    }
+
+    handleSubmitPassword =(e) => {
+        e.preventDefault();
+        this.setState({submitSuccess: true})
     }
 
     render(){
@@ -24,12 +33,32 @@ class ChangePassword extends Component{
                     :
                     <div className="banner">
                         <h2>Change Password Page</h2>
-                        <form className="form-style">
-                            <span>
-                                <label htmlFor="">Current Password:  </label>
-                                <input type="text"/>
-                            </span>
-                        </form>
+                        {this.state.submitSuccess?
+                            <form className="form-style"><h2>Success, your password has been changed</h2></form>
+                            :
+                            <form className="form-style" onSubmit={this.handleSubmitPassword}>
+
+                                <span>
+                                    <label htmlFor="">Current Password:  </label>
+                                    <input type="password"/>
+                                </span>
+
+                                <span>
+                                    <label htmlFor="">New Password:  </label>
+                                    <input type="password"/>
+                                </span>
+
+                                <span>
+                                    <label htmlFor="">Retype New Password: </label>
+                                    <input type="password"/>
+                                </span>
+
+                                <span>
+                                    <input type="submit" value="Submit"/>
+                                </span>
+                            </form>
+                        }
+                        
                     </div>
                 }                               
             </div>
