@@ -63,8 +63,8 @@ class NavBar extends Component{
     }
 
     saveTab = (str) => {
-        this.setState({tab:str}) 
-        this.showLinks(1000)       
+        this.setState({tab:str});
+        if(document.querySelector(".nav-links-hidden").style.display !== "none") this.showLinks(1000)          
     }
 
     showLinks = (w) => {
