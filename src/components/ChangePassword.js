@@ -3,8 +3,12 @@ import React, { Component } from 'react';
 class ChangePassword extends Component{
     constructor(props){
         super(props)
+        this.inputRef = React.createRef()
         this.state = {
-            user: this.props.passdownUser
+            user: this.props.passdownUser,
+            old_pass: "",
+            new_pass: "",
+            re_new_pass: ""
         }
     }
 
@@ -18,9 +22,23 @@ class ChangePassword extends Component{
         }
     }
 
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
     handleSubmitPassword =(e) => {
         e.preventDefault();
         this.setState({submitSuccess: true})
+    }
+
+    iconClick =(e) => {
+        const $form = this.inputRef.current.children
+        for (let i = 0; i< $form.length; i++) {
+             if($form[i].children[2] && $form[i].children[2].id === e.target.id){
+                 if($form[i].children[1].type === "password"){$form[i].children[1].type = "text"}
+                 else{$form[i].children[1].type = "password"}
+             }
+        }
     }
 
     render(){
@@ -36,21 +54,24 @@ class ChangePassword extends Component{
                         {this.state.submitSuccess?
                             <form className="form-style"><h2>Success, your password has been changed</h2></form>
                             :
-                            <form className="form-style" onSubmit={this.handleSubmitPassword}>
+                            <form className="form-style" onSubmit={this.handleSubmitPassword} ref={this.inputRef}>
 
                                 <span>
                                     <label htmlFor="">Current Password:  </label>
-                                    <input type="password"/>
+                                    <input type="password" name="old_pass" value={this.state.old_pass} onChange={this.handleChange}/>
+                                    <i className="fas fa-eye" onClick={this.iconClick} id="1" ></i>
                                 </span>
 
                                 <span>
                                     <label htmlFor="">New Password:  </label>
-                                    <input type="password"/>
+                                    <input type="password" name="new_pass" value={this.state.new_pass} onChange={this.handleChange}/>
+                                    <i className="fas fa-eye" onClick={this.iconClick} id="2" ></i>
                                 </span>
 
                                 <span>
                                     <label htmlFor="">Retype New Password: </label>
-                                    <input type="password"/>
+                                    <input type="password" name="re_new_pass" value={this.state.re_new_pass} onChange={this.handleChange}/>
+                                    <i className="fas fa-eye" onClick={this.iconClick} id="3" ></i>
                                 </span>
 
                                 <span>
