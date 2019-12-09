@@ -129,7 +129,7 @@ class NavBar extends Component{
 
                 <ul className="nav-links-hidden" >
                     <li id="user-li">Current User is <strong>{this.state.user.name}</strong></li>
-                    <li><Link to="/jobs/pass/change"><button onClick={()=> this.saveTab("booster")} >Change Password</button></Link></li> 
+                    <li><Link to="/jobs/pass/change"><button onClick={()=> this.saveTab("booster")} >{this.state.user.admin? "Users Settings":"Change Password"}</button></Link></li> 
                     <hr className="in-list-hr"/>
                     <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
                     <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
