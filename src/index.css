@@ -321,9 +321,13 @@ Forms (New/Update)
   width: 200px;
   padding: 5px;
 }
-.form-style span input[type=text], .form-style span select{
+.form-style span input[type=text], .form-style span input[type=password], .form-style span select{
   width: 400px;
   height: 30px;
+  margin-right: 20px;
+}
+.fa-eye{
+  cursor: pointer;
 }
 /* *********************************
 Login Form
