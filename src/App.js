@@ -60,7 +60,7 @@ class App extends Component {
           <Route path="/" exact render={()=><Redirect to="/login"/>} />
           <Route path="/login" exact render ={({history})=>(!Auth.getToken()? (<Login history={history}/>):(<Redirect to="/jobs/booster/index" />) )} /> 
 
-          <Route path="/jobs/pass/change" exact component={ChangePassword} />
+          <Route path="/jobs/pass/change" exact render={()=><ChangePassword passdownUser={this.state.user} />} />
                 
           <Route path="/jobs/booster/index" exact render ={({history})=> <BoosterHome history={history} retriveUser={this.passdownUser} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/booster/new" exact component={BoosterNew} />

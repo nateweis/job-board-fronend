@@ -26,8 +26,12 @@ class BoosterHome extends Component{
                 this.props.history.push("/login")
                }
                else{
+                   const obj = {
+                       name: data.userInfo.name,
+                       admin: data.userInfo.admin
+                   }
                    this.setState({jobs:data.data, user:data.userInfo.name})
-                   this.props.retriveUser(data.userInfo)                   
+                   this.props.retriveUser(obj)                   
                }
             },(err) => {
                 console.log(err);
