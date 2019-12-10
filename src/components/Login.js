@@ -51,7 +51,7 @@ class Login extends Component{
         return(
             <form onSubmit={this.handleSubmit} className="login-form">
                 <h2 className="banner">Login</h2>
-                <h4>{this.state.failedAttempt? "Wrong Username and/or Password":""}</h4>
+                <h4 className="wrong-login">{this.state.failedAttempt? "Wrong Username and/or Password":""}</h4>
                 <div className="login">
                     <input type="text" placeholder="Username" value={this.state.username} name="username" onChange={this.handleChange}/>
                     <input type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} />
