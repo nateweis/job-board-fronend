@@ -349,3 +349,7 @@ Login Form
   width: 100px;
   border-radius: 5px;
 }
+.wrong-login{
+  text-align: center;
+  color: #810c0c;
+}

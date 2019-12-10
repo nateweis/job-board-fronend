@@ -8,7 +8,8 @@ class ChangePassword extends Component{
             user: this.props.passdownUser,
             old_pass: "",
             new_pass: "",
-            re_new_pass: ""
+            re_new_pass: "",
+            pass_match: false
         }
     }
 
@@ -23,8 +24,11 @@ class ChangePassword extends Component{
     }
 
     checkPassMatch = () => {
-        if(this.state.new_pass === this.state.re_new_pass){console.log("success");}
-        else{console.log("not matching");}
+        if(this.state.new_pass === this.state.re_new_pass){
+            this.setState({pass_match:false});          
+        }else{
+            this.setState({pass_match:true});
+        }
     }
 
     handleChange = (e) => {
@@ -65,6 +69,7 @@ class ChangePassword extends Component{
                         {this.state.submitSuccess?
                             <form className="form-style"><h2>Success, your password has been changed</h2></form>
                             :
+                            <>
                             <form className="form-style" onSubmit={this.handleSubmitPassword} ref={this.inputRef}>
 
                                 <span>
@@ -89,6 +94,9 @@ class ChangePassword extends Component{
                                     <input type="submit" value="Submit"/>
                                 </span>
                             </form>
+
+                            <h4 className="wrong-login">{this.state.pass_match? "Confirmation Password Doesn't Match":""}</h4>
+                            </>
                         }
                         
                     </div>
