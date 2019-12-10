@@ -22,13 +22,24 @@ class ChangePassword extends Component{
         }
     }
 
+    checkPassMatch = () => {
+        if(this.state.new_pass === this.state.re_new_pass){console.log("success");}
+        else{console.log("not matching");}
+    }
+
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
 
     handleSubmitPassword =(e) => {
         e.preventDefault();
-        this.setState({submitSuccess: true})
+        this.checkPassMatch();
+        // this.setState({submitSuccess: true});
+        this.setState({
+            old_pass: "",
+            new_pass: "",
+            re_new_pass: ""
+        })
     }
 
     iconClick =(e) => {
