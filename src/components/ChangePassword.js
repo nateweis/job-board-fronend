@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import Auth from '../modules/Auth'
 
 class ChangePassword extends Component{
     constructor(props){
         super(props)
-        this.inputRef = React.createRef()
+        this.inputRef = React.createRef();
         this.state = {
             user: this.props.passdownUser,
             old_pass: "",
@@ -25,10 +26,12 @@ class ChangePassword extends Component{
 
     checkPassMatch = () => {
         if(this.state.new_pass === this.state.re_new_pass){
-            this.setState({pass_match:false});          
+            this.setState({pass_match:false});
+            this.updatedPassword()          
         }else{
             this.setState({pass_match:true});
         }
+        
     }
 
     handleChange = (e) => {
@@ -37,13 +40,10 @@ class ChangePassword extends Component{
 
     handleSubmitPassword =(e) => {
         e.preventDefault();
+        this.unclickEye();
         this.checkPassMatch();
         // this.setState({submitSuccess: true});
-        this.setState({
-            old_pass: "",
-            new_pass: "",
-            re_new_pass: ""
-        })
+        this.resetState();
     }
 
     iconClick =(e) => {
@@ -54,6 +54,45 @@ class ChangePassword extends Component{
                  else{$form[i].children[1].type = "password"}
              }
         }
+    }
+
+    resetState = () => {
+        this.setState({
+            old_pass: "",
+            new_pass: "",
+            re_new_pass: ""
+        })
+    }
+
+    unclickEye = () => {
+        const $form = this.inputRef.current.children;
+        for (let i = 0; i < $form.length; i++) {
+            if($form[i].children[2] && $form[i].children[1].type === "text"){
+                $form[i].children[1].type = "password";
+            }
+        }
+    }
+
+    updatedPassword = () => {
+        fetch('https://job-board-api.herokuapp.com/users',{
+            method: 'PUT',
+            body: JSON.stringify(this.state),
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization : `Token ${Auth.getToken()}`
+            }
+        })
+        .then((res) => {
+            res.json()
+            .then((data) => {
+                console.log(data);
+               
+            },(err) => {
+                console.log(err);
+                
+            })
+        })
     }
 
     render(){
