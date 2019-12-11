@@ -10,12 +10,16 @@ class ChangePassword extends Component{
             old_pass: "",
             new_pass: "",
             re_new_pass: "",
-            pass_match: false
+            pass_match: false,
+            wrong_pass: false
         }
     }
 
     componentDidMount(){
-        this.setState({submitSuccess: false})
+        this.setState({submitSuccess: false});
+        if(this.state.user.name === "Unknown"){
+            this.props.push("/jobs/booster/index")
+        }
     }
 
     componentDidUpdate(){
@@ -26,7 +30,7 @@ class ChangePassword extends Component{
 
     checkPassMatch = () => {
         if(this.state.new_pass === this.state.re_new_pass){
-            this.setState({pass_match:false});
+            this.setState({pass_match:false, wrong_pass:false});
             this.updatedPassword()          
         }else{
             this.setState({pass_match:true});
@@ -42,7 +46,6 @@ class ChangePassword extends Component{
         e.preventDefault();
         this.unclickEye();
         this.checkPassMatch();
-        // this.setState({submitSuccess: true});
         this.resetState();
     }
 
@@ -86,8 +89,12 @@ class ChangePassword extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data);
-               
+                // console.log(data);
+                if(data.message === "check it out, it worked"){
+                    this.setState({submitSuccess: true});
+                }else{
+                    this.setState({wrong_pass: true})
+                }
             },(err) => {
                 console.log(err);
                 
@@ -135,6 +142,7 @@ class ChangePassword extends Component{
                             </form>
 
                             <h4 className="wrong-login">{this.state.pass_match? "Confirmation Password Doesn't Match":""}</h4>
+                            <h4 className="wrong-login">{this.state.wrong_pass?"Wrong Credentials, Please Give the Proper Password for this Account":""}</h4>
                             </>
                         }
                         
