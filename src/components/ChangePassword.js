@@ -42,7 +42,6 @@ class ChangePassword extends Component{
         e.preventDefault();
         this.unclickEye();
         this.checkPassMatch();
-        // this.setState({submitSuccess: true});
         this.resetState();
     }
 
@@ -87,7 +86,7 @@ class ChangePassword extends Component{
             res.json()
             .then((data) => {
                 console.log(data);
-               
+                this.setState({submitSuccess: true});
             },(err) => {
                 console.log(err);
                 
