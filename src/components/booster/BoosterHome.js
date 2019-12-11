@@ -28,7 +28,8 @@ class BoosterHome extends Component{
                else{
                    const obj = {
                        name: data.userInfo.name,
-                       admin: data.userInfo.admin
+                       admin: data.userInfo.admin,
+                       id: data.userInfo.id
                    }
                    this.setState({jobs:data.data, user:data.userInfo.name})
                    this.props.retriveUser(obj)                   
