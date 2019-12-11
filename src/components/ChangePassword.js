@@ -20,6 +20,7 @@ class ChangePassword extends Component{
         if(this.state.user.name === "Unknown"){
             this.props.push("/jobs/booster/index")
         }
+        if(this.state.user.admin === true){this.getAllUsers()}
     }
 
     componentDidUpdate(){
@@ -36,6 +37,22 @@ class ChangePassword extends Component{
             this.setState({pass_match:true});
         }
         
+    }
+
+    getAllUsers = () => {
+        fetch('https://job-board-api.herokuapp.com/users',{
+            method:"GET",
+            headers:{
+                Authorization : `Token ${Auth.getToken()}`
+            }
+        })
+        .then((res) => {
+            res.json()
+            .then((data)=>{
+                // console.log(data);
+                this.setState({listOfUsers: data.allUserInfo})
+            },(err)=>{console.log(err)})
+        })
     }
 
     handleChange = (e) => {
@@ -108,6 +125,7 @@ class ChangePassword extends Component{
                 {this.state.user.admin?
                     <div className="banner">
                         <h2>Users Edit Page</h2>
+                        <div></div>
                     </div>
                     :
                     <div className="banner">
