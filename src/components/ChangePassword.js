@@ -13,7 +13,9 @@ class ChangePassword extends Component{
             new_pass: "",
             re_new_pass: "",
             pass_match: false,
-            wrong_pass: false
+            wrong_pass: false,
+            clear_form: false,
+            switch_form: true
         }
     }
 
@@ -29,6 +31,10 @@ class ChangePassword extends Component{
         if(this.state.user.name !== this.props.passdownUser.name){
             this.setState({user:this.props.passdownUser})
         }
+    }
+
+    changeClearform = (bool) => {
+        this.setState({clear_form: bool})
     }
 
     checkPassMatch = () => {
@@ -81,6 +87,10 @@ class ChangePassword extends Component{
                  else{$form[i].children[1].type = "password"}
              }
         }
+    }
+
+    newUserForm = () => {
+        this.changeClearform(true);
     }
 
     resetState = () => {
@@ -146,10 +156,11 @@ class ChangePassword extends Component{
                                     })
                                     :""}
                                 </ul>
-                                <button>New User</button>
+                                <button onClick={this.newUserForm}>New User</button>
                             </div>
                             <div className="new-user-container">
-                                    <NewUserForm /><UpdateUserForm user={this.state.passdownUser} />
+                                    <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} />
+                                    <UpdateUserForm user={this.state.passdownUser} />
                             </div>
                         </div>
                     </div>
