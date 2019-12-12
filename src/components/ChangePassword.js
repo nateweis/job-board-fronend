@@ -66,6 +66,11 @@ class ChangePassword extends Component{
         this.resetState();
     }
 
+    handleUser = (user) => {
+        console.log(user);
+        
+    }
+
     iconClick =(e) => {
         const $form = this.inputRef.current.children
         for (let i = 0; i< $form.length; i++) {
@@ -125,7 +130,22 @@ class ChangePassword extends Component{
                 {this.state.user.admin?
                     <div className="banner">
                         <h2>Users Edit Page</h2>
-                        <div></div>
+                        <div className="users-container">
+                            <div className="users">
+                                <h4>Users</h4>
+                                <ul>
+                                    {this.state.listOfUsers?
+                                    this.state.listOfUsers.map((user, index) => {
+                                        return(
+                                            <>
+                                                <li onClick={()=>this.handleUser(user)} key={index}> {user.username}  </li>
+                                            </>
+                                        )
+                                    })
+                                    :""}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     :
                     <div className="banner">
