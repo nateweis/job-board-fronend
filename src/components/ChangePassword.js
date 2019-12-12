@@ -69,8 +69,8 @@ class ChangePassword extends Component{
     }
 
     handleUser = (user) => {
-        console.log(user);
-        
+        // console.log(user);
+        this.setState({passdownUser: user})
     }
 
     iconClick =(e) => {
@@ -149,7 +149,7 @@ class ChangePassword extends Component{
                                 <button>New User</button>
                             </div>
                             <div className="new-user-container">
-                                    <NewUserForm /><UpdateUserForm />
+                                    <NewUserForm /><UpdateUserForm user={this.state.passdownUser} />
                             </div>
                         </div>
                     </div>
