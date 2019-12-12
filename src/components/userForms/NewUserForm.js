@@ -6,11 +6,25 @@ class NewUserForm extends Component{
     render(){
         return(
             <>
-            <form>
-                <input type="text" name="" />
-                <input type="password" name=""/>
-                <input type="text"/>
-                <input type="checkbox" name="" />
+            <form className="form-style">
+                <h3>Add a New User</h3>
+
+                <span>
+                    <input type="text" name="" />
+                </span>
+                
+                <span>
+                    <input type="password" name=""/>
+                </span>
+
+                <span>
+                    <input type="text"/>
+                </span>
+
+                <span>
+                    <input type="checkbox" name="" />
+                </span>
+                
                 <input type="submit" value="Submit"/>
             </form>
             </>
