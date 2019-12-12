@@ -76,7 +76,8 @@ class ChangePassword extends Component{
 
     handleUser = (user) => {
         // console.log(user);
-        this.setState({passdownUser: user})
+        this.setState({switch_form: false})
+        setTimeout(()=>{this.setState({passdownUser: user})}, 3)
     }
 
     iconClick =(e) => {
@@ -91,6 +92,7 @@ class ChangePassword extends Component{
 
     newUserForm = () => {
         this.changeClearform(true);
+        this.setState({switch_form: true});
     }
 
     resetState = () => {
@@ -159,8 +161,11 @@ class ChangePassword extends Component{
                                 <button onClick={this.newUserForm}>New User</button>
                             </div>
                             <div className="new-user-container">
-                                    <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} />
-                                    <UpdateUserForm user={this.state.passdownUser} />
+                                    {
+                                        this.state.switch_form?
+                                        <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} />:
+                                        <UpdateUserForm user={this.state.passdownUser} />
+                                    }
                             </div>
                         </div>
                     </div>
