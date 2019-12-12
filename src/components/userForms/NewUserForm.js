@@ -12,6 +12,10 @@ class NewUserForm extends Component{
         }
     }
 
+    componentDidUpdate(){
+        if(this.props.clear){this.resetState();}
+    }
+
     handleChange = (e) => {     
         let val;
 
@@ -22,6 +26,17 @@ class NewUserForm extends Component{
             val = e.target.value
         }     
         this.setState({[e.target.name]: val});
+    }
+
+    resetState = () => {
+        this.props.changeClearform(false);
+
+        this.setState({
+            username: "",
+            password:"",
+            name: "",
+            admin: false
+        })
     }
 
 
