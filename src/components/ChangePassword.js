@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Auth from '../modules/Auth'
+import NewUserForm from './userForms/NewUserForm'
+import UpdateUserForm from './userForms/UpdateUserForm'
 
 class ChangePassword extends Component{
     constructor(props){
@@ -144,6 +146,10 @@ class ChangePassword extends Component{
                                     })
                                     :""}
                                 </ul>
+                                <button>New User</button>
+                            </div>
+                            <div className="new-user-container">
+                                    <NewUserForm /><UpdateUserForm />
                             </div>
                         </div>
                     </div>
