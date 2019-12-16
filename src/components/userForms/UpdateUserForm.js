@@ -23,16 +23,49 @@ class UpdateUserForm extends Component{
     }
 
 
+    deleteUser = () => {
+        // this.preventUpdate();
+        fetch('https://job-board-api.herokuapp.com/users/' + this.state.id,{
+            method:'DELETE',
+            headers:{Authorization : `Token ${Auth.getToken()}`}
+        })
+        .then((res) => {
+            res.json()
+            .then((data) => {
+                console.log(data);
+            },(err) => {
+                console.log(err);             
+            })
+        })
+    }
+
+    handleSubmit = (e) => {
+        this.preventUpdate();
+        e.preventDefault();
+    }
+
+    handleUpdate = () => {
+        this.delayFunc();
+        console.log("We got a second btn going");
+    }
+
+    preventUpdate = () => {
+        if(this.state.id === undefined){
+            console.log("normally delete would be prvented");
+        }
+    }
+
+
 
     render(){
         return(
             <>
             
             
-            <form className="form-style">
+            <form className="form-style" onSubmit={this.handleSubmit}>
                 <h3>Update {this.props.user? this.props.user.name: "User"}'s Profile</h3>
 
-                <span><button>Delete User</button></span>
+                <span><button onClick={this.deleteUser}>Delete User</button></span>
                 
                 <span>
                     <input type="text" name="username" value={this.state.username} />
@@ -50,7 +83,7 @@ class UpdateUserForm extends Component{
                     <input type="checkbox" name="admin" checked={this.state.admin? true : false} />
                 </span>
 
-                <input type="submit" value="Update User"/>
+                <input type="submit" value="Update User" onClick={this.handleUpdate}/>
             </form>
             </>
         )
