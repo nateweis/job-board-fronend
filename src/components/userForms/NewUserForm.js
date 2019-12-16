@@ -16,6 +16,12 @@ class NewUserForm extends Component{
         if(this.props.clear){this.resetState();}
     }
 
+    checkFeilds = () => {
+        if(this.state.username.trim() && this.state.password.trim() && this.state.name.trim()){
+            console.log("good to go")
+        }else{console.log("no good one or more is empty")}
+    }
+
     handleChange = (e) => {     
         let val;
 
@@ -26,6 +32,12 @@ class NewUserForm extends Component{
             val = e.target.value
         }     
         this.setState({[e.target.name]: val});
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault(); 
+        this.checkFeilds();
+        this.resetState();
     }
 
     resetState = () => {
@@ -43,7 +55,7 @@ class NewUserForm extends Component{
     render(){
         return(
             <>
-            <form className="form-style">
+            <form className="form-style" onSubmit={this.handleSubmit}>
                 <h3>Add a New User</h3>
 
                 <span>
@@ -58,7 +70,7 @@ class NewUserForm extends Component{
 
                 <span>
                     <label htmlFor="">Name of User:  </label>
-                    <input type="text"  name="name" val={this.state.name} onChange={this.handleChange} />
+                    <input type="text"  name="name" value={this.state.name} onChange={this.handleChange} />
                 </span>
 
                 <span>
