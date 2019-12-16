@@ -25,7 +25,7 @@ class UpdateUserForm extends Component{
 
     deleteUser = () => {
         // this.preventUpdate();
-        fetch('https://job-board-api.herokuapp.com/users/' + this.state.id,{
+        fetch('http://localhost:3001/users/' + this.state.id,{
             method:'DELETE',
             headers:{Authorization : `Token ${Auth.getToken()}`}
         })
