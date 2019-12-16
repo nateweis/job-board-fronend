@@ -33,6 +33,10 @@ class ChangePassword extends Component{
         }
     }
 
+    addUserToList = (user) => {
+        this.setState({listOfUsers: [...this.state.listOfUsers, user]})
+    }
+
     changeClearform = (bool) => {
         this.setState({clear_form: bool})
     }
@@ -163,7 +167,7 @@ class ChangePassword extends Component{
                             <div className="new-user-container">
                                     {
                                         this.state.switch_form?
-                                        <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} />:
+                                        <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} addUserToList={this.addUserToList} />:
                                         <UpdateUserForm user={this.state.passdownUser} />
                                     }
                             </div>
