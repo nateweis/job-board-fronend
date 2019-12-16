@@ -8,7 +8,8 @@ class NewUserForm extends Component{
             username: "",
             password: "",
             name: "",
-            admin: false
+            admin: false,
+            form_complete: false
         }
     }
 
@@ -18,8 +19,12 @@ class NewUserForm extends Component{
 
     checkFeilds = () => {
         if(this.state.username.trim() && this.state.password.trim() && this.state.name.trim()){
-            console.log("good to go")
-        }else{console.log("no good one or more is empty")}
+            this.makeNewUser();
+            this.props.addUserToList(this.state);
+            this.resetState();
+        }else{
+            this.setState({form_complete: true})
+        }
     }
 
     handleChange = (e) => {     
@@ -37,7 +42,26 @@ class NewUserForm extends Component{
     handleSubmit = (e) => {
         e.preventDefault(); 
         this.checkFeilds();
-        this.resetState();
+    }
+
+    makeNewUser = () => {
+        fetch('https://job-board-api.herokuapp.com/users/newUser',{
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers:{
+                'Accept': 'application/json',
+               'Content-Type': 'application/json',
+               'Authorization' : `Token ${Auth.getToken()}`           
+             }
+        })
+        .then((res) => {
+            res.json()
+            .then((data) => {
+                console.log(data);
+            },(err) => {
+                console.log(err);
+            })
+        })
     }
 
     resetState = () => {
@@ -47,7 +71,8 @@ class NewUserForm extends Component{
             username: "",
             password:"",
             name: "",
-            admin: false
+            admin: false,
+            form_complete: false
         })
     }
 
@@ -57,6 +82,8 @@ class NewUserForm extends Component{
             <>
             <form className="form-style" onSubmit={this.handleSubmit}>
                 <h3>Add a New User</h3>
+
+                <h4 className="wrong-login">{this.state.form_complete? "One or More Fields Haven't Been Filled":""}</h4>
 
                 <span>
                     <label htmlFor="">Username:  </label>

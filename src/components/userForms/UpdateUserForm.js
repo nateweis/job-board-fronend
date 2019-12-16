@@ -30,7 +30,7 @@ class UpdateUserForm extends Component{
             
             
             <form className="form-style">
-                <h3>Update 's' Profile</h3>
+                <h3>Update {this.props.user? this.props.user.name: "User"}'s Profile</h3>
 
                 <span><button>Delete User</button></span>
                 
