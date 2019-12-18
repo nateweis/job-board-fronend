@@ -8,16 +8,18 @@ class UpdateUserForm extends Component{
             username: "",
             name: "",
             admin: false,
+            id:0
         }
     }
 
     componentDidUpdate(){
-        if(this.props.user && this.props.user.username !== this.state.username){
+        if(this.props.user && this.props.user.id !== this.state.id){
             this.setState({
                 username: this.props.user.username,
                 name: this.props.user.name,
                 admin: this.props.user.admin,
-                id: this.props.user.id
+                id: this.props.user.id,
+                index: this.props.user.index
             })
         }
     }
@@ -41,19 +43,33 @@ class UpdateUserForm extends Component{
         })
     }
 
+    handleChange = (e) => {     
+        let val;
+        
+        if(e.target.name === "admin"){
+           val = e.target.checked; 
+        }    
+        else{
+            val = e.target.value
+        }     
+        this.setState({[e.target.name]: val});
+    }
+
     handleSubmit = (e) => {
         this.preventUpdate();
         e.preventDefault();
     }
 
     handleUpdate = () => {
-        this.delayFunc();
         console.log("We got a second btn going");
+        this.props.updateUserFromList(this.state);
     }
 
     preventUpdate = () => {
         if(this.state.id === undefined){
             console.log("normally delete would be prvented");
+            alert("User information is still being updated. Please try again.")
+            window.location.reload();
         }
     }
 
@@ -70,7 +86,8 @@ class UpdateUserForm extends Component{
                 <span><button onClick={this.deleteUser}>Delete User</button></span>
                 
                 <span>
-                    <input type="text" name="username" value={this.state.username} />
+                    <label htmlFor="">Username:  </label>
+                    <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                 </span>
                 
                 {/* <span>
@@ -78,11 +95,13 @@ class UpdateUserForm extends Component{
                 </span> */}
 
                 <span>
-                    <input type="text" name="name" value={this.state.name} />
+                    <label htmlFor=""> Name of User:   </label>
+                    <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
                 </span>
 
                 <span>
-                    <input type="checkbox" name="admin" checked={this.state.admin? true : false} />
+                    <label htmlFor="">Admin Privlages:  </label>
+                    <input type="checkbox" name="admin" checked={this.state.admin? true : false} onChange={this.handleChange} />
                 </span>
 
                 <input type="submit" value="Update User" onClick={this.handleUpdate}/>

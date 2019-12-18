@@ -150,6 +150,13 @@ class ChangePassword extends Component{
         })
     }
 
+    updateUserFromList = (user) => {
+        this.setState((preState)=>{
+            preState.listOfUsers[user.index] = user;
+            return{listOfUsers: preState.listOfUsers}
+        })
+    }
+
     render(){
         return(
             <div>
@@ -176,7 +183,8 @@ class ChangePassword extends Component{
                                     {
                                         this.state.switch_form?
                                         <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} addUserToList={this.addUserToList} />:
-                                        <UpdateUserForm user={this.state.passdownUser} removeUserFromList={this.removeUserFromList} newUserForm={this.newUserForm} />
+                                        <UpdateUserForm user={this.state.passdownUser} removeUserFromList={this.removeUserFromList} newUserForm={this.newUserForm}
+                                        updateUserFromList={this.updateUserFromList} />
                                     }
                             </div>
                         </div>
