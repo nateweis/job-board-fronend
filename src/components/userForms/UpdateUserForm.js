@@ -32,7 +32,9 @@ class UpdateUserForm extends Component{
         .then((res) => {
             res.json()
             .then((data) => {
-                console.log(data);
+                // console.log(data);
+                this.props.removeUserFromList(this.props.user.index);
+                this.props.newUserForm();
             },(err) => {
                 console.log(err);             
             })

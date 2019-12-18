@@ -78,8 +78,9 @@ class ChangePassword extends Component{
         this.resetState();
     }
 
-    handleUser = (user) => {
+    handleUser = (user, index) => {
         // console.log(user);
+        user.index = index;
         this.setState({switch_form: false})
         setTimeout(()=>{this.setState({passdownUser: user})}, 3)
     }
@@ -97,6 +98,13 @@ class ChangePassword extends Component{
     newUserForm = () => {
         this.changeClearform(true);
         this.setState({switch_form: true});
+    }
+
+    removeUserFromList = (index) => {
+        this.setState((preState)=>{
+            preState.listOfUsers.splice(index, 1);
+            return{listOfUsers: preState.listOfUsers}
+        })
     }
 
     resetState = () => {
@@ -156,7 +164,7 @@ class ChangePassword extends Component{
                                     this.state.listOfUsers.map((user, index) => {
                                         return(
                                             <>
-                                                <li onClick={()=>this.handleUser(user)} key={index}> {user.username}  </li>
+                                                <li onClick={()=>this.handleUser(user, index)} key={index}> {user.username}  </li>
                                             </>
                                         )
                                     })
@@ -168,7 +176,7 @@ class ChangePassword extends Component{
                                     {
                                         this.state.switch_form?
                                         <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} addUserToList={this.addUserToList} />:
-                                        <UpdateUserForm user={this.state.passdownUser} />
+                                        <UpdateUserForm user={this.state.passdownUser} removeUserFromList={this.removeUserFromList} newUserForm={this.newUserForm} />
                                     }
                             </div>
                         </div>
