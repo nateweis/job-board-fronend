@@ -61,7 +61,7 @@ class UpdateUserForm extends Component{
     }
 
     handleUpdate = () => {
-        console.log("We got a second btn going");
+        this.updateUserInBackend();
         this.props.updateUserFromList(this.state);
     }
 
@@ -71,6 +71,26 @@ class UpdateUserForm extends Component{
             alert("User information is still being updated. Please try again.")
             window.location.reload();
         }
+    }
+
+    updateUserInBackend = () => {
+        fetch('https://job-board-api.herokuapp.com/users/anyUser',{
+            method: 'PUT',
+            body: JSON.stringify(this.state),
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : `Token ${Auth.getToken()}`
+            }
+        })
+        .then((res) => {
+            res.json()
+            .then((data) => {
+                // console.log(data);
+            },(err) => {
+                console.log(err);
+            })
+        })
     }
 
 
