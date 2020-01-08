@@ -95,8 +95,8 @@ class NavBar extends Component{
                         
                     <ul className="nav-links" >
                         <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >iBoost Jobs</button></Link></li> 
-                        <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewer</button></Link></li>
-                        <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>iLevel Tankfill</button></Link></li>                   
+                        <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewage/Sump</button></Link></li>
+                        <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire</button></Link></li>                   
                     </ul> 
 
                     <h1>{this.state.viewState}</h1>
@@ -131,9 +131,9 @@ class NavBar extends Component{
                     <li id="user-li">Current User is <strong>{this.state.user.name}</strong></li>
                     <li><Link to="/jobs/pass/change"><button onClick={()=> this.saveTab("booster")} >{this.state.user.admin? "Users Settings":"Change Password"}</button></Link></li> 
                     <hr className="in-list-hr"/>
-                    <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Booster Jobs</button></Link></li> 
-                    <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewer Jobs</button></Link></li>
-                    <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire Jobs</button></Link></li>
+                    <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >iBoost Jobs</button></Link></li> 
+                    <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewage/Sump</button></Link></li>
+                    <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire</button></Link></li>
                     <hr className="in-list-hr"/>
                     <li>
                         {

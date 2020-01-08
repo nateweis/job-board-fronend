@@ -217,11 +217,11 @@ class SewageShow extends Component{
                         <label htmlFor="">Stage:   </label>
                         <select name="stage" onChange={this.handleChange} >
                             <option value={this.state.stage}>Current Stage {this.state.stage}</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="1">1 Ready for Pick Release</option>
+                            <option value="2">2 Ready for Pick Confirm </option>
+                            <option value="3">3 Ready for Ship Confirm</option>
+                            <option value="4">4 Ready for Invoicing</option>
+                            <option value="5">5 Completed</option>
                         </select>
                     </span>
 
