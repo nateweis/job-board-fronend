@@ -4,7 +4,7 @@ import Auth from '../../modules/Auth'
 
 
 
-class BoosterNew extends Component{
+class TankfillNew extends Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -34,12 +34,12 @@ class BoosterNew extends Component{
 
     cancle= () => {
         this.resetState()
-        this.props.history.push('/jobs/booster/index')
+        this.props.history.push('/jobs/tankfill/index')
     }
 
     checkForUser = () => {
         if(!this.props.location.state){
-            this.props.history.push('/jobs/booster/index')
+            this.props.history.push('/jobs/tankfill/index')
         }else{
             this.setState({updated_by: this.props.location.state.user})
         }
@@ -92,7 +92,7 @@ class BoosterNew extends Component{
 
 
    postToApi = () => {
-    fetch('http://localhost:3001/boosters',{
+    fetch('https://job-board-api.herokuapp.com/tankfill',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{
@@ -106,7 +106,7 @@ class BoosterNew extends Component{
         .then((data) => {
             // console.log(data)
             this.resetState()
-            this.props.history.push('/jobs/booster/index')
+            this.props.history.push('/jobs/tankfill/index')
         },(err) => {
             console.log(err)
         })
@@ -118,7 +118,7 @@ class BoosterNew extends Component{
     render(){
         return(
             <div>
-                <h3 className="banner">New Booster Job</h3>
+                <h3 className="banner">New Tankfill Job</h3>
                 <form onSubmit={this.handleSubmit} className="form-style" >
                     <span>
                         <button className="cancle-btn" onClick={this.cancle} >Cancle</button>
@@ -242,4 +242,4 @@ class BoosterNew extends Component{
     }
 }
 
-export default withRouter(BoosterNew) 
+export default withRouter(TankfillNew) 

@@ -67,8 +67,7 @@ class UpdateUserForm extends Component{
 
     preventUpdate = () => {
         if(this.state.id === undefined){
-            console.log("normally delete would be prvented");
-            alert("User information is still being updated. Please try again.")
+            alert("User information is still being updated. Please try again.");
             window.location.reload();
         }
     }

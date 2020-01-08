@@ -3,7 +3,7 @@ import Auth from '../../modules/Auth'
 
 
 
-class SewageShow extends Component{
+class TankfillShow extends Component{
     constructor(props){
         super(props)
         this.state={
@@ -27,9 +27,6 @@ class SewageShow extends Component{
             pump_eta: this.state.originalData.pump_eta,
             pump_po: this.state.originalData.pump_po,
             pump_received: this.state.originalData.pump_received,
-            basin_cover:this.state.originalData.basin_cover,
-            basin_cover_eta:this.state.originalData.basin_cover_eta,
-            basin_cover_received:this.state.originalData.basin_cover_received,
             shipdate_packlist: this.state.originalData.shipdate_packlist,
             due_date: this.state.originalData.due_date,
             carrier: this.state.originalData.carrier,
@@ -42,7 +39,7 @@ class SewageShow extends Component{
 
     changeCompletion = (bol) => {
         const obj = {completed: bol, id: this.state.id}
-        fetch('http://localhost:3001/sewers/completed',{
+        fetch('https://job-board-api.herokuapp.com/tankfill/completed',{
             method:'PUT',
             headers:{
                 'Accept': 'application/json',
@@ -55,7 +52,7 @@ class SewageShow extends Component{
             res.json()
             .then((data) => {
                 // console.log(data)
-                this.props.push('/jobs/sewer/index')
+                this.props.push('/jobs/tankfill/index')
             },(err) => {
                 console.log(err);
                 
@@ -64,11 +61,11 @@ class SewageShow extends Component{
     }
 
     componentDidMount(){
-        this.pullSewerData()
+        this.pullTankfillData()
     }
 
     deleteJob = () => {
-        fetch('http://localhost:3001/sewers/'+this.props.id,{
+        fetch('https://job-board-api.herokuapp.com/tankfill/'+this.props.id,{
             method:'DELETE',
             headers:{Authorization : `Token ${Auth.getToken()}`}
         })
@@ -76,7 +73,7 @@ class SewageShow extends Component{
             res.json()
             .then((data) => {
                 // console.log(data)
-                this.props.push('/jobs/sewer/index')
+                this.props.push('/jobs/tankfill/index')
             },(err) => {
                 console.log(err);
                 
@@ -84,6 +81,11 @@ class SewageShow extends Component{
         })
     }
 
+    // formatDate =(string) => {
+    //     const str = string;
+    //     if(str){return str.slice(0,10)}
+    //     return str
+    // }
 
     handleChange = (e) => {
         if(e.target.type === "radio"){           
@@ -102,14 +104,14 @@ class SewageShow extends Component{
                
     }
 
-    pullSewerData = () => {
-        fetch('http://localhost:3001/sewers/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
+    pullTankfillData = () => {
+        fetch('https://job-board-api.herokuapp.com/tankfill/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
         .then((res) => {
            res.json()
            .then((data) => {
-            //    console.log(data)
-               if(data.err){this.props.push('/jobs/sewer/index')}
-               else if(data.message === "403 forbiddin"){this.props.push('/jobs/sewer/index')}
+               console.log(data)
+               if(data.err){this.props.push('/jobs/tankfill/index')}
+               else if(data.message === "403 forbiddin"){this.props.push('/jobs/tankfill/index')}
                else{
                    this.setState({
                        id: data.data.id,
@@ -118,19 +120,16 @@ class SewageShow extends Component{
                        job_order_number: data.data.job_order_number,
                        requested_by: data.data.requested_by,
                        completed: data.data.completed,
-                       controller_eta: data.data.controller_eta,
+                       controller_eta:data.data.controller_eta,
                        controller_po: data.data.controller_po,
                        controller_received: data.data.controller_received,
                        date_created: data.data.date_created,
-                       due_date: data.data.due_date,
-                       last_updated: data.data.last_updated,
+                       due_date:data.data.due_date,
+                       last_updated:data.data.last_updated,
                        notes: data.data.notes,
                        pump_eta: data.data.pump_eta,
                        pump_po: data.data.pump_po,
                        pump_received: data.data.pump_received,
-                       basin_cover: data.data.basin_cover,
-                       basin_cover_eta: data.data.basin_cover_eta,
-                       basin_cover_received:data.data.basin_cover_received,
                        shipdate_packlist: data.data.shipdate_packlist,
                        updated_by: data.data.updated_by,
                        stage: data.data.stage,
@@ -150,9 +149,10 @@ class SewageShow extends Component{
         })
     }
 
+
     
     updateApi = () => {
-        fetch('http://localhost:3001/sewers',{
+        fetch('https://job-board-api.herokuapp.com/tankfill',{
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers:{
@@ -165,7 +165,7 @@ class SewageShow extends Component{
             res.json()
             .then((data) => {
                 // console.log(data)
-                this.pullSewerData()
+                this.pullTankfillData()
                 this.setState({makeUpdates: false})
             },(err) => {
                 console.log(err);
@@ -256,22 +256,6 @@ class SewageShow extends Component{
                         Yes  <input type="radio" name="controller_received" checked={this.state.controller_received} onChange={this.handleChange} className="trueClass" /> No 
                         <input type="radio" name="controller_received" checked={this.state.controller_received? false: true} onChange={this.handleChange}/>
                     </span>
-
-                    <span>
-                        <label htmlFor="">Basin/Cover: </label>    
-                        <input type="text" name="basin_cover" value={this.state.basin_cover} onChange={this.handleChange} />
-                    </span>
-
-                    <span>
-                        <label htmlFor="">Basin/Cover ETA: </label>    
-                        <input type="date" name="basin_cover_eta" value={this.state.basin_cover_eta} onChange={this.handleChange} />
-                    </span>
-
-                    <span>                   
-                        <label >Basin/Cover Received: </label> 
-                        Yes  <input type="radio" name="basin_cover_received" checked={this.state.basin_cover_received} onChange={this.handleChange} className="trueClass" /> No 
-                        <input type="radio" name="basin_cover_received" checked={this.state.basin_cover_received? false: true} onChange={this.handleChange}/>
-                    </span>
                     
                     <span>
                         <label >Due Date: </label>
@@ -324,7 +308,7 @@ class SewageShow extends Component{
                     </span>
                 </form></div> :<h3>Loading.......</h3>}</> : <div>
                     <div className="banner">
-                        <h2>Sewer Job Info</h2>
+                        <h2>Tankfill Job Info</h2>
                         <>
                             {this.state.completed?
                             <span className="flexbox">
@@ -355,9 +339,6 @@ class SewageShow extends Component{
                             <li> <strong>Controller PO:</strong> {this.state.controller_po} </li>
                             <li> <strong>Controller ETA:</strong> <this.props.SpellOutDate date={this.state.controller_eta} /> </li>
                             <li> <strong>Controller Received:</strong> {this.state.controller_received?'Yes':'No'} </li>
-                            <li> <strong>Basin/Cover:</strong> {this.state.basin_cover} </li>
-                            <li> <strong>Basin/Cover ETA:</strong> <this.props.SpellOutDate date={this.state.basin_cover_eta} /> </li>
-                            <li> <strong>Basin/Cover Received:</strong> {this.state.basin_cover_received?'Yes':'No'} </li>
                             <li> <strong>Due Date:</strong> <this.props.SpellOutDate date={this.state.due_date} /> </li>
                             <li> <strong>Completed:</strong> {this.state.completed?'Yes':'No'} </li>
                             <li> <strong>ShipDate/Packlist:</strong> {this.state.shipdate_packlist} </li>
@@ -376,4 +357,4 @@ class SewageShow extends Component{
     }
 }
 
-export default SewageShow
+export default TankfillShow
