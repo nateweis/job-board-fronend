@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Auth from '../../modules/Auth'
 
-class BoosterHome extends Component{
+class TankfillHome extends Component{
     constructor(props) {
        super(props)
        this.state = {
