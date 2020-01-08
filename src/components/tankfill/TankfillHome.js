@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Auth from '../../modules/Auth'
 
-class BoosterHome extends Component{
+class TankfillHome extends Component{
     constructor(props) {
        super(props)
        this.state = {
@@ -11,7 +11,7 @@ class BoosterHome extends Component{
     }
 
     componentDidMount(){
-        fetch('https://job-board-api.herokuapp.com/tankfill',{
+        fetch('http://localhost:3001/tankfill',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`

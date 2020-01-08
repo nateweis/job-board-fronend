@@ -92,7 +92,7 @@ class TankfillNew extends Component{
 
 
    postToApi = () => {
-    fetch('https://job-board-api.herokuapp.com/tankfill',{
+    fetch('http://localhost:3001/tankfill',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{
