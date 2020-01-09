@@ -329,6 +329,12 @@ Forms (New/Update)
 .fa-eye{
   cursor: pointer;
 }
+@media(max-width: 600px){
+  .form-style span input[type=text], .form-style span input[type=password], .form-style span select, .form-style span textarea{
+    width: 320px;
+  }
+
+}
 /* *********************************
 Login Form
 ********************************* */
@@ -352,4 +358,46 @@ Login Form
 .wrong-login{
   text-align: center;
   color: #810c0c;
+}
+/* *********************************
+User Page
+**********************************/
+.users-container{
+  display: flex;
+}
+.users{
+  /* border: #420000 3px solid; */
+  width: 200px;
+  padding: 10px;
+}
+.users ul li{
+  list-style: none;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+.users ul li:hover{
+  text-decoration: underline;
+}
+.new-user-container{
+  flex-grow: 2;
+}
+@media(max-width: 785px){
+  .new-user-container .form-style span input[type=text], .new-user-container .form-style span input[type=password], .new-user-container .form-style span select, .new-user-container .form-style span textarea{
+    width: 350px;
+  }
+}
+@media(max-width: 705px){
+  .new-user-container .form-style span input[type=text], .new-user-container .form-style span input[type=password], .new-user-container .form-style span select, .new-user-container .form-style span textarea{
+    width: 300px;
+  }
+}
+@media(max-width: 622px){
+  .new-user-container .form-style span input[type=text], .new-user-container .form-style span input[type=password], .new-user-container .form-style span select, .new-user-container .form-style span textarea{
+    width: 250px;
+  }
+}
+@media(max-width: 538px){
+  .new-user-container .form-style span input[type=text], .new-user-container .form-style span input[type=password], .new-user-container .form-style span select, .new-user-container .form-style span textarea{
+    width: 200px;
+  }
 }
