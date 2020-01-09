@@ -92,7 +92,7 @@ class ChangePassword extends Component{
                         <h2>Users Edit Page</h2>
                         <div className="users-container">
                             <div className="users">
-                                <h4>Users</h4>
+                                <h4>Edit Users</h4>
                                 <ul>
                                     {this.state.listOfUsers?
                                     this.state.listOfUsers.map((user, index) => {
