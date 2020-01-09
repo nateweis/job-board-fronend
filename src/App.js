@@ -17,6 +17,9 @@ import SewageShow from './components/sewage/SewageShow';
 import FireHome from './components/fire/FireHome';
 import FireNew from './components/fire/FireNew';
 import FireShow from './components/fire/FireShow';
+import TankfillHome from './components/tankfill/TankfillHome'
+import TankfillNew from './components/tankfill/TankfillNew'
+import TankfillShow from './components/tankfill/TankfillShow'
 
 class App extends Component {
   constructor(props){
@@ -65,6 +68,10 @@ class App extends Component {
           <Route path="/jobs/booster/index" exact render ={({history})=> <BoosterHome history={history} retriveUser={this.passdownUser} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/booster/new" exact component={BoosterNew} />
           <Route path="/jobs/booster/:id" render={({match, history})=><BoosterShow id={match.params.id} SpellOutDate={this.SpellOutDate} push={history.push} /> } />
+
+          <Route path="/jobs/tankfill/index" exact render ={({history})=> <TankfillHome history={history} retriveUser={this.passdownUser} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
+          <Route path="/jobs/tankfill/new" exact component={TankfillNew} />
+          <Route path="/jobs/tankfill/:id" render={({match, history})=><TankfillShow id={match.params.id} SpellOutDate={this.SpellOutDate} push={history.push} /> } />
 
           <Route path="/jobs/sewer/index" exact render ={({history})=> <SewageHome history={history} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/sewer/new" exact component={SewageNew} />
