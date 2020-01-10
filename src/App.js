@@ -17,9 +17,10 @@ import SewageShow from './components/sewage/SewageShow';
 import FireHome from './components/fire/FireHome';
 import FireNew from './components/fire/FireNew';
 import FireShow from './components/fire/FireShow';
-import TankfillHome from './components/tankfill/TankfillHome'
-import TankfillNew from './components/tankfill/TankfillNew'
-import TankfillShow from './components/tankfill/TankfillShow'
+import TankfillHome from './components/tankfill/TankfillHome';
+import TankfillNew from './components/tankfill/TankfillNew';
+import TankfillShow from './components/tankfill/TankfillShow';
+import AllJobsHome from './components/allJobs/AllJobsHome';
 
 class App extends Component {
   constructor(props){
@@ -80,6 +81,8 @@ class App extends Component {
           <Route path="/jobs/fire/index" exact render ={({history})=> <FireHome history={history} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
           <Route path="/jobs/fire/new" exact component={FireNew} />
           <Route path="/jobs/fire/:id" exact render={({match, history})=><FireShow id={match.params.id} SpellOutDate={this.SpellOutDate} push={history.push} /> } />
+
+          <Route path="/jobs/all/index" exact render ={({history})=> <AllJobsHome history={history} retriveUser={this.passdownUser} SpellOutDate={this.SpellOutDate} archive={this.state.archive} />} />
 
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>
