@@ -109,12 +109,12 @@ class ChangePassword extends Component{
                             </div>
                             <div className="new-user-container">
                                     {
-                                        this.state.switch_form == 1 ?
+                                        this.state.switch_form === 1 ?
                                             <NewUserForm clear={this.state.clear_form} changeClearform={this.changeClearform} addUserToList={this.addUserToList} />:
-                                        this.state.switch_form == 2 ?
+                                        this.state.switch_form === 2 ?
                                             <UpdateUserForm user={this.state.passdownUser} removeUserFromList={this.removeUserFromList} newUserForm={this.newUserForm}
                                             updateUserFromList={this.updateUserFromList} />:
-                                        this.state.switch_form == 3 ?
+                                        this.state.switch_form === 3 ?
                                             <ChangePasswordForm passdownUser={this.state.user}/> : 
                                             ""    
                                     }
