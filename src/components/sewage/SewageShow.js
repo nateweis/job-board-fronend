@@ -36,7 +36,8 @@ class SewageShow extends Component{
             bol_number: this.state.originalData.bol_number,
             pro_number: this.state.originalData.pro_number,
             deposit_amount: this.state.originalData.deposit_amount,
-            invoice_number: this.state.originalData.invoice_number
+            invoice_number: this.state.originalData.invoice_number,
+            quantity: this.state.originalData.quantity
         })
     }
 
@@ -140,6 +141,7 @@ class SewageShow extends Component{
                        pro_number: data.data.pro_number,
                        deposit_amount: data.data.deposit_amount,
                        invoice_number: data.data.invoice_number,
+                       quantity: data.data.quantity,
                        originalData: data.data
                    })
                }
@@ -206,6 +208,11 @@ class SewageShow extends Component{
                     <span>
                         <label htmlFor="">Customer: </label>
                         <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Quantity: </label>
+                        <input type="number" value={this.state.quantity} onChange={this.handleChange} name="quantity" min="1" />
                     </span>
 
                     <span>
@@ -347,6 +354,7 @@ class SewageShow extends Component{
                             <li><strong>Date Created:</strong> <this.props.SpellOutDate date={this.state.date_created}/> </li>
                             <li><strong>Description:</strong> {this.state.description} </li>
                             <li><strong>Customer:</strong> {this.state.requested_by} </li>
+                            <li><strong>Quantity:</strong> {this.state.quantity} </li>
                             <li><strong>Job Address:</strong> {this.state.job_address} </li>
                             <li><strong>Pump PO:</strong> {this.state.pump_po} </li>
                             <li><strong>Pump ETA:</strong> <this.props.SpellOutDate date={this.state.pump_eta}/> </li>

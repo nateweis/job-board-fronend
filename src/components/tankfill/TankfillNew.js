@@ -28,7 +28,8 @@ class TankfillNew extends Component{
             bol_number:"",
             pro_number:"",
             deposit_amount:"",
-            invoice_number:""
+            invoice_number:"",
+            quantity: 1
         }
     }
 
@@ -86,7 +87,8 @@ class TankfillNew extends Component{
             bol_number:"",
             pro_number:"",
             deposit_amount:"",
-            invoice_number:""
+            invoice_number:"",
+            quantity:1
         })
     }
 
@@ -137,6 +139,11 @@ class TankfillNew extends Component{
                     <span>
                         <label htmlFor="">Customer: </label>
                         <input type="text" value={this.state.requested_by} onChange={this.handleChange} name="requested_by"/>
+                    </span>
+
+                    <span>
+                        <label htmlFor="">Quantity: </label>
+                        <input type="number" value={this.state.quantity} onChange={this.handleChange} name="quantity" min="1" />
                     </span>
 
                     <span>
