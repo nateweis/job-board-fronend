@@ -205,11 +205,11 @@ class FireShow extends Component{
                         <label htmlFor="">Stage:   </label>
                         <select name="stage" onChange={this.handleChange} >
                             <option value={this.state.stage}>Current Stage {this.state.stage}</option>
-                            <option value="1">1 Ready for Pick Release</option>
-                            <option value="2">2 Ready for Pick Confirm </option>
-                            <option value="3">3 Ready for Ship Confirm</option>
-                            <option value="4">4 Ready for Invoicing</option>
-                            <option value="5">5 Completed</option>
+                            <option value="1">1 Items Ordered</option>
+                            <option value="2">2 Items Received </option>
+                            <option value="3">3 Ready for Build/Assembly</option>
+                            <option value="4">4 System Completed (Ready for Shipping)</option>
+                            <option value="5">5 Shipped/Invoice</option>
                         </select>
                     </span>
 
