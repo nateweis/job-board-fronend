@@ -49,6 +49,7 @@ class AllJobsHome extends Component{
                    this.setState({user:data.userInfo.name});
                    this.props.retriveUser(obj);
                    data.data.forEach(job => {
+                    job.jobType = "tankfill";
                     this.setState({jobs: [job, ...this.state.jobs]})
                 });              
                }
@@ -79,6 +80,7 @@ class AllJobsHome extends Component{
                else{             
                     
                     data.data.forEach(job => {
+                        job.jobType = "booster";
                         this.setState({jobs: [job, ...this.state.jobs]})
                     });                          
                                 
@@ -109,6 +111,7 @@ class AllJobsHome extends Component{
                }
                else{       
                 data.data.forEach(job => {
+                    job.jobType = "sewer";
                     this.setState({jobs: [job, ...this.state.jobs]})
                 });                
                }
@@ -138,6 +141,7 @@ class AllJobsHome extends Component{
                }
                else{ 
                 data.data.forEach(job => {
+                    job.jobType = "fire";
                     this.setState({jobs: [job, ...this.state.jobs]})
                 });                
                }
@@ -159,7 +163,8 @@ class AllJobsHome extends Component{
      }
  
      showPage = (job) => {
-         this.props.history.push("/jobs/tankfill/"+job)
+        //  this.props.history.push("/jobs/tankfill/"+job)
+        this.props.history.push(`/jobs/${job.jobType}/${job.id}`);
      }
  
  
@@ -181,7 +186,7 @@ class AllJobsHome extends Component{
                  return(
                      <>
                      {job.completed? 
-                         <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
+                         <div key={index} className="index-display" onClick={()=>this.showPage(job)}>
                          <p> <strong>Job Order Number:  </strong> {job.job_order_number}</p>
                          <p className="stage-class5"> <strong>Stage:  </strong> 5</p>
                          <p> <strong>Customer:  </strong> {job.requested_by} </p>
@@ -197,7 +202,7 @@ class AllJobsHome extends Component{
              return(
                  <>
                  {job.completed? "" : 
-                     <div key={index} className="index-display" onClick={()=>this.showPage(job.id)}>
+                     <div key={index} className="index-display" onClick={()=>this.showPage(job)}>
                      <p> <strong>Job Order Number:  </strong> {job.job_order_number}</p>
                      <p className={"stage-class"+job.stage}> <strong>Stage:  </strong> {job.stage}</p>
                      <p> <strong>Customer:  </strong> {job.requested_by} </p>
