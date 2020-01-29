@@ -62,7 +62,7 @@ class BoosterNew extends Component{
     }
 
     getLinkJobs = () => {
-        fetch('https://job-board-api.herokuapp.com/link',{
+        fetch('http://localhost:3001/link',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
