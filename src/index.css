@@ -52,7 +52,7 @@ input, select{
 /* *********************************
 Nav 
 **********************************/
-.outer-nav-container{
+.outer-container{
   position: relative;
 }
 .spacer{
@@ -400,4 +400,16 @@ User Page
   .new-user-container .form-style span input[type=text], .new-user-container .form-style span input[type=password], .new-user-container .form-style span select, .new-user-container .form-style span textarea{
     width: 200px;
   }
+}
+
+/* *********************************
+New Jobs Page
+**********************************/
+.link-options-container{
+  width:80%;
+  height: 100px;
+  background-color: rgba(20,66,77,.5);
+  position: fixed;
+  top: 30%;
+  left: 50%;
 }
