@@ -84,7 +84,7 @@ class NavBar extends Component{
     render(){ 
         // let width = window.innerWidth      
         return(
-            <div className="outer-nav-container" >
+            <div className="outer-container" >
                 <ReactResizeDetector handleWidth handleHeight onResize={this.checkDropdown}>
 
                     {({ width}) => <div>{width > 910? 

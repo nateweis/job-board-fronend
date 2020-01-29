@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
+import ReactResizeDetector from 'react-resize-detector';
 import Auth from '../../modules/Auth'
 
 
@@ -7,6 +8,7 @@ import Auth from '../../modules/Auth'
 class BoosterNew extends Component{
     constructor(props) {
         super(props)
+        this.ref = React.createRef();
         this.state = {
             job_order_number:"",
             description:"",
@@ -29,7 +31,8 @@ class BoosterNew extends Component{
             pro_number:"",
             deposit_amount:"",
             invoice_number:"",
-            quantity: 1
+            quantity: 1,
+            connect_job: false
         }
     }
 
@@ -46,8 +49,29 @@ class BoosterNew extends Component{
         }
     }
 
+    centerLinkDiv = () => {
+        // const linkWidth = this.ref.current.clientWidth; 
+        // this.ref.current.style.marginLeft = `-${linkWidth/2}px`
+    }
+
     componentDidMount(){
-        this.checkForUser()
+        this.checkForUser();
+        this.getLinkJobs();
+        this.centerLinkDiv();
+        
+    }
+
+    getLinkJobs = () => {
+        fetch('https://job-board-api.herokuapp.com/link',{
+            method:"GET",
+            headers:{
+                Authorization : `Token ${Auth.getToken()}`
+            }
+        })
+        .then((res) => {
+            res.json()
+            .then((data)=>{console.log(data)},(err)=>{console.log(err)})
+        })
     }
 
     handleChange = (e) => {
@@ -57,12 +81,16 @@ class BoosterNew extends Component{
         }
         else{
             this.setState({[e.target.name]: e.target.value})
-        }        
+        }      
       }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        setTimeout(this.postToApi, 500)
+        // if(this.state.connect_job){
+        //     console.log(this.ref);
+        // }
+        // else console.log("post to api");
+        setTimeout(this.postToApi, 500);
     } 
 
     resetState = () => {
@@ -88,7 +116,8 @@ class BoosterNew extends Component{
             pro_number:"",
             deposit_amount:"",
             invoice_number:"",
-            quantity: 1
+            quantity: 1,
+            connect_job: false
         })
     }
 
@@ -119,7 +148,8 @@ class BoosterNew extends Component{
 
     render(){
         return(
-            <div>
+            <ReactResizeDetector handleWidth handleHeight onResize={this.centerLinkDiv}>
+            <div className="outer-container">
                 <h3 className="banner">New Booster Job</h3>
                 <form onSubmit={this.handleSubmit} className="form-style" >
                     <span>
@@ -129,6 +159,12 @@ class BoosterNew extends Component{
                     <span>
                         <label htmlFor="">Job Order Number: </label>
                         <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
+                    </span>
+
+                    <span>
+                        <label htmlFor="">One of Several Jobs? </label> 
+                        Yes  <input type="radio" name="connect_job" checked={this.state.connect_job} onChange={this.handleChange} className="trueClass"/> No   
+                        <input type="radio" name="connect_job" checked={this.state.connect_job? false: true} onChange={this.handleChange}/>
                     </span>
                     
                     <span>
@@ -244,7 +280,12 @@ class BoosterNew extends Component{
                         <input type="submit" value="Add Job"/>
                     </span>
                 </form>
+
+
+
+                {/* <div className="link-options-container" ref={this.ref}></div> */}
             </div>
+            </ReactResizeDetector>
         )
     }
 }
