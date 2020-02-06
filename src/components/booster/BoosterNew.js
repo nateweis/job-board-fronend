@@ -50,15 +50,25 @@ class BoosterNew extends Component{
     }
 
     centerLinkDiv = () => {
-        // const linkWidth = this.ref.current.clientWidth; 
-        // this.ref.current.style.marginLeft = `-${linkWidth/2}px`
+        const linkWidth = this.ref.current.clientWidth; 
+        this.ref.current.style.marginLeft = `-${linkWidth/2}px`
     }
 
     componentDidMount(){
         this.checkForUser();
         this.getLinkJobs();
         this.centerLinkDiv();
+        console.log(this.ref)
         
+    }
+
+    displayLinks = () => {
+        document.querySelector(".link-options").style.display = "block";
+    }
+
+    exitLinks = () => {
+        this.ref.current.style.display = "none";
+        document.querySelector(".link-options").style.display = "none";
     }
 
     getLinkJobs = () => {
@@ -70,7 +80,9 @@ class BoosterNew extends Component{
         })
         .then((res) => {
             res.json()
-            .then((data)=>{console.log(data)},(err)=>{console.log(err)})
+            .then((data)=>{
+                this.setState({listOfLinks: data.data})
+            },(err)=>{console.log(err)})
         })
     }
 
@@ -86,11 +98,12 @@ class BoosterNew extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        // if(this.state.connect_job){
-        //     console.log(this.ref);
-        // }
-        // else console.log("post to api");
-        setTimeout(this.postToApi, 500);
+        if(this.state.connect_job){
+            this.ref.current.style.display = "block"
+            this.centerLinkDiv()
+        }
+        else console.log("post to api");
+        // setTimeout(this.postToApi, 500);
     } 
 
     resetState = () => {
@@ -283,7 +296,24 @@ class BoosterNew extends Component{
 
 
 
-                {/* <div className="link-options-container" ref={this.ref}></div> */}
+                <div className="link-options-container" ref={this.ref}>
+                    <div className="link-btns-container" >
+                        <button onClick={this.displayLinks}>First of Several</button>
+                        <button onClick={this.displayLinks}>Join on Prexisting</button>
+                        <button onClick={this.exitLinks} >X</button>
+                    </div>
+                    <div className="link-options" >
+                        
+                        {this.state.listOfLinks? this.state.listOfLinks.map((link, index) => {
+                            return(
+                                <>
+                                    <div key={index}>{link.title}</div>
+                                </>
+                            )
+                        }):""}
+                        
+                    </div>
+                </div>
             </div>
             </ReactResizeDetector>
         )
