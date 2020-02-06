@@ -63,12 +63,19 @@ class BoosterNew extends Component{
     }
 
     displayLinks = () => {
+        document.querySelector(".new-link").style.display = "none";
         document.querySelector(".link-options").style.display = "block";
+    }
+
+    displayLForm = () => {
+        document.querySelector(".link-options").style.display = "none";
+        document.querySelector(".new-link").style.display = "block";
     }
 
     exitLinks = () => {
         this.ref.current.style.display = "none";
         document.querySelector(".link-options").style.display = "none";
+        document.querySelector(".new-link").style.display = "none";
     }
 
     getLinkJobs = () => {
@@ -298,10 +305,11 @@ class BoosterNew extends Component{
 
                 <div className="link-options-container" ref={this.ref}>
                     <div className="link-btns-container" >
-                        <button onClick={this.displayLinks}>First of Several</button>
+                        <button onClick={this.displayLForm}>First of Several</button>
                         <button onClick={this.displayLinks}>Join on Prexisting</button>
                         <button onClick={this.exitLinks} >X</button>
                     </div>
+
                     <div className="link-options" >
                         
                         {this.state.listOfLinks? this.state.listOfLinks.map((link, index) => {
@@ -312,6 +320,10 @@ class BoosterNew extends Component{
                             )
                         }):""}
                         
+                    </div>
+
+                    <div className="new-link" >
+                        <div>This is the new form page for links</div>
                     </div>
                 </div>
             </div>
