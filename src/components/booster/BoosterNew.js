@@ -116,12 +116,12 @@ class BoosterNew extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        if(this.state.connect_job){
-            this.ref.current.style.display = "block"
-            this.centerLinkDiv()
-        }
-        else console.log("post to api");
-        // setTimeout(this.postToApi, 500);
+        // if(this.state.connect_job){
+        //     this.ref.current.style.display = "block"
+        //     this.centerLinkDiv()
+        // }
+        // else console.log("post to api");
+        setTimeout(this.postToApi, 500);
     } 
 
     resetState = () => {
