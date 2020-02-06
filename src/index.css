@@ -420,13 +420,13 @@ New Jobs Page
 }
 .link-options{
   height: 300px;
-  background-color: rgba(135, 207, 235, 0.671);
+  background-color: rgba(135, 207, 235, 1);
   display: none;
   animation: Slide_Down 1.2s ease;
 }
 .new-link{
   height: 300px;
-  background-color: rgba(135, 207, 235, 0.671);
+  background-color: rgba(135, 207, 235, 1);
   display: none;
   animation: Slide_Down 1.2s ease;
 }
