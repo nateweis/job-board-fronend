@@ -32,7 +32,8 @@ class BoosterNew extends Component{
             deposit_amount:"",
             invoice_number:"",
             quantity: 1,
-            connect_job: false
+            connect_job: false,
+            link_job:{}
         }
     }
 
@@ -49,34 +50,44 @@ class BoosterNew extends Component{
         }
     }
 
-    centerLinkDiv = () => {
-        const linkWidth = this.ref.current.clientWidth; 
-        this.ref.current.style.marginLeft = `-${linkWidth/2}px`
-    }
+    // centerLinkDiv = () => {
+    //     const linkWidth = this.ref.current.clientWidth; 
+    //     this.ref.current.style.marginLeft = `-${linkWidth/2}px`
+    // }
+
+    // connectToJob = (link) => {
+    //     this.setState({
+    //         link_job : {
+    //             title: link.title,
+    //             id: link.id,
+    //             newJob: false
+    //         }
+    //     })
+    // }
 
     componentDidMount(){
         this.checkForUser();
         this.getLinkJobs();
-        this.centerLinkDiv();
-        console.log(this.ref)
+        // this.centerLinkDiv();
+        // console.log(this.ref)
         
     }
 
-    displayLinks = () => {
-        document.querySelector(".new-link").style.display = "none";
-        document.querySelector(".link-options").style.display = "block";
-    }
+    // displayLinks = () => {
+    //     document.querySelector(".new-link").style.display = "none";
+    //     document.querySelector(".link-options").style.display = "block";
+    // }
 
-    displayLForm = () => {
-        document.querySelector(".link-options").style.display = "none";
-        document.querySelector(".new-link").style.display = "block";
-    }
+    // displayLForm = () => {
+    //     document.querySelector(".link-options").style.display = "none";
+    //     document.querySelector(".new-link").style.display = "block";
+    // }
 
-    exitLinks = () => {
-        this.ref.current.style.display = "none";
-        document.querySelector(".link-options").style.display = "none";
-        document.querySelector(".new-link").style.display = "none";
-    }
+    // exitLinks = () => {
+    //     this.ref.current.style.display = "none";
+    //     document.querySelector(".link-options").style.display = "none";
+    //     document.querySelector(".new-link").style.display = "none";
+    // }
 
     getLinkJobs = () => {
         fetch('http://localhost:3001/link',{
@@ -105,12 +116,12 @@ class BoosterNew extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        if(this.state.connect_job){
-            this.ref.current.style.display = "block"
-            this.centerLinkDiv()
-        }
-        else console.log("post to api");
-        // setTimeout(this.postToApi, 500);
+        // if(this.state.connect_job){
+        //     this.ref.current.style.display = "block"
+        //     this.centerLinkDiv()
+        // }
+        // else console.log("post to api");
+        setTimeout(this.postToApi, 500);
     } 
 
     resetState = () => {
@@ -137,7 +148,8 @@ class BoosterNew extends Component{
             deposit_amount:"",
             invoice_number:"",
             quantity: 1,
-            connect_job: false
+            connect_job: false,
+            link_job:{}
         })
     }
 
@@ -181,11 +193,12 @@ class BoosterNew extends Component{
                         <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     </span>
 
-                    <span>
+                    {/* <span>
                         <label htmlFor="">One of Several Jobs? </label> 
                         Yes  <input type="radio" name="connect_job" checked={this.state.connect_job} onChange={this.handleChange} className="trueClass"/> No   
                         <input type="radio" name="connect_job" checked={this.state.connect_job? false: true} onChange={this.handleChange}/>
-                    </span>
+                        <span> {this.state.link_job.title? this.state.link_job.title: "" } </span>
+                    </span> */}
                     
                     <span>
                         <label htmlFor="">Description:</label>
@@ -303,7 +316,7 @@ class BoosterNew extends Component{
 
 
 
-                <div className="link-options-container" ref={this.ref}>
+                {/* <div className="link-options-container" ref={this.ref}>
                     <div className="link-btns-container" >
                         <button onClick={this.displayLForm}>First of Several</button>
                         <button onClick={this.displayLinks}>Join on Prexisting</button>
@@ -315,7 +328,7 @@ class BoosterNew extends Component{
                         {this.state.listOfLinks? this.state.listOfLinks.map((link, index) => {
                             return(
                                 <>
-                                    <div key={index}>{link.title}</div>
+                                    <div key={index} onClick={()=>this.connectToJob(link)} >{link.title}</div>
                                 </>
                             )
                         }):""}
@@ -325,7 +338,7 @@ class BoosterNew extends Component{
                     <div className="new-link" >
                         <div>This is the new form page for links</div>
                     </div>
-                </div>
+                </div> */}
             </div>
             </ReactResizeDetector>
         )

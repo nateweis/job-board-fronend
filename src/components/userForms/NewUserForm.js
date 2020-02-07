@@ -19,9 +19,10 @@ class NewUserForm extends Component{
 
     checkFeilds = () => {
         if(this.state.username.trim() && this.state.password.trim() && this.state.name.trim()){
-            this.makeNewUser();
             this.props.addUserToList(this.state);
-            this.resetState();
+            this.setState({username: this.state.username.toLowerCase()});
+            setTimeout(this.makeNewUser, 300);
+            setTimeout(this.resetState, 500);
         }else{
             this.setState({form_complete: true})
         }

@@ -18,6 +18,11 @@ class Login extends Component{
     
     handleSubmit = (e) => {
         e.preventDefault()
+        this.setState({username: this.state.username.toLowerCase()});
+        setTimeout(this.submitLogin, 100)
+    }
+
+    submitLogin = () => {
         fetch('http://localhost:3001/users',{
             method: 'POST',
             body: JSON.stringify(this.state),
@@ -43,8 +48,6 @@ class Login extends Component{
             }
             )
         })
-
-        
     }
 
     render(){
