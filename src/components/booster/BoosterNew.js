@@ -73,21 +73,21 @@ class BoosterNew extends Component{
         
     }
 
-    displayLinks = () => {
-        document.querySelector(".new-link").style.display = "none";
-        document.querySelector(".link-options").style.display = "block";
-    }
+    // displayLinks = () => {
+    //     document.querySelector(".new-link").style.display = "none";
+    //     document.querySelector(".link-options").style.display = "block";
+    // }
 
-    displayLForm = () => {
-        document.querySelector(".link-options").style.display = "none";
-        document.querySelector(".new-link").style.display = "block";
-    }
+    // displayLForm = () => {
+    //     document.querySelector(".link-options").style.display = "none";
+    //     document.querySelector(".new-link").style.display = "block";
+    // }
 
-    exitLinks = () => {
-        this.ref.current.style.display = "none";
-        document.querySelector(".link-options").style.display = "none";
-        document.querySelector(".new-link").style.display = "none";
-    }
+    // exitLinks = () => {
+    //     this.ref.current.style.display = "none";
+    //     document.querySelector(".link-options").style.display = "none";
+    //     document.querySelector(".new-link").style.display = "none";
+    // }
 
     getLinkJobs = () => {
         fetch('https://job-board-api.herokuapp.com/link',{
