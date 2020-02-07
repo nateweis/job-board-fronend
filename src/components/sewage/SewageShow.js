@@ -37,6 +37,7 @@ class SewageShow extends Component{
             pro_number: this.state.originalData.pro_number,
             deposit_amount: this.state.originalData.deposit_amount,
             invoice_number: this.state.originalData.invoice_number,
+            connected_jobs: this.state.originalData.connected_jobs,
             quantity: this.state.originalData.quantity
         })
     }
@@ -142,6 +143,7 @@ class SewageShow extends Component{
                        deposit_amount: data.data.deposit_amount,
                        invoice_number: data.data.invoice_number,
                        quantity: data.data.quantity,
+                       connected_jobs: data.data.connected_jobs,
                        originalData: data.data
                    })
                }

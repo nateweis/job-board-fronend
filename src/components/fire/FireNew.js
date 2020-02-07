@@ -27,7 +27,8 @@ class FireNew extends Component{
             pro_number:"",
             deposit_amount:"",
             invoice_number:"",
-            quantity: 1
+            quantity: 1,
+            connected_jobs:""
         }
     }
 
@@ -84,7 +85,8 @@ class FireNew extends Component{
             pro_number:"",
             deposit_amount:"",
             invoice_number:"",
-            quantity: 1
+            quantity: 1,
+            connected_jobs:""
         })
     }
 
