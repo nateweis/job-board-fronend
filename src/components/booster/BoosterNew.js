@@ -32,8 +32,9 @@ class BoosterNew extends Component{
             deposit_amount:"",
             invoice_number:"",
             quantity: 1,
-            connect_job: false,
-            link_job:{}
+            connect_to_job: false,
+            link_job:{},
+            connected_jobs:""
         }
     }
 
@@ -116,7 +117,7 @@ class BoosterNew extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        // if(this.state.connect_job){
+        // if(this.state.connect_to_job){
         //     this.ref.current.style.display = "block"
         //     this.centerLinkDiv()
         // }
@@ -148,8 +149,9 @@ class BoosterNew extends Component{
             deposit_amount:"",
             invoice_number:"",
             quantity: 1,
-            connect_job: false,
-            link_job:{}
+            connect_to_job: false,
+            link_job:{},
+            connected_jobs:""
         })
     }
 
@@ -195,8 +197,8 @@ class BoosterNew extends Component{
 
                     {/* <span>
                         <label htmlFor="">One of Several Jobs? </label> 
-                        Yes  <input type="radio" name="connect_job" checked={this.state.connect_job} onChange={this.handleChange} className="trueClass"/> No   
-                        <input type="radio" name="connect_job" checked={this.state.connect_job? false: true} onChange={this.handleChange}/>
+                        Yes  <input type="radio" name="connect_to_job" checked={this.state.connect_to_job} onChange={this.handleChange} className="trueClass"/> No   
+                        <input type="radio" name="connect_to_job" checked={this.state.connect_to_job? false: true} onChange={this.handleChange}/>
                         <span> {this.state.link_job.title? this.state.link_job.title: "" } </span>
                     </span> */}
                     
