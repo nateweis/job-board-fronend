@@ -51,44 +51,44 @@ class BoosterNew extends Component{
         }
     }
 
-    // centerLinkDiv = () => {
-    //     const linkWidth = this.ref.current.clientWidth; 
-    //     this.ref.current.style.marginLeft = `-${linkWidth/2}px`
-    // }
+    centerLinkDiv = () => {
+        const linkWidth = this.ref.current.clientWidth; 
+        this.ref.current.style.marginLeft = `-${linkWidth/2}px`
+    }
 
-    // connectToJob = (link) => {
-    //     this.setState({
-    //         link_job : {
-    //             title: link.title,
-    //             id: link.id,
-    //             newJob: false
-    //         }
-    //     })
-    // }
+    connectToJob = (link) => {
+        this.setState({
+            link_job : {
+                title: link.title,
+                id: link.id,
+                newJob: false
+            }
+        })
+    }
 
     componentDidMount(){
         this.checkForUser();
         this.getLinkJobs();
-        // this.centerLinkDiv();
+        this.centerLinkDiv();
         // console.log(this.ref)
         
     }
 
-    // displayLinks = () => {
-    //     document.querySelector(".new-link").style.display = "none";
-    //     document.querySelector(".link-options").style.display = "block";
-    // }
+    displayLinks = () => {
+        document.querySelector(".new-link").style.display = "none";
+        document.querySelector(".link-options").style.display = "block";
+    }
 
-    // displayLForm = () => {
-    //     document.querySelector(".link-options").style.display = "none";
-    //     document.querySelector(".new-link").style.display = "block";
-    // }
+    displayLForm = () => {
+        document.querySelector(".link-options").style.display = "none";
+        document.querySelector(".new-link").style.display = "block";
+    }
 
-    // exitLinks = () => {
-    //     this.ref.current.style.display = "none";
-    //     document.querySelector(".link-options").style.display = "none";
-    //     document.querySelector(".new-link").style.display = "none";
-    // }
+    exitLinks = () => {
+        this.ref.current.style.display = "none";
+        document.querySelector(".link-options").style.display = "none";
+        document.querySelector(".new-link").style.display = "none";
+    }
 
     getLinkJobs = () => {
         fetch('https://job-board-api.herokuapp.com/link',{
@@ -117,12 +117,15 @@ class BoosterNew extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        // if(this.state.connect_to_job){
-        //     this.ref.current.style.display = "block"
-        //     this.centerLinkDiv()
-        // }
-        // else console.log("post to api");
-        setTimeout(this.postToApi, 500);
+        if(this.state.connect_to_job && !this.state.link_job.title){
+            this.ref.current.style.display = "block"
+            this.centerLinkDiv()
+        }
+        else if(this.state.connect_to_job){
+            console.log("already have a job to connect to")
+        }
+        else console.log("post to api");
+        // setTimeout(this.postToApi, 500);
     } 
 
     resetState = () => {
@@ -177,6 +180,15 @@ class BoosterNew extends Component{
         })
     })
    }
+
+   removeLinkJob = () => {
+       this.setState({link_job:{}})
+   }
+
+   submitLinkJob = (e) => {
+       e.preventDefault();
+       this.exitLinks();
+   }
     
     
 
@@ -195,12 +207,13 @@ class BoosterNew extends Component{
                         <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     </span>
 
-                    {/* <span>
+                    <span>
                         <label htmlFor="">One of Several Jobs? </label> 
                         Yes  <input type="radio" name="connect_to_job" checked={this.state.connect_to_job} onChange={this.handleChange} className="trueClass"/> No   
                         <input type="radio" name="connect_to_job" checked={this.state.connect_to_job? false: true} onChange={this.handleChange}/>
                         <span> {this.state.link_job.title? this.state.link_job.title: "" } </span>
-                    </span> */}
+                        <span onClick={this.removeLinkJob} > {this.state.link_job.title? "X" : "" } </span>
+                    </span>
                     
                     <span>
                         <label htmlFor="">Description:</label>
@@ -318,7 +331,7 @@ class BoosterNew extends Component{
 
 
 
-                {/* <div className="link-options-container" ref={this.ref}>
+                <div className="link-options-container" ref={this.ref}>
                     <div className="link-btns-container" >
                         <button onClick={this.displayLForm}>First of Several</button>
                         <button onClick={this.displayLinks}>Join on Prexisting</button>
@@ -330,6 +343,7 @@ class BoosterNew extends Component{
                         {this.state.listOfLinks? this.state.listOfLinks.map((link, index) => {
                             return(
                                 <>
+                                    <h3>Select job to Connect to</h3>
                                     <div key={index} onClick={()=>this.connectToJob(link)} >{link.title}</div>
                                 </>
                             )
@@ -338,9 +352,26 @@ class BoosterNew extends Component{
                     </div>
 
                     <div className="new-link" >
-                        <div>This is the new form page for links</div>
+                        <h3>Please give information for the jobs you wish to link together </h3>
+                        <form className="form-style" onSubmit={this.submitLinkJob} >
+
+                            <span>
+                                <label htmlFor="">Title </label>
+                                <input type="text" name="" id=""/>
+                            </span>
+
+                            <span>
+                                <label htmlFor="">How many jobs linked together in total</label>
+                                <input type="number" min="2" max="10" />
+                            </span>
+
+                            <span>
+                                <input type="submit" value="Submit"/>
+                            </span>
+
+                        </form>
                     </div>
-                </div> */}
+                </div>
             </div>
             </ReactResizeDetector>
         )
