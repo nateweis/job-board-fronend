@@ -34,7 +34,9 @@ class BoosterNew extends Component{
             quantity: 1,
             connect_to_job: false,
             link_job:{},
-            connected_jobs:""
+            connected_jobs:"",
+            title:"",
+            number_linked: 2
         }
     }
 
@@ -154,7 +156,9 @@ class BoosterNew extends Component{
             quantity: 1,
             connect_to_job: false,
             link_job:{},
-            connected_jobs:""
+            connected_jobs:"",
+            title:"",
+            number_linked: 2
         })
     }
 
@@ -187,7 +191,9 @@ class BoosterNew extends Component{
 
    submitLinkJob = (e) => {
        e.preventDefault();
+       const obj = {title: this.state.title, number_linked: parseInt(this.state.number_linked)}
        this.exitLinks();
+       console.log(obj)
    }
     
     
@@ -357,12 +363,12 @@ class BoosterNew extends Component{
 
                             <span>
                                 <label htmlFor="">Title </label>
-                                <input type="text" name="" id=""/>
+                                <input type="text" name="title" onChange={this.handleChange} value={this.state.title} />
                             </span>
 
                             <span>
                                 <label htmlFor="">How many jobs linked together in total</label>
-                                <input type="number" min="2" max="10" />
+                                <input type="number" min="2" max="10" name="number_linked" value={this.state.number_linked} onChange={this.handleChange} />
                             </span>
 
                             <span>
