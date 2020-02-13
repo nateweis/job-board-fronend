@@ -191,7 +191,7 @@ class BoosterNew extends Component{
    }
 
    postToJoblink = () => {
-    fetch('https://job-board-api.herokuapp.com/link',{
+    fetch('http://localhost:3001/link',{
         method: 'POST',
         body: JSON.stringify(this.state.link_job),
         headers:{
