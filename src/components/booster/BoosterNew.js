@@ -124,9 +124,14 @@ class BoosterNew extends Component{
             this.centerLinkDiv()
         }
         else if(this.state.connect_to_job){
-            console.log("already have a job to connect to")
+            console.log("already have a job to connect to");
+
+            if(this.state.link_job.newJob){this.postToJoblink();} // post to the joblink if a new one
+            else console.log("this.updateCurrentJoblink()"); // if not a new joblink, update existing one
+
+            // then post to the api
         }
-        else console.log("post to api");
+        else console.log("post to api"); // straight post to the api
         // setTimeout(this.postToApi, 500);
     } 
 
@@ -185,15 +190,35 @@ class BoosterNew extends Component{
     })
    }
 
+   postToJoblink = () => {
+    fetch('https://job-board-api.herokuapp.com/link',{
+        method: 'POST',
+        body: JSON.stringify(this.state.link_job),
+        headers:{
+            'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           'Authorization' : `Token ${Auth.getToken()}`
+         }
+    })
+    .then((res) => {
+        res.json()
+        .then((data) => {
+            console.log(data)
+        },(err) => {
+            console.log(err)
+        })
+    })
+   }
+
    removeLinkJob = () => {
        this.setState({link_job:{}})
    }
 
    submitLinkJob = (e) => {
        e.preventDefault();
-       const obj = {title: this.state.title, number_linked: parseInt(this.state.number_linked)}
+       const obj = {title: this.state.title, number_linked: parseInt(this.state.number_linked), newJob: true}
        this.exitLinks();
-       console.log(obj)
+       this.setState({link_job: obj})
    }
     
     
@@ -217,7 +242,7 @@ class BoosterNew extends Component{
                         <label htmlFor="">One of Several Jobs? </label> 
                         Yes  <input type="radio" name="connect_to_job" checked={this.state.connect_to_job} onChange={this.handleChange} className="trueClass"/> No   
                         <input type="radio" name="connect_to_job" checked={this.state.connect_to_job? false: true} onChange={this.handleChange}/>
-                        <span> {this.state.link_job.title? this.state.link_job.title: "" } </span>
+                        <span> {this.state.link_job.title? this.state.link_job.newJob? `(new) ${this.state.link_job.title}`: this.state.link_job.title : "" } </span>
                         <span onClick={this.removeLinkJob} > {this.state.link_job.title? "X" : "" } </span>
                     </span>
                     
@@ -345,11 +370,10 @@ class BoosterNew extends Component{
                     </div>
 
                     <div className="link-options" >
-                        
+                        <h3>Select job to Connect to</h3>
                         {this.state.listOfLinks? this.state.listOfLinks.map((link, index) => {
                             return(
                                 <>
-                                    <h3>Select job to Connect to</h3>
                                     <div key={index} onClick={()=>this.connectToJob(link)} >{link.title}</div>
                                 </>
                             )
