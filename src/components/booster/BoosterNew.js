@@ -130,7 +130,7 @@ class BoosterNew extends Component{
         else if(this.state.connect_to_job){
 
             if(this.state.link_job.newJob){this.postToJoblink();} // post to the joblink if a new one
-            else console.log("this.updateCurrentJoblink()"); // if not a new joblink, update existing one
+            else this.updateCurrentJoblink(); // if not a new joblink, update existing one
 
             // then post to the api
         }
