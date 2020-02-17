@@ -63,9 +63,13 @@ class BoosterNew extends Component{
             link_job : {
                 title: link.title,
                 id: link.id,
-                newJob: false
+                newJob: false,
+                number_linked: link.number_linked,
+                job_count: link.job_count +=1
             }
-        })
+        });
+
+        this.exitLinks();
     }
 
     componentDidMount(){
@@ -124,7 +128,6 @@ class BoosterNew extends Component{
             this.centerLinkDiv()
         }
         else if(this.state.connect_to_job){
-            console.log("already have a job to connect to");
 
             if(this.state.link_job.newJob){this.postToJoblink();} // post to the joblink if a new one
             else console.log("this.updateCurrentJoblink()"); // if not a new joblink, update existing one
@@ -216,9 +219,29 @@ class BoosterNew extends Component{
 
    submitLinkJob = (e) => {
        e.preventDefault();
-       const obj = {title: this.state.title, number_linked: parseInt(this.state.number_linked), newJob: true}
+       const obj = {title: this.state.title, number_linked: parseInt(this.state.number_linked), newJob: true, job_count: 1 }
        this.exitLinks();
        this.setState({link_job: obj})
+   }
+
+   updateCurrentJoblink = () => {
+    fetch('https://job-board-api.herokuapp.com/link',{
+        method: 'PUT',
+        body: JSON.stringify(this.state.link_job),
+        headers:{
+            'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           'Authorization' : `Token ${Auth.getToken()}`
+         }
+    })
+    .then((res) => {
+        res.json()
+        .then((data) => {
+            console.log(data)
+        },(err) => {
+            console.log(err)
+        })
+    })
    }
     
     
