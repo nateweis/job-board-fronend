@@ -225,7 +225,7 @@ class BoosterNew extends Component{
    }
 
    updateCurrentJoblink = () => {
-    fetch('https://job-board-api.herokuapp.com/link',{
+    fetch('http://localhost:3001/link',{
         method: 'PUT',
         body: JSON.stringify(this.state.link_job),
         headers:{
