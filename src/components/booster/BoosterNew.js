@@ -59,14 +59,16 @@ class BoosterNew extends Component{
     }
 
     connectToJob = (link) => {
+        const obj = {
+            title: link.title,
+            id: link.id,
+            newJob: false,
+            number_linked: link.number_linked,
+            job_count: link.job_count +=1
+        }
         this.setState({
-            link_job : {
-                title: link.title,
-                id: link.id,
-                newJob: false,
-                number_linked: link.number_linked,
-                job_count: link.job_count +=1
-            }
+            link_job : obj,
+            connected_jobs:  obj.title + " : " + obj.job_count + "/" + link.number_linked
         });
 
         this.exitLinks();
@@ -133,42 +135,13 @@ class BoosterNew extends Component{
             else this.updateCurrentJoblink(); // if not a new joblink, update existing one
 
             // then post to the api
+            setTimeout(this.postToApi, 500);
         }
-        else console.log("post to api"); // straight post to the api
-        // setTimeout(this.postToApi, 500);
+        else setTimeout(this.postToApi, 500); // straight post to the api
+        
     } 
 
-    resetState = () => {
-        this.setState({
-            job_order_number:"",
-            description:"",
-            requested_by:"",
-            job_address:"",
-            stage:1,
-            pump_po:"",
-            pump_eta:null,
-            pump_received:false,
-            updated_by: this.props.location.state.user,
-            controller_po:"",
-            controller_eta:null,
-            controller_received:false,
-            due_date:null,
-            completed:false,
-            shipdate_packlist:"",
-            notes:"",
-            carrier:"",
-            bol_number:"",
-            pro_number:"",
-            deposit_amount:"",
-            invoice_number:"",
-            quantity: 1,
-            connect_to_job: false,
-            link_job:{},
-            connected_jobs:"",
-            title:"",
-            number_linked: 2
-        })
-    }
+    
 
 
    postToApi = () => {
@@ -214,14 +187,49 @@ class BoosterNew extends Component{
    }
 
    removeLinkJob = () => {
-       this.setState({link_job:{}})
+       this.setState({link_job:{}, connected_jobs:""});
    }
+
+   resetState = () => {
+    this.setState({
+        job_order_number:"",
+        description:"",
+        requested_by:"",
+        job_address:"",
+        stage:1,
+        pump_po:"",
+        pump_eta:null,
+        pump_received:false,
+        updated_by: this.props.location.state.user,
+        controller_po:"",
+        controller_eta:null,
+        controller_received:false,
+        due_date:null,
+        completed:false,
+        shipdate_packlist:"",
+        notes:"",
+        carrier:"",
+        bol_number:"",
+        pro_number:"",
+        deposit_amount:"",
+        invoice_number:"",
+        quantity: 1,
+        connect_to_job: false,
+        link_job:{},
+        connected_jobs:"",
+        title:"",
+        number_linked: 2
+    })
+}
 
    submitLinkJob = (e) => {
        e.preventDefault();
        const obj = {title: this.state.title, number_linked: parseInt(this.state.number_linked), newJob: true, job_count: 1 }
        this.exitLinks();
-       this.setState({link_job: obj})
+       this.setState({
+        link_job: obj,
+        connected_jobs: obj.title + " : 1/" + obj.number_linked
+       })
    }
 
    updateCurrentJoblink = () => {
