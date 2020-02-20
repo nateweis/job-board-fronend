@@ -94,8 +94,8 @@ class NavBar extends Component{
                     <div className="image-container"><img className="logo" onClick={this.homeBtn} src={logo} alt="US Pump"/></div>
                         
                     <ul className="nav-links" >
-                        <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >iBoost Jobs</button></Link></li> 
-                        <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewage/Sump</button></Link></li>
+                        <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Fabrication Jobs</button></Link></li> 
+                        <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewage/Sump</button></Link></li>
                         <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire</button></Link></li>                   
                     </ul> 
 
@@ -131,9 +131,9 @@ class NavBar extends Component{
                     <li id="user-li">Current User is <strong>{this.state.user.name}</strong></li>
                     <li><Link to="/jobs/pass/change"><button onClick={()=> this.saveTab("booster")} >{this.state.user.admin? "Users Settings":"Change Password"}</button></Link></li> 
                     <hr className="in-list-hr"/>
-                    <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >iBoost Jobs</button></Link></li> 
+                    <li><Link to="/jobs/booster/index"><button onClick={()=> this.saveTab("booster")} >Fabrication Jobs</button></Link></li> 
                     <li><Link to="/jobs/tankfill/index"><button onClick={()=> this.saveTab("tankfill")} >iTankfill Jobs</button></Link></li> 
-                    <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>iLevel Sewage/Sump</button></Link></li>
+                    <li><Link to="/jobs/sewer/index"><button onClick={()=> this.saveTab("sewer")}>Sewage/Sump</button></Link></li>
                     <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire</button></Link></li>
                     <li><Link to="/jobs/all/index"><button onClick={()=> this.saveTab("all")}>All Jobs Listed</button></Link></li>
                     <hr className="in-list-hr"/>
