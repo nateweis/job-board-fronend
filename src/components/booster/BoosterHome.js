@@ -112,7 +112,7 @@ class BoosterHome extends Component{
         return(
             <div>
                 <div className="banner">
-                    <h2>Booster Jobs Index Page</h2>
+                    <h2>Fabrication Jobs Index Page</h2>
                     <span className="flexbox">
                         <input type="text" placeholder="search" value={this.state.search} onChange={this.handleChange} />
                         <select name="filter" onChange={this.filterOptions}>

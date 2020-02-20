@@ -258,7 +258,7 @@ class BoosterNew extends Component{
         return(
             <ReactResizeDetector handleWidth handleHeight onResize={this.centerLinkDiv}>
             <div className="outer-container">
-                <h3 className="banner">New Booster Job</h3>
+                <h3 className="banner">New Fabrication Job</h3>
                 <form onSubmit={this.handleSubmit} className="form-style" >
                     <span>
                         <button className="cancle-btn" onClick={this.cancle} >Cancle</button>
