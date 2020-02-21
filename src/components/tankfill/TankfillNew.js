@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
+import ReactResizeDetector from 'react-resize-detector';
 import Auth from '../../modules/Auth'
 
 
@@ -7,6 +8,7 @@ import Auth from '../../modules/Auth'
 class TankfillNew extends Component{
     constructor(props) {
         super(props)
+        this.ref = React.createRef();
         this.state = {
             job_order_number:"",
             description:"",
@@ -30,7 +32,11 @@ class TankfillNew extends Component{
             deposit_amount:"",
             invoice_number:"",
             quantity: 1,
-            connected_jobs:""
+            connect_to_job: false,
+            link_job:{},
+            connected_jobs:"",
+            title:"",
+            number_linked: 2
         }
     }
 
@@ -47,8 +53,62 @@ class TankfillNew extends Component{
         }
     }
 
+    centerLinkDiv = () => {
+        const linkWidth = this.ref.current.clientWidth; 
+        this.ref.current.style.marginLeft = `-${linkWidth/2}px`
+    }
+
+    connectToJob = (link) => {
+        const obj = {
+            title: link.title,
+            id: link.id,
+            newJob: false,
+            number_linked: link.number_linked,
+            job_count: link.job_count +=1
+        }
+        this.setState({
+            link_job : obj,
+            connected_jobs:  obj.title + " : " + obj.job_count + "/" + link.number_linked
+        });
+
+        this.exitLinks();
+    }
+
     componentDidMount(){
-        this.checkForUser()
+        this.checkForUser();
+        this.getLinkJobs();
+        this.centerLinkDiv();
+    }
+
+    displayLinks = () => {
+        document.querySelector(".new-link").style.display = "none";
+        document.querySelector(".link-options").style.display = "block";
+    }
+
+    displayLForm = () => {
+        document.querySelector(".link-options").style.display = "none";
+        document.querySelector(".new-link").style.display = "block";
+    }
+
+    exitLinks = () => {
+        this.ref.current.style.display = "none";
+        document.querySelector(".link-options").style.display = "none";
+        document.querySelector(".new-link").style.display = "none";
+    }
+
+    getLinkJobs = () => {
+        fetch('https://job-board-api.herokuapp.com/link',{
+            method:"GET",
+            headers:{
+                Authorization : `Token ${Auth.getToken()}`
+            }
+        })
+        .then((res) => {
+            res.json()
+            .then((data)=>{
+                this.setState({listOfLinks: data.data})
+            },(err)=>{console.log(err)})
+        })
     }
 
     handleChange = (e) => {
@@ -63,37 +123,22 @@ class TankfillNew extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        setTimeout(this.postToApi, 500)
+        if(this.state.connect_to_job && !this.state.link_job.title){
+            this.ref.current.style.display = "block"
+            this.centerLinkDiv()
+        }
+        else if(this.state.connect_to_job){
+
+            if(this.state.link_job.newJob){this.postToJoblink();} // post to the joblink if a new one
+            else this.updateCurrentJoblink(); // if not a new joblink, update existing one
+
+            // then post to the api
+            setTimeout(this.postToApi, 500);
+        }
+        else setTimeout(this.postToApi, 500); // straight post to the api
     } 
 
-    resetState = () => {
-        this.setState({
-            job_order_number:"",
-            description:"",
-            requested_by:"",
-            job_address:"",
-            stage:1,
-            pump_po:"",
-            pump_eta:null,
-            pump_received:false,
-            updated_by: this.props.location.state.user,
-            controller_po:"",
-            controller_eta:null,
-            controller_received:false,
-            due_date:null,
-            completed:false,
-            shipdate_packlist:"",
-            notes:"",
-            carrier:"",
-            bol_number:"",
-            pro_number:"",
-            deposit_amount:"",
-            invoice_number:"",
-            quantity:1,
-            connected_jobs:""
-        })
-    }
-
+    
 
    postToApi = () => {
     fetch('https://job-board-api.herokuapp.com/tankfill',{
@@ -116,12 +161,98 @@ class TankfillNew extends Component{
         })
     })
    }
+
+   postToJoblink = () => {
+    fetch('https://job-board-api.herokuapp.com/link',{
+        method: 'POST',
+        body: JSON.stringify(this.state.link_job),
+        headers:{
+            'Accept': 'application/json',
+           'Content-Type': 'application/json',
+           'Authorization' : `Token ${Auth.getToken()}`
+         }
+    })
+    .then((res) => {
+        res.json()
+        .then((data) => {
+            console.log(data)
+        },(err) => {
+            console.log(err)
+        })
+    })
+   }
+
+   removeLinkJob = () => {
+       this.setState({link_job:{}, connected_jobs:""});
+   }
     
-    
+   resetState = () => {
+    this.setState({
+        job_order_number:"",
+        description:"",
+        requested_by:"",
+        job_address:"",
+        stage:1,
+        pump_po:"",
+        pump_eta:null,
+        pump_received:false,
+        updated_by: this.props.location.state.user,
+        controller_po:"",
+        controller_eta:null,
+        controller_received:false,
+        due_date:null,
+        completed:false,
+        shipdate_packlist:"",
+        notes:"",
+        carrier:"",
+        bol_number:"",
+        pro_number:"",
+        deposit_amount:"",
+        invoice_number:"",
+        quantity:1,
+        connect_to_job: false,
+        link_job:{},
+        connected_jobs:"",
+        title:"",
+        number_linked: 2
+    })
+}
+
+submitLinkJob = (e) => {
+    e.preventDefault();
+    const obj = {title: this.state.title, number_linked: parseInt(this.state.number_linked), newJob: true, job_count: 1 }
+    this.exitLinks();
+    this.setState({
+     link_job: obj,
+     connected_jobs: obj.title + " : 1/" + obj.number_linked
+    })
+}
+
+updateCurrentJoblink = () => {
+ fetch('https://job-board-api.herokuapp.com/link',{
+     method: 'PUT',
+     body: JSON.stringify(this.state.link_job),
+     headers:{
+         'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization' : `Token ${Auth.getToken()}`
+      }
+ })
+ .then((res) => {
+     res.json()
+     .then((data) => {
+         console.log(data)
+     },(err) => {
+         console.log(err)
+     })
+ })
+}
+
 
     render(){
         return(
-            <div>
+            <ReactResizeDetector handleWidth handleHeight onResize={this.centerLinkDiv}>
+                <div>
                 <h3 className="banner">New Tankfill Job</h3>
                 <form onSubmit={this.handleSubmit} className="form-style" >
                     <span>
@@ -132,6 +263,14 @@ class TankfillNew extends Component{
                         <label htmlFor="">Job Order Number: </label>
                         <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     </span>
+
+                    {/* <span>
+                        <label htmlFor="">One of Several Jobs? </label> 
+                        Yes  <input type="radio" name="connect_to_job" checked={this.state.connect_to_job} onChange={this.handleChange} className="trueClass"/> No   
+                        <input type="radio" name="connect_to_job" checked={this.state.connect_to_job? false: true} onChange={this.handleChange}/>
+                        <span> {this.state.link_job.title? this.state.link_job.newJob? `(new) ${this.state.link_job.title}`: this.state.link_job.title : "" } </span>
+                        <span onClick={this.removeLinkJob} > {this.state.link_job.title? "X" : "" } </span>
+                    </span> */}
                     
                     <span>
                         <label htmlFor="">Description:</label>
@@ -246,7 +385,49 @@ class TankfillNew extends Component{
                         <input type="submit" value="Add Job"/>
                     </span>
                 </form>
+
+                <div className="link-options-container" ref={this.ref}>
+                    <div className="link-btns-container" >
+                        <button onClick={this.displayLForm}>First of Several</button>
+                        <button onClick={this.displayLinks}>Join on Prexisting</button>
+                        <button onClick={this.exitLinks} >X</button>
+                    </div>
+
+                    <div className="link-options" >
+                        <h3>Select job to Connect to</h3>
+                        {this.state.listOfLinks? this.state.listOfLinks.map((link, index) => {
+                            return(
+                                <>
+                                    <div key={index} onClick={()=>this.connectToJob(link)} >{link.title}</div>
+                                </>
+                            )
+                        }):""}
+                        
+                    </div>
+
+                    <div className="new-link" >
+                        <h3>Please give information for the jobs you wish to link together </h3>
+                        <form className="form-style" onSubmit={this.submitLinkJob} >
+
+                            <span>
+                                <label htmlFor="">Title </label>
+                                <input type="text" name="title" onChange={this.handleChange} value={this.state.title} />
+                            </span>
+
+                            <span>
+                                <label htmlFor="">How many jobs linked together in total</label>
+                                <input type="number" min="2" max="10" name="number_linked" value={this.state.number_linked} onChange={this.handleChange} />
+                            </span>
+
+                            <span>
+                                <input type="submit" value="Submit"/>
+                            </span>
+
+                        </form>
+                    </div>
+                </div>
             </div>
+            </ReactResizeDetector>
         )
     }
 }
