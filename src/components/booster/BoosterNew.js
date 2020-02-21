@@ -269,13 +269,13 @@ class BoosterNew extends Component{
                         <input type="text" value={this.state.job_order_number} name="job_order_number" onChange={this.handleChange} />
                     </span>
 
-                    <span>
+                    {/* <span>
                         <label htmlFor="">One of Several Jobs? </label> 
                         Yes  <input type="radio" name="connect_to_job" checked={this.state.connect_to_job} onChange={this.handleChange} className="trueClass"/> No   
                         <input type="radio" name="connect_to_job" checked={this.state.connect_to_job? false: true} onChange={this.handleChange}/>
                         <span> {this.state.link_job.title? this.state.link_job.newJob? `(new) ${this.state.link_job.title}`: this.state.link_job.title : "" } </span>
                         <span onClick={this.removeLinkJob} > {this.state.link_job.title? "X" : "" } </span>
-                    </span>
+                    </span> */}
                     
                     <span>
                         <label htmlFor="">Description:</label>
