@@ -4,8 +4,19 @@ class InStock extends Component{
     constructor(props){
         super(props)
         this.state= {
-            
+            items: [],
+            addItem : " "
         }
+    }
+
+    handleChange = (e) => {
+        this.setState({[e.target.name]:[e.target.value]})
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        const newItem = this.state.addItem
+        this.setState({items: [newItem, ...this.state.items], addItem: " "})
     }
 
     render(){
@@ -16,23 +27,51 @@ class InStock extends Component{
                     <h2>Stock</h2>
                 </div>
                 
-                <div className="flexbox">
-                    <input type="text" placeholder="Add Item" name="" id=""/>
+                
+                <form onSubmit={this.handleSubmit} className="flexbox">
+                    <label style={style.label}>Add Item:</label>
+                    <input type="text" style={style.input} name="addItem" value={this.state.addItem} onChange={this.handleChange}/>
                     <button>Add</button>
-                </div>
+                </form>
+                
 
                 <div className="show-display">
                     <ul>
-                        <li>Example <button>Edit</button>  <button>Delete</button></li>
-                        <li>Example <button>Edit</button>  <button>Delete</button></li>
-                        <li>Example <button>Edit</button>  <button>Delete</button></li>
-                        <li>Example <button>Edit</button>  <button>Delete</button></li>
-                        <li>Example <button>Edit</button>  <button>Delete</button></li>
-                        <li>Example <button>Edit</button>  <button>Delete</button></li>
+ 
+                        {this.state.items? this.state.items.map((item, index) => {
+                            return(
+                                <span key={index}>
+                                    <li key={index} style={style.inputBtns} > <span style={style.label}>{item}</span>
+
+                                    <span>
+                                        <button>Edit</button>  
+                                        <button>Delete</button>
+                                    </span>
+ 
+                                    </li>
+                                </span>
+                            )
+                        }) : "Loading................"}
+
+
                     </ul>
                 </div>
             </>
         )
+    }
+}
+
+const style = {
+    input: {
+        width: "300px"
+    },
+    label: {
+        paddingTop: "10px",
+        fontSize: "19px"
+    },
+    inputBtns: {
+        display: "flex",
+        justifyContent: "space-between"
     }
 }
 
