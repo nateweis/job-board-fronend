@@ -9,6 +9,14 @@ class InStock extends Component{
         }
     }
 
+    deleteItem = (index) => {
+        console.log(this.state.items[index])
+    }
+
+    editItem = (index) => {
+        console.log(this.state.items[index])
+    }
+
     handleChange = (e) => {
         this.setState({[e.target.name]:[e.target.value]})
     }
@@ -44,8 +52,8 @@ class InStock extends Component{
                                     <li key={index} style={style.inputBtns} > <span style={style.label}>{item}</span>
 
                                     <span>
-                                        <button>Edit</button>  
-                                        <button>Delete</button>
+                                        <button onClick={()=> this.editItem(index)}>Edit</button>  
+                                        <button onClick={()=> this.deleteItem(index)}>Delete</button>
                                     </span>
  
                                     </li>
