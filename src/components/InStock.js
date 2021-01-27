@@ -33,6 +33,15 @@ class InStock extends Component{
         this.setState({[e.target.name]:[e.target.value]})
     }
 
+    handelEdit = (e) => {
+        const i = parseInt([e.target.name])
+        const val = [e.target.value]
+        this.setState((pre) => {
+            pre.items[i].name = val
+            return{items : pre.items}
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault()
         const newItem = {}
@@ -64,7 +73,15 @@ class InStock extends Component{
                         {this.state.items? this.state.items.map((item, index) => {
                             return(
                                 <span key={index}>
-                                    <li style={style.inputBtns} > <span style={style.label}>{item.name}</span>
+                                    <li style={style.inputBtns} > 
+                                    <span style={style.label}>
+                                        {
+                                        item.edit?
+                                        <input type="text" value={item.name} name={index} onChange={this.handelEdit}/> 
+                                          :
+                                        item.name
+                                        }
+                                    </span>
 
                                     <span>
                                         {item.edit? 
