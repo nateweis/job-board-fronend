@@ -5,14 +5,16 @@ class InStock extends Component{
         super(props)
         this.state= {
             items: [],
-            addItem : " ",
-            edit: false
+            addItem : " "
         }
     }
 
-    changeEdit = () => {
-        const bool = this.state.edit
-        this.setState({edit: !bool})
+    changeEdit = (index) => {
+        const bool = this.state.items[index].edit
+        this.setState((pre) => {
+            pre.items[index].edit = !bool
+            return{items : pre.items}
+        })
     }
 
     deleteItem = (index) => {
@@ -24,7 +26,7 @@ class InStock extends Component{
     editItem = (index) => {
         console.log(this.state.items[index])
         console.log(index)
-        this.changeEdit()
+        this.changeEdit(index)
     }
 
     handleChange = (e) => {
@@ -33,7 +35,10 @@ class InStock extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const newItem = this.state.addItem
+        const newItem = {}
+        newItem.name = this.state.addItem;
+        newItem.edit = false;
+
         this.setState({items: [newItem, ...this.state.items], addItem: " "})
     }
 
@@ -59,13 +64,13 @@ class InStock extends Component{
                         {this.state.items? this.state.items.map((item, index) => {
                             return(
                                 <span key={index}>
-                                    <li style={style.inputBtns} > <span style={style.label}>{item}</span>
+                                    <li style={style.inputBtns} > <span style={style.label}>{item.name}</span>
 
                                     <span>
-                                        {this.state.edit? 
+                                        {item.edit? 
                                         <button onClick={()=> this.editItem(index)}>Submit</button> 
                                             :
-                                        <button onClick={this.changeEdit}>Edit</button>
+                                        <button onClick={()=> this.changeEdit(index)}>Edit</button>
                                         }  
 
                                         <button onClick={()=> this.deleteItem(index)}>Delete</button>
