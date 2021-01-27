@@ -23,11 +23,6 @@ class InStock extends Component{
        this.setState({items: newArr})
     }
 
-    editItem = (index) => {
-        console.log(this.state.items[index])
-        console.log(index)
-        this.changeEdit(index)
-    }
 
     handleChange = (e) => {
         this.setState({[e.target.name]:[e.target.value]})
@@ -43,12 +38,31 @@ class InStock extends Component{
     }
 
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
+        let id;
+        if(this.state.items[0]){
+            let temp = 0 
+            this.state.items.forEach(item => {
+               if(item.id > temp) temp = item.id
+            });
+            id = temp + 1
+        }else{
+            id = 1
+        }
+
         const newItem = {}
         newItem.name = this.state.addItem;
         newItem.edit = false;
+        newItem.id = id;
 
         this.setState({items: [newItem, ...this.state.items], addItem: " "})
+    }
+
+    submitEditItem = (index) => {
+        console.log(this.state.items[index])
+        console.log(index)
+        this.changeEdit(index)
     }
 
     render(){
@@ -85,7 +99,7 @@ class InStock extends Component{
 
                                     <span>
                                         {item.edit? 
-                                        <button onClick={()=> this.editItem(index)}>Submit</button> 
+                                        <button onClick={()=> this.submitEditItem(index)}>Submit</button> 
                                             :
                                         <button onClick={()=> this.changeEdit(index)}>Edit</button>
                                         }  
