@@ -5,16 +5,26 @@ class InStock extends Component{
         super(props)
         this.state= {
             items: [],
-            addItem : " "
+            addItem : " ",
+            edit: false
         }
     }
 
+    changeEdit = () => {
+        const bool = this.state.edit
+        this.setState({edit: !bool})
+    }
+
     deleteItem = (index) => {
-        console.log(this.state.items[index])
+       let newArr = this.state.items
+       newArr.splice(index, 1)
+       this.setState({items: newArr})
     }
 
     editItem = (index) => {
         console.log(this.state.items[index])
+        console.log(index)
+        this.changeEdit()
     }
 
     handleChange = (e) => {
@@ -49,10 +59,15 @@ class InStock extends Component{
                         {this.state.items? this.state.items.map((item, index) => {
                             return(
                                 <span key={index}>
-                                    <li key={index} style={style.inputBtns} > <span style={style.label}>{item}</span>
+                                    <li style={style.inputBtns} > <span style={style.label}>{item}</span>
 
                                     <span>
-                                        <button onClick={()=> this.editItem(index)}>Edit</button>  
+                                        {this.state.edit? 
+                                        <button onClick={()=> this.editItem(index)}>Submit</button> 
+                                            :
+                                        <button onClick={this.changeEdit}>Edit</button>
+                                        }  
+
                                         <button onClick={()=> this.deleteItem(index)}>Delete</button>
                                     </span>
  
