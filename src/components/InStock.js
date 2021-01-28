@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Auth from '../modules/Auth'
 
 class InStock extends Component{
     constructor(props){
@@ -55,8 +56,27 @@ class InStock extends Component{
         newItem.name = this.state.addItem;
         newItem.edit = false;
         newItem.id = id;
+        newItem.user = this.props.passdownUser.name
 
-        this.setState({items: [newItem, ...this.state.items], addItem: " "})
+        fetch('http://localhost:3001/stock',{
+            method: 'POST',
+            body: JSON.stringify(newItem),
+            headers:{
+                'Accept': 'application/json',
+               'Content-Type': 'application/json',
+               'Authorization' : `Token ${Auth.getToken()}`
+             }
+        })
+        .then((res) => {
+            res.json()
+            .then(data =>{
+                console.log(data)
+                this.setState({items: [newItem, ...this.state.items], addItem: " "})
+            })
+            .catch(err => console.log(err))
+        })
+
+
     }
 
     submitEditItem = (index) => {
