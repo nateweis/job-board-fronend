@@ -10,6 +10,22 @@ class InStock extends Component{
         }
     }
 
+    componentDidMount(){
+        fetch('http://localhost:3001/stock',{
+            method: 'GET',
+            headers:{
+                'Accept': 'application/json',
+               'Content-Type': 'application/json',
+               'Authorization' : `Token ${Auth.getToken()}`
+             }
+        })
+        .then((res) => {
+            res.json()
+            .then(data => this.setState({items: data.data}))
+            .catch(err => console.log(err))
+        })
+    }
+
     changeEdit = (index) => {
         const bool = this.state.items[index].edit
         this.setState((pre) => {
@@ -19,6 +35,20 @@ class InStock extends Component{
     }
 
     deleteItem = (index) => {
+        fetch('http://localhost:3001/stock/' + this.state.items[index].id,{
+            method: 'DELETE',
+            headers:{
+                'Accept': 'application/json',
+               'Content-Type': 'application/json',
+               'Authorization' : `Token ${Auth.getToken()}`
+             }
+        })
+        .then((res) => {
+            res.json()
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+        })
+
        let newArr = this.state.items
        newArr.splice(index, 1)
        this.setState({items: newArr})
@@ -53,10 +83,11 @@ class InStock extends Component{
         }
 
         const newItem = {}
-        newItem.name = this.state.addItem;
+        newItem.name = this.state.addItem[0];
         newItem.edit = false;
         newItem.id = id;
         newItem.user = this.props.passdownUser.name
+        console.log(newItem.name)
 
         fetch('http://localhost:3001/stock',{
             method: 'POST',
@@ -70,7 +101,7 @@ class InStock extends Component{
         .then((res) => {
             res.json()
             .then(data =>{
-                console.log(data)
+                // console.log(data)
                 this.setState({items: [newItem, ...this.state.items], addItem: " "})
             })
             .catch(err => console.log(err))
