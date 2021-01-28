@@ -62,8 +62,9 @@ class InStock extends Component{
     handelEdit = (e) => {
         const i = parseInt([e.target.name])
         const val = [e.target.value]
+        
         this.setState((pre) => {
-            pre.items[i].name = val
+            pre.items[i].name = val[0]
             return{items : pre.items}
         })
     }
@@ -111,9 +112,24 @@ class InStock extends Component{
     }
 
     submitEditItem = (index) => {
-        console.log(this.state.items[index])
-        console.log(index)
         this.changeEdit(index)
+        const updateItem = this.state.items[index]
+        updateItem.user = this.props.passdownUser.name
+        console.log(updateItem)
+        fetch('http://localhost:3001/stock',{
+            method: 'PUT',
+            body: JSON.stringify(updateItem),
+            headers:{
+                'Accept': 'application/json',
+               'Content-Type': 'application/json',
+               'Authorization' : `Token ${Auth.getToken()}`
+             }
+        })
+        .then((res) => {
+            res.json()
+            .then(data =>{console.log(data)})
+            .catch(err => console.log(err))
+        })
     }
 
     render(){
