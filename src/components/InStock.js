@@ -23,7 +23,12 @@ class InStock extends Component{
         })
         .then((res) => {
             res.json()
-            .then(data => this.setState({items: data.data}))
+            .then(data => {
+                let itemsList = data.data
+                itemsList.sort(this.sortObject)
+
+                this.setState({items: itemsList})
+            })
             .catch(err => console.log(err))
         })
     }
@@ -34,6 +39,17 @@ class InStock extends Component{
             pre.items[index].edit = !bool
             return{items : pre.items}
         })
+    }
+
+    sortObject = (a, b) => {
+       const itemA = a.name.toUpperCase();
+       const itemB = b.name.toUpperCase();
+
+       let compare = 0;
+       if(itemA > itemB) compare = 1
+       else if (itemA < itemB) compare = -1
+
+       return compare
     }
 
     deleteItem = (index) => {
