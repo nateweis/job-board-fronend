@@ -11,6 +11,8 @@ class InStock extends Component{
     }
 
     componentDidMount(){
+        if (this.props.passdownUser.name === 'Unknown') this.props.push("/jobs/booster/index")
+
         fetch('http://localhost:3001/stock',{
             method: 'GET',
             headers:{
@@ -62,7 +64,7 @@ class InStock extends Component{
     handelEdit = (e) => {
         const i = parseInt([e.target.name])
         const val = [e.target.value]
-        
+
         this.setState((pre) => {
             pre.items[i].name = val[0]
             return{items : pre.items}
