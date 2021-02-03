@@ -6,9 +6,11 @@ class InStock extends Component{
         super(props)
         this.state= {
             items: [],
-            addItem : " ",
+            addItem : "",
             latestUser : "Unknown",
-            latestDate :  "1/1/2000"
+            latestDate :  "1/1/2000",
+            catigory: "booster",
+            catigoryDisplay: "allStock"
         }
     }
 
@@ -77,7 +79,7 @@ class InStock extends Component{
 
 
     handleChange = (e) => {
-        this.setState({[e.target.name]:[e.target.value]})
+        this.setState({[e.target.name]:e.target.value})
     }
 
     handelEdit = (e) => {
@@ -105,29 +107,33 @@ class InStock extends Component{
         }
 
         const newItem = {}
-        newItem.name = this.state.addItem[0];
+        newItem.name = this.state.addItem;
         newItem.edit = false;
         newItem.id = id;
         newItem.user = this.props.passdownUser.name
-        console.log(newItem.name)
+        newItem.catigory = this.state.catigory
+        console.log(newItem)
 
-        fetch('http://localhost:3001/stock',{
-            method: 'POST',
-            body: JSON.stringify(newItem),
-            headers:{
-                'Accept': 'application/json',
-               'Content-Type': 'application/json',
-               'Authorization' : `Token ${Auth.getToken()}`
-             }
-        })
-        .then((res) => {
-            res.json()
-            .then(data =>{
-                // console.log(data)
-                this.setState({items: [newItem, ...this.state.items], addItem: " "})
-            })
-            .catch(err => console.log(err))
-        })
+        if(newItem.name) {
+        // fetch('http://localhost:3001/stock',{
+        //     method: 'POST',
+        //     body: JSON.stringify(newItem),
+        //     headers:{
+        //         'Accept': 'application/json',
+        //        'Content-Type': 'application/json',
+        //        'Authorization' : `Token ${Auth.getToken()}`
+        //      }
+        // })
+        // .then((res) => {
+        //     res.json()
+        //     .then(data =>{
+        //         // console.log(data)
+        //         this.setState({items: [newItem, ...this.state.items], addItem: " "})
+        //     })
+        //     .catch(err => console.log(err))
+        // })
+        }
+        else alert("Add Item Field Not Filled In")
 
 
     }
@@ -177,10 +183,10 @@ class InStock extends Component{
                     <label style={style.label}>Add Item:</label>
                     <span>
                         <input type="text" style={style.input} name="addItem" value={this.state.addItem} onChange={this.handleChange}/>
-                        <select name="" id="" style={style.select}>
-                            <option value="">Booster</option>
-                            <option value="">Sewer</option>
-                            <option value="">Tank</option>
+                        <select name="catigory" style={style.select} onChange={this.handleChange}>
+                            <option value="booster">Booster</option>
+                            <option value="sewer">Sewer</option>
+                            <option value="tank">Tank</option>
                         </select>
                     </span>
 
