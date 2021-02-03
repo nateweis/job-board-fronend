@@ -6,7 +6,9 @@ class InStock extends Component{
         super(props)
         this.state= {
             items: [],
-            addItem : " "
+            addItem : " ",
+            latestUser : "Unknown",
+            latestDate :  "1/1/2000"
         }
     }
 
@@ -24,10 +26,15 @@ class InStock extends Component{
         .then((res) => {
             res.json()
             .then(data => {
-                let itemsList = data.data
+                const newest = data.data[0]//for getting newest latest update information 
+                newest.update_date = this.formatDate(newest.update_date)
+
+                let itemsList = data.data // for sorting the items in alphebetical order 
                 itemsList.sort(this.sortObject)
 
-                this.setState({items: itemsList})
+                this.setState({items: itemsList, latestUser : newest.update_by, latestDate : newest.update_date})
+
+                
             })
             .catch(err => console.log(err))
         })
@@ -41,16 +48,6 @@ class InStock extends Component{
         })
     }
 
-    sortObject = (a, b) => {
-       const itemA = a.name.toUpperCase();
-       const itemB = b.name.toUpperCase();
-
-       let compare = 0;
-       if(itemA > itemB) compare = 1
-       else if (itemA < itemB) compare = -1
-
-       return compare
-    }
 
     deleteItem = (index) => {
         fetch('http://localhost:3001/stock/' + this.state.items[index].id,{
@@ -70,6 +67,12 @@ class InStock extends Component{
        let newArr = this.state.items
        newArr.splice(index, 1)
        this.setState({items: newArr})
+    }
+
+    formatDate = (dt) => {
+        const dtSplit = dt.split('T')
+        const date = dtSplit[0].split('-')
+        return `${parseInt(date[1])}/${parseInt(date[2])}/${date[0]}`
     }
 
 
@@ -129,6 +132,17 @@ class InStock extends Component{
 
     }
 
+    sortObject = (a, b) => {
+        const itemA = a.name.toUpperCase();
+        const itemB = b.name.toUpperCase();
+ 
+        let compare = 0;
+        if(itemA > itemB) compare = 1
+        else if (itemA < itemB) compare = -1
+ 
+        return compare
+     }
+
     submitEditItem = (index) => {
         this.changeEdit(index)
         const updateItem = this.state.items[index]
@@ -161,10 +175,19 @@ class InStock extends Component{
                 
                 <form onSubmit={this.handleSubmit} className="flexbox">
                     <label style={style.label}>Add Item:</label>
-                    <input type="text" style={style.input} name="addItem" value={this.state.addItem} onChange={this.handleChange}/>
+                    <span>
+                        <input type="text" style={style.input} name="addItem" value={this.state.addItem} onChange={this.handleChange}/>
+                        <select name="" id="" style={style.select}>
+                            <option value="">Booster</option>
+                            <option value="">Sewer</option>
+                            <option value="">Tank</option>
+                        </select>
+                    </span>
+
                     <button>Add</button>
                 </form>
                 
+                <p style={style.p}><span style={style.pSpan}>Last Updated On: </span> {this.state.latestDate}  <span style={style.pSpan}>By:</span> {this.state.latestUser} </p>
 
                 <div className="show-display">
                     <ul>
@@ -207,7 +230,14 @@ class InStock extends Component{
 
 const style = {
     input: {
-        width: "300px"
+        width: "300px",
+        height:"30px",
+        marginRight: "0"
+    },
+    select: {
+        marginLeft: "0",
+        height: "35px",
+        fontFamily: 'Raleway'
     },
     label: {
         paddingTop: "10px",
@@ -216,6 +246,18 @@ const style = {
     inputBtns: {
         display: "flex",
         justifyContent: "space-between"
+    },
+    p:{
+        display: "flex",
+        justifyContent: "center",
+        textAlign: "center",
+        marginBottom: "-10px"
+    },
+    pSpan:{
+        paddingLeft: "50px",
+        paddingRight: "3px",
+        fontWeight: 800,
+        color: "#420000"
     }
 }
 
