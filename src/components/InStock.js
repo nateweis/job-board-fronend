@@ -50,6 +50,10 @@ class InStock extends Component{
         })
     }
 
+    changeFilter = (str) => {
+        this.setState({catigoryDisplay: str})
+    }
+
 
     deleteItem = (index) => {
         fetch('http://localhost:3001/stock/' + this.state.items[index].id,{
@@ -193,7 +197,17 @@ class InStock extends Component{
                     <button>Add</button>
                 </form>
                 
-                <p style={style.p}><span style={style.pSpan}>Last Updated On: </span> {this.state.latestDate}  <span style={style.pSpan}>By:</span> {this.state.latestUser} </p>
+                <div style={style.btnContainer}>
+                    <span style={style.allNavBtns}>
+                        <button style={style.navBtns} onClick={()=>this.changeFilter("allStock")}>All</button>
+                        <button style={style.navBtns} onClick={()=>this.changeFilter("booster")}>Booster</button>
+                        <button style={style.navBtns} onClick={()=>this.changeFilter("sewer")}>Sewer</button>
+                        <button style={style.navBtns} onClick={()=>this.changeFilter("tank")}>Tank</button>
+                    </span>
+
+                    <p style={style.p}><span style={style.pSpan}>Last Updated On: </span> {this.state.latestDate}  <span style={style.pSpan}>By:</span> {this.state.latestUser} </p>
+                </div>
+
 
                 <div className="show-display">
                     <ul>
@@ -264,6 +278,17 @@ const style = {
         paddingRight: "3px",
         fontWeight: 800,
         color: "#420000"
+    },
+    btnContainer:{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "10px"
+    },
+    allNavBtns: {
+        marginBottom: "-20px"
+    },
+    navBtns:{
+        marginTop: "7px"
     }
 }
 
