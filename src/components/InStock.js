@@ -112,26 +112,26 @@ class InStock extends Component{
         newItem.id = id;
         newItem.user = this.props.passdownUser.name
         newItem.catigory = this.state.catigory
-        console.log(newItem)
+        // console.log(newItem)
 
         if(newItem.name) {
-        // fetch('http://localhost:3001/stock',{
-        //     method: 'POST',
-        //     body: JSON.stringify(newItem),
-        //     headers:{
-        //         'Accept': 'application/json',
-        //        'Content-Type': 'application/json',
-        //        'Authorization' : `Token ${Auth.getToken()}`
-        //      }
-        // })
-        // .then((res) => {
-        //     res.json()
-        //     .then(data =>{
-        //         // console.log(data)
-        //         this.setState({items: [newItem, ...this.state.items], addItem: " "})
-        //     })
-        //     .catch(err => console.log(err))
-        // })
+        fetch('http://localhost:3001/stock',{
+            method: 'POST',
+            body: JSON.stringify(newItem),
+            headers:{
+                'Accept': 'application/json',
+               'Content-Type': 'application/json',
+               'Authorization' : `Token ${Auth.getToken()}`
+             }
+        })
+        .then((res) => {
+            res.json()
+            .then(data =>{
+                // console.log(data)
+                this.setState({items: [newItem, ...this.state.items], addItem: " "})
+            })
+            .catch(err => console.log(err))
+        })
         }
         else alert("Add Item Field Not Filled In")
 
