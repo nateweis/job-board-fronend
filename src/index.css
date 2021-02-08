@@ -49,6 +49,10 @@ input, select{
 .flexbox *{
   margin: 0 10px;
 }
+.active{
+  background-color: #420000;
+  color: #d4d7dd;
+}
 /* *********************************
 Nav 
 **********************************/

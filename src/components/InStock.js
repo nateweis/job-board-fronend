@@ -50,8 +50,15 @@ class InStock extends Component{
         })
     }
 
-    changeFilter = (str) => {
+    changeFilter = (str, e) => {
         this.setState({catigoryDisplay: str})
+
+        const childrenBtns = e.target.parentElement.childNodes
+        childrenBtns.forEach(btn => {
+            btn.classList.remove("active")
+        });
+
+        e.target.classList.add("active")
     }
 
 
@@ -207,10 +214,10 @@ class InStock extends Component{
                 
                 <div style={style.btnContainer}>
                     <span style={style.allNavBtns}>
-                        <button style={style.navBtns} onClick={()=>this.changeFilter("allStock")}>All</button>
-                        <button style={style.navBtns} onClick={()=>this.changeFilter("booster")}>Booster</button>
-                        <button style={style.navBtns} onClick={()=>this.changeFilter("sewer")}>Sewer</button>
-                        <button style={style.navBtns} onClick={()=>this.changeFilter("tank")}>Tank</button>
+                        <button style={style.navBtns} className="active" onClick={(e)=>this.changeFilter("allStock", e)}>All</button>
+                        <button style={style.navBtns} onClick={(e)=>this.changeFilter("booster", e)}>Booster</button>
+                        <button style={style.navBtns} onClick={(e)=>this.changeFilter("sewer",e)}>Sewer</button>
+                        <button style={style.navBtns} onClick={(e)=>this.changeFilter("tank",e)}>Tank</button>
                     </span>
 
                     <p style={style.p}><span style={style.pSpan}>Last Updated On: </span> {this.state.latestDate}  <span style={style.pSpan}>By:</span> {this.state.latestUser} </p>
