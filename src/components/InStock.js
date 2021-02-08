@@ -176,6 +176,14 @@ class InStock extends Component{
 
     render(){
 
+        let filteredItems = this.state.items? this.state.items.filter((it) => {
+            if(this.state.catigoryDisplay !== "allStock"){
+                return it.catigory.toLowerCase().indexOf(this.state.catigoryDisplay.toLowerCase()) !== -1 
+            }else return it
+            
+
+        }): null
+
         return(
             <>
                 <div className="banner">
@@ -212,7 +220,7 @@ class InStock extends Component{
                 <div className="show-display">
                     <ul>
  
-                        {this.state.items? this.state.items.map((item, index) => {
+                        {filteredItems? filteredItems.map((item, index) => {
                             return(
                                 <span key={index}>
                                     <li style={style.inputBtns} > 
