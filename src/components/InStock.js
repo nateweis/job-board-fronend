@@ -4,15 +4,46 @@ import Auth from '../modules/Auth'
 class InStock extends Component{
     constructor(props){
         super(props)
-        this.state= {textbox:"This is the perloaded area\nfsdfsdfsdfds''\n\nsfsdfs\nsfdfs\n\n\nsdfsdf"}
+        this.state= {stock:"This is the perloaded area\n"}
     }
 
     componentDidMount(){
-        // if (this.props.passdownUser.name === 'Unknown') this.props.push("/jobs/booster/index")
+        if (this.props.passdownUser.name === 'Unknown') this.props.push("/jobs/booster/index")
+        fetch('http://localhost:3001/stock/text',{
+            method: 'GET',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : `Token ${Auth.getToken()}`
+            }
+        })
+        .then((res) => {
+            res.json()
+            .then(data => {this.setState({id: data.pulledData.id, stock: data.pulledData.stock})})
+            .catch(err => console.log(err))
+        })
     }
 
-    handleChange = (e) => {
-        this.setState({[e.target.name]:e.target.value})
+    handleChange = (e) => {this.setState({[e.target.name]:e.target.value})}
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+            fetch('http://localhost:3001/stock/text',{
+                method: 'PUT',
+                body: JSON.stringify(this.state),
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Token ${Auth.getToken()}`
+                }
+            })
+            .then((res) => {
+                res.json()
+                .then(data =>{alert("The Stock List Has Been Updated")})
+                .catch(err => console.log(err))
+            })
+
     }
 
     render(){
@@ -21,11 +52,11 @@ class InStock extends Component{
                 <div className="banner">
                     <h2>Stock</h2>
                 </div>
-                <form className="form-style"> 
+                <form className="form-style" onSubmit={this.handleSubmit}> 
                     <textarea 
-                    name="textbox" id="" cols="50" rows="37" wrap="hard" 
+                    name="stock" id="" cols="50" rows="37" wrap="hard" 
                     style={style.textarea}
-                    value={this.state.textbox}
+                    value={this.state.stock}
                     onChange={this.handleChange}
                     >
                     </textarea>
@@ -42,6 +73,8 @@ const style = {
         width: '80%',
         margin: 'auto',
         marginTop: '2%',
+        padding: '10px',
+        paddingTop: '20px',
         resize: 'none',
         fontSize: '16px',
         fontFamily: 'Raleway',
