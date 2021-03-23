@@ -21,7 +21,7 @@ class BoosterHome extends Component{
             res.json()
             .then((data) => {
             //    console.log(data);
-               if(data.message === "403 forbiddin"){
+               if(data.message === "403 forbiddin" || data.err){
                 Auth.deauthUser();
                 this.props.history.push("/login")
                }
