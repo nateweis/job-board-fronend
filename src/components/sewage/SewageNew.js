@@ -179,7 +179,7 @@ class SewageNew extends Component{
     .then((res) => {
         res.json()
         .then((data) => {
-            console.log(data)
+            // console.log(data)
         },(err) => {
             console.log(err)
         })

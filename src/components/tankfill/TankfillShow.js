@@ -111,7 +111,7 @@ class TankfillShow extends Component{
         .then((res) => {
            res.json()
            .then((data) => {
-               console.log(data)
+            //    console.log(data)
                if(data.err){this.props.push('/jobs/tankfill/index')}
                else if(data.message === "403 forbiddin"){this.props.push('/jobs/tankfill/index')}
                else{
