@@ -95,7 +95,7 @@ class FireNew extends Component{
     }
 
     getLinkJobs = () => {
-        fetch('https://job-board-api.herokuapp.com/link',{
+        fetch('http://localhost:3001/link',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
@@ -138,7 +138,7 @@ class FireNew extends Component{
 
 
    postToApi = () => {
-    fetch('https://job-board-api.herokuapp.com/fire',{
+    fetch('http://localhost:3001/fire',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{
@@ -160,7 +160,7 @@ class FireNew extends Component{
    }
 
    postToJoblink = () => {
-    fetch('https://job-board-api.herokuapp.com/link',{
+    fetch('http://localhost:3001/link',{
         method: 'POST',
         body: JSON.stringify(this.state.link_job),
         headers:{
@@ -224,7 +224,7 @@ submitLinkJob = (e) => {
 }
 
 updateCurrentJoblink = () => {
- fetch('https://job-board-api.herokuapp.com/link',{
+ fetch('http://localhost:3001/link',{
      method: 'PUT',
      body: JSON.stringify(this.state.link_job),
      headers:{

@@ -11,7 +11,7 @@ class FireHome extends Component{
     }
 
     componentDidMount(){
-        fetch('https://job-board-api.herokuapp.com/fire',{
+        fetch('http://localhost:3001/fire',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`

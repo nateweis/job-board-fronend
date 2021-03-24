@@ -12,7 +12,7 @@ class AllJobsHome extends Component{
      }
  
      componentDidMount(){
-           
+
         this.getTankJobs();
         this.getBoosterJobs();
         this.getSewerJobs();
@@ -26,7 +26,7 @@ class AllJobsHome extends Component{
      }
 
      getTankJobs = () => {
-        fetch('https://job-board-api.herokuapp.com/tankfill',{
+        fetch('http://localhost:3001/tankfill',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
@@ -63,7 +63,7 @@ class AllJobsHome extends Component{
      }
 
      getBoosterJobs = () => {
-        fetch('https://job-board-api.herokuapp.com/boosters',{
+        fetch('http://localhost:3001/boosters',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
@@ -95,7 +95,7 @@ class AllJobsHome extends Component{
      }
 
      getSewerJobs = () => {
-        fetch('https://job-board-api.herokuapp.com/sewers',{
+        fetch('http://localhost:3001/sewers',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
@@ -125,7 +125,7 @@ class AllJobsHome extends Component{
      }
 
      getFireJobs = () => {
-        fetch('https://job-board-api.herokuapp.com/fire',{
+        fetch('http://localhost:3001/fire',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`

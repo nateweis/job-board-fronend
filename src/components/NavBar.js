@@ -137,6 +137,7 @@ class NavBar extends Component{
                     <li><Link to="/jobs/fire/index"><button onClick={()=> this.saveTab("fire")}>Fire</button></Link></li>
                     <li><Link to="/jobs/all/index"><button onClick={()=> this.saveTab("all")}>All Jobs Listed</button></Link></li>
                     <hr className="in-list-hr"/>
+                    <li><Link to="/jobs/pass/stock"><button onClick={()=> this.saveTab("booster")} >Stock</button></Link></li>
                     <li>
                         {
                             this.state.viewState === "Pending................"?

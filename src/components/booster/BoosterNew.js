@@ -99,7 +99,7 @@ class BoosterNew extends Component{
     }
 
     getLinkJobs = () => {
-        fetch('https://job-board-api.herokuapp.com/link',{
+        fetch('http://localhost:3001/link',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
@@ -145,7 +145,7 @@ class BoosterNew extends Component{
 
 
    postToApi = () => {
-    fetch('https://job-board-api.herokuapp.com/boosters',{
+    fetch('http://localhost:3001/boosters',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{
@@ -167,7 +167,7 @@ class BoosterNew extends Component{
    }
 
    postToJoblink = () => {
-    fetch('https://job-board-api.herokuapp.com/link',{
+    fetch('http://localhost:3001/link',{
         method: 'POST',
         body: JSON.stringify(this.state.link_job),
         headers:{
@@ -233,7 +233,7 @@ class BoosterNew extends Component{
    }
 
    updateCurrentJoblink = () => {
-    fetch('https://job-board-api.herokuapp.com/link',{
+    fetch('http://localhost:3001/link',{
         method: 'PUT',
         body: JSON.stringify(this.state.link_job),
         headers:{

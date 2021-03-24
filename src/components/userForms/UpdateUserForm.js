@@ -27,7 +27,7 @@ class UpdateUserForm extends Component{
 
     deleteUser = () => {
         // this.preventUpdate();
-        fetch('https://job-board-api.herokuapp.com/users/' + this.state.id,{
+        fetch('http://localhost:3001/users/' + this.state.id,{
             method:'DELETE',
             headers:{Authorization : `Token ${Auth.getToken()}`}
         })
@@ -73,7 +73,7 @@ class UpdateUserForm extends Component{
     }
 
     updateUserInBackend = () => {
-        fetch('https://job-board-api.herokuapp.com/users/anyUser',{
+        fetch('http://localhost:3001/users/anyUser',{
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers:{

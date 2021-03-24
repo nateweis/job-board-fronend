@@ -44,7 +44,7 @@ class SewageShow extends Component{
 
     changeCompletion = (bol) => {
         const obj = {completed: bol, id: this.state.id}
-        fetch('https://job-board-api.herokuapp.com/sewers/completed',{
+        fetch('http://localhost:3001/sewers/completed',{
             method:'PUT',
             headers:{
                 'Accept': 'application/json',
@@ -70,7 +70,7 @@ class SewageShow extends Component{
     }
 
     deleteJob = () => {
-        fetch('https://job-board-api.herokuapp.com/sewers/'+this.props.id,{
+        fetch('http://localhost:3001/sewers/'+this.props.id,{
             method:'DELETE',
             headers:{Authorization : `Token ${Auth.getToken()}`}
         })
@@ -105,7 +105,7 @@ class SewageShow extends Component{
     }
 
     pullSewerData = () => {
-        fetch('https://job-board-api.herokuapp.com/sewers/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
+        fetch('http://localhost:3001/sewers/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
         .then((res) => {
            res.json()
            .then((data) => {
@@ -156,7 +156,7 @@ class SewageShow extends Component{
 
     
     updateApi = () => {
-        fetch('https://job-board-api.herokuapp.com/sewers',{
+        fetch('http://localhost:3001/sewers',{
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers:{
