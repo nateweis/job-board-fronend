@@ -40,7 +40,10 @@ class InStock extends Component{
             })
             .then((res) => {
                 res.json()
-                .then(data =>{alert("The Stock List Has Been Updated")})
+                .then(data =>{
+                    alert("The Stock List Has Been Updated")
+                    this.props.push("/jobs/booster/index")
+                })
                 .catch(err => console.log(err))
             })
 
