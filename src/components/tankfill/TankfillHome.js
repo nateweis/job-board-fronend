@@ -11,7 +11,7 @@ class TankfillHome extends Component{
     }
 
     componentDidMount(){
-        fetch('http://localhost:3001/tankfill',{
+        fetch('https://job-board-api.herokuapp.com/tankfill',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`

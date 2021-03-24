@@ -41,7 +41,7 @@ class ChangePassword extends Component{
     }
 
     getAllUsers = () => {
-        fetch('http://localhost:3001/users',{
+        fetch('https://job-board-api.herokuapp.com/users',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`

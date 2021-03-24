@@ -11,7 +11,7 @@ class BoosterHome extends Component{
     }
 
     componentDidMount(){
-        fetch('http://localhost:3001/boosters',{
+        fetch('https://job-board-api.herokuapp.com/boosters',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`

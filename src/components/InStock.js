@@ -9,7 +9,7 @@ class InStock extends Component{
 
     componentDidMount(){
         if (this.props.passdownUser.name === 'Unknown') this.props.push("/jobs/booster/index")
-        fetch('http://localhost:3001/stock/text',{
+        fetch('https://job-board-api.herokuapp.com/stock/text',{
             method: 'GET',
             headers:{
                 'Accept': 'application/json',
@@ -29,7 +29,7 @@ class InStock extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
 
-            fetch('http://localhost:3001/stock/text',{
+            fetch('https://job-board-api.herokuapp.com/stock/text',{
                 method: 'PUT',
                 body: JSON.stringify(this.state),
                 headers:{
@@ -42,7 +42,7 @@ class InStock extends Component{
                 res.json()
                 .then(data =>{
                     alert("The Stock List Has Been Updated")
-                    this.props.push("/jobs/booster/index")
+                    
                 })
                 .catch(err => console.log(err))
             })

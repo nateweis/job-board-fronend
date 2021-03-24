@@ -41,7 +41,7 @@ class TankfillShow extends Component{
 
     changeCompletion = (bol) => {
         const obj = {completed: bol, id: this.state.id}
-        fetch('http://localhost:3001/tankfill/completed',{
+        fetch('https://job-board-api.herokuapp.com/tankfill/completed',{
             method:'PUT',
             headers:{
                 'Accept': 'application/json',
@@ -67,7 +67,7 @@ class TankfillShow extends Component{
     }
 
     deleteJob = () => {
-        fetch('http://localhost:3001/tankfill/'+this.props.id,{
+        fetch('https://job-board-api.herokuapp.com/tankfill/'+this.props.id,{
             method:'DELETE',
             headers:{Authorization : `Token ${Auth.getToken()}`}
         })
@@ -107,7 +107,7 @@ class TankfillShow extends Component{
     }
 
     pullTankfillData = () => {
-        fetch('http://localhost:3001/tankfill/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
+        fetch('https://job-board-api.herokuapp.com/tankfill/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
         .then((res) => {
            res.json()
            .then((data) => {
@@ -156,7 +156,7 @@ class TankfillShow extends Component{
 
     
     updateApi = () => {
-        fetch('http://localhost:3001/tankfill',{
+        fetch('https://job-board-api.herokuapp.com/tankfill',{
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers:{

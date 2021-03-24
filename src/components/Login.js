@@ -23,7 +23,7 @@ class Login extends Component{
     }
 
     submitLogin = () => {
-        fetch('http://localhost:3001/users',{
+        fetch('https://job-board-api.herokuapp.com/users',{
             method: 'POST',
             body: JSON.stringify(this.state),
             headers:{

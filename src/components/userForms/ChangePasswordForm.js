@@ -69,7 +69,7 @@ class ChangePasswordForm extends Component{
     }
 
     updatedPassword = () => {
-        fetch('http://localhost:3001/users',{
+        fetch('https://job-board-api.herokuapp.com/users',{
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers:{

@@ -97,7 +97,7 @@ class TankfillNew extends Component{
     }
 
     getLinkJobs = () => {
-        fetch('http://localhost:3001/link',{
+        fetch('https://job-board-api.herokuapp.com/link',{
             method:"GET",
             headers:{
                 Authorization : `Token ${Auth.getToken()}`
@@ -141,7 +141,7 @@ class TankfillNew extends Component{
     
 
    postToApi = () => {
-    fetch('http://localhost:3001/tankfill',{
+    fetch('https://job-board-api.herokuapp.com/tankfill',{
         method: 'POST',
         body: JSON.stringify(this.state),
         headers:{
@@ -163,7 +163,7 @@ class TankfillNew extends Component{
    }
 
    postToJoblink = () => {
-    fetch('http://localhost:3001/link',{
+    fetch('https://job-board-api.herokuapp.com/link',{
         method: 'POST',
         body: JSON.stringify(this.state.link_job),
         headers:{
@@ -229,7 +229,7 @@ submitLinkJob = (e) => {
 }
 
 updateCurrentJoblink = () => {
- fetch('http://localhost:3001/link',{
+ fetch('https://job-board-api.herokuapp.com/link',{
      method: 'PUT',
      body: JSON.stringify(this.state.link_job),
      headers:{

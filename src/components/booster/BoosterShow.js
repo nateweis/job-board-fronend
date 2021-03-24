@@ -41,7 +41,7 @@ class BoosterShow extends Component{
 
     changeCompletion = (bol) => {
         const obj = {completed: bol, id: this.state.id}
-        fetch('http://localhost:3001/boosters/completed',{
+        fetch('https://job-board-api.herokuapp.com/boosters/completed',{
             method:'PUT',
             headers:{
                 'Accept': 'application/json',
@@ -67,7 +67,7 @@ class BoosterShow extends Component{
     }
 
     deleteJob = () => {
-        fetch('http://localhost:3001/boosters/'+this.props.id,{
+        fetch('https://job-board-api.herokuapp.com/boosters/'+this.props.id,{
             method:'DELETE',
             headers:{Authorization : `Token ${Auth.getToken()}`}
         })
@@ -107,7 +107,7 @@ class BoosterShow extends Component{
     }
 
     pullBoosterData = () => {
-        fetch('http://localhost:3001/boosters/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
+        fetch('https://job-board-api.herokuapp.com/boosters/'+this.props.id,{method:'GET', headers:{Authorization : `Token ${Auth.getToken()}`}})
         .then((res) => {
            res.json()
            .then((data) => {
@@ -156,7 +156,7 @@ class BoosterShow extends Component{
 
     
     updateApi = () => {
-        fetch('http://localhost:3001/boosters',{
+        fetch('https://job-board-api.herokuapp.com/boosters',{
             method: 'PUT',
             body: JSON.stringify(this.state),
             headers:{

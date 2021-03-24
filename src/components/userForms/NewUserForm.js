@@ -46,7 +46,7 @@ class NewUserForm extends Component{
     }
 
     makeNewUser = () => {
-        fetch('http://localhost:3001/users/newUser',{
+        fetch('https://job-board-api.herokuapp.com/users/newUser',{
             method: 'POST',
             body: JSON.stringify(this.state),
             headers:{
